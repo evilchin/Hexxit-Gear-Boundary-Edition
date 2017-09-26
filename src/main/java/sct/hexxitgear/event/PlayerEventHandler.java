@@ -27,23 +27,22 @@ import sct.hexxitgear.core.CapeHandler;
 
 public class PlayerEventHandler {
 
-    private int ticks = 0;
+	private int ticks = 0;
 
-    @SubscribeEvent
-    public void playerUpdate(LivingEvent.LivingUpdateEvent event) {
-        if (ticks > 16) {
-            if (event.entityLiving != null && event.entityLiving instanceof EntityPlayer) {
-                if (!event.entityLiving.worldObj.isRemote)
-                    return;
+	@SubscribeEvent
+	public void playerUpdate(LivingEvent.LivingUpdateEvent event) {
+		if (ticks > 16) {
+			if (event.entityLiving != null && event.entityLiving instanceof EntityPlayer) {
+				if (!event.entityLiving.worldObj.isRemote) return;
 
-                EntityPlayer player = (EntityPlayer) event.entityLiving;
-                String capeUrl = CapeHandler.getCapeUrl(player.getDisplayName());
-                if (capeUrl != null && player instanceof AbstractClientPlayer) {
-                    HexxitGear.proxy.setPlayerCape(player, capeUrl);
-                }
-            }
-        ticks = 0;
-        }
-        ticks++;
-    }
+				EntityPlayer player = (EntityPlayer) event.entityLiving;
+				String capeUrl = CapeHandler.getCapeUrl(player.getDisplayName());
+				if (capeUrl != null && player instanceof AbstractClientPlayer) {
+					HexxitGear.proxy.setPlayerCape(player, capeUrl);
+				}
+			}
+			ticks = 0;
+		}
+		ticks++;
+	}
 }

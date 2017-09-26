@@ -28,61 +28,60 @@ import sct.hexxitgear.core.ArmorSet;
 
 public class AbilityHandler {
 
-    public static Map<String, AbilityHandler> buffHandlers = new HashMap<String, AbilityHandler>();
+	public static Map<String, AbilityHandler> buffHandlers = new HashMap<String, AbilityHandler>();
 
-    private int activeTime = 0;
-    private int cooldownTime = 0;
-    private String playerName;
-    private Ability ability;
+	private int activeTime = 0;
+	private int cooldownTime = 0;
+	private String playerName;
+	private Ability ability;
 
-    public static Map<String, AbilityHandler> getBuffHandlers() {
-        return buffHandlers;
-    }
+	public static Map<String, AbilityHandler> getBuffHandlers() {
+		return buffHandlers;
+	}
 
-    public static AbilityHandler getPlayerAbilityHandler(String playerName) {
-        return buffHandlers.get(playerName);
-    }
+	public static AbilityHandler getPlayerAbilityHandler(String playerName) {
+		return buffHandlers.get(playerName);
+	}
 
-    public static void removePlayer(String playerName) {
-        buffHandlers.remove(playerName);
-    }
+	public static void removePlayer(String playerName) {
+		buffHandlers.remove(playerName);
+	}
 
-    public static void readAbilityPacket(String playerName) {
-        if (playerName != null && !buffHandlers.containsKey(playerName)) {
-            buffHandlers.put(playerName, new AbilityHandler(playerName));
-        }
-    }
+	public static void readAbilityPacket(String playerName) {
+		if (playerName != null && !buffHandlers.containsKey(playerName)) {
+			buffHandlers.put(playerName, new AbilityHandler(playerName));
+		}
+	}
 
-    public AbilityHandler(String playerName) {
-        this.playerName = playerName;
-        this.ability = ArmorSet.getPlayerArmorSet(playerName).getAbility();
-        this.activeTime = ability.getActive();
-        this.cooldownTime = ability.getCooldown();
-    }
+	public AbilityHandler(String playerName) {
+		this.playerName = playerName;
+		this.ability = ArmorSet.getPlayerArmorSet(playerName).getAbility();
+		this.activeTime = ability.getActive();
+		this.cooldownTime = ability.getCooldown();
+	}
 
-    public void onTick(EntityPlayer player) {
-        if (activeTime > 0) {
-            if (ability != null) {
-                if (ability.getActive() == activeTime) {
-                    String abilityName = StatCollector.translateToLocal(ability.getName());
-                    String activated = StatCollector.translateToLocal("ability.hexxitgear.activated");
-                    activated = activated.replace("{0}", abilityName);
-                    player.addChatMessage(new ChatComponentText(activated));
-                }
+	public void onTick(EntityPlayer player) {
+		if (activeTime > 0) {
+			if (ability != null) {
+				if (ability.getActive() == activeTime) {
+					String abilityName = StatCollector.translateToLocal(ability.getName());
+					String activated = StatCollector.translateToLocal("ability.hexxitgear.activated");
+					activated = activated.replace("{0}", abilityName);
+					player.addChatMessage(new ChatComponentText(activated));
+				}
 
-                ability.start(player);
-                if (ability.isInstant())
-                    activeTime = 0;
-            }
-            activeTime--;
-        } else if (cooldownTime > 0) {
-            if (ability != null) {
-                ability.end(player);
-            }
-            cooldownTime--;
-        } else {
-            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("ability.hexxitgear.refreshed")));
-            removePlayer(playerName);
-        }
-    }
+				ability.start(player);
+				if (ability.isInstant()) activeTime = 0;
+			}
+			activeTime--;
+		} else if (cooldownTime > 0) {
+			if (ability != null) {
+				ability.end(player);
+			}
+			cooldownTime--;
+		} else {
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("ability.hexxitgear.refreshed")));
+			removePlayer(playerName);
+		}
+	}
 }

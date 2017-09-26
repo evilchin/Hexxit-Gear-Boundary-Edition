@@ -24,15 +24,15 @@ import net.minecraft.potion.PotionEffect;
 
 public class BuffMagicianSet implements IBuffHandler {
 
-    @Override
-    public void applyPlayerBuffs(EntityPlayer player) {
-        player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 20, 2));
-        player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 20, 2));
-        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 21 * 20, 0));
-    }
+	@Override
+	public void applyPlayerBuffs(EntityPlayer player) {
+		player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 20, 2));
+		player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 20, 2));
+		player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 21 * 20, 0));
+	}
 
-    @Override
-    public void removePlayerBuffs(EntityPlayer player) {
+	@Override
+	public void removePlayerBuffs(EntityPlayer player) {
 
-    }
+	}
 }

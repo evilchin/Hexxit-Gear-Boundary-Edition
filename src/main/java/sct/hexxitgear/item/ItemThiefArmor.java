@@ -35,52 +35,48 @@ import sct.hexxitgear.util.FormatCodes;
 
 public class ItemThiefArmor extends ItemHexxitArmor {
 
-    public ItemThiefArmor(int renderIndex, int slot) {
-        super(ArmorMaterial.DIAMOND, renderIndex, slot);
-    }
+	public ItemThiefArmor(int renderIndex, int slot) {
+		super(ArmorMaterial.DIAMOND, renderIndex, slot);
+	}
 
-    @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, int slot, java.lang.String type) {
-        if (entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entity;
-            if (player.isPotionActive(Potion.invisibility))
-                return "hexxitgear:textures/armor/invisible.png";
-        }
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, java.lang.String type) {
+		if (entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) entity;
+			if (player.isPotionActive(Potion.invisibility)) return "hexxitgear:textures/armor/invisible.png";
+		}
 
-        // If the helmet slot, return helmet texture map
-        if (slot == 0)
-            return "hexxitgear:textures/maps/HoodHelmet.png";
+		// If the helmet slot, return helmet texture map
+		if (slot == 0) return "hexxitgear:textures/maps/HoodHelmet.png";
 
-        if (stack.getItem() == HexxitGear.thiefLeggings)
-            return "hexxitgear:textures/armor/thief2.png";
+		if (stack.getItem() == HexxitGear.thiefLeggings) return "hexxitgear:textures/armor/thief2.png";
 
-        return "hexxitgear:textures/armor/thief.png";
-    }
+		return "hexxitgear:textures/armor/thief.png";
+	}
 
-    @SideOnly(Side.CLIENT)
-    private static ModelHoodHelmet hoodHelmet;
+	@SideOnly(Side.CLIENT)
+	private static ModelHoodHelmet hoodHelmet;
 
-    @SideOnly(Side.CLIENT)
-    private ModelBiped getHelmet() {
-        if (hoodHelmet == null)
-            hoodHelmet = new ModelHoodHelmet();
+	@SideOnly(Side.CLIENT)
+	private ModelBiped getHelmet() {
+		if (hoodHelmet == null) hoodHelmet = new ModelHoodHelmet();
 
-        return hoodHelmet;
-    }
+		return hoodHelmet;
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
-        if (armorSlot == 0) {
-            ModelBiped helmet = getHelmet();
-            helmet.isSneak = entityLiving.isSneaking();
-            return helmet;
-        }
-        return null;
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
+		if (armorSlot == 0) {
+			ModelBiped helmet = getHelmet();
+			helmet.isSneak = entityLiving.isSneaking();
+			return helmet;
+		}
+		return null;
+	}
 
-    @Override
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List infoList, boolean par4) {
-        infoList.add(FormatCodes.Indigo.format + StatCollector.translateToLocal("gui.hexxitgear.set.thief"));
-    }
+	@Override
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List infoList, boolean par4) {
+		infoList.add(FormatCodes.Indigo.format + StatCollector.translateToLocal("gui.hexxitgear.set.thief"));
+	}
 }

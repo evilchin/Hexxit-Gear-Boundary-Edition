@@ -13,47 +13,49 @@ import sct.hexxitgear.HexxitGear;
 
 public class CapeJoinPacket extends HexxitGearPacketBase {
 
-    private Map<String, String> allPlayerCapes = new HashMap<String, String>();
+	private Map<String, String> allPlayerCapes = new HashMap<String, String>();
 
-    public CapeJoinPacket() {}
-    public CapeJoinPacket(Map<String, String> capes) {
-        for(String playerName : capes.keySet()) {
-            allPlayerCapes.put(playerName, capes.get(playerName));
-        }
-    }
+	public CapeJoinPacket() {
+	}
 
-    @Override
-    public void write(ByteArrayDataOutput out) {
-        out.writeInt(allPlayerCapes.keySet().size());
+	public CapeJoinPacket(Map<String, String> capes) {
+		for (String playerName : capes.keySet()) {
+			allPlayerCapes.put(playerName, capes.get(playerName));
+		}
+	}
 
-        for (String playerName : allPlayerCapes.keySet()) {
-            out.writeUTF(playerName);
-            String capeUrl = allPlayerCapes.get(playerName);
-            out.writeUTF(capeUrl);
-        }
-    }
+	@Override
+	public void write(ByteArrayDataOutput out) {
+		out.writeInt(allPlayerCapes.keySet().size());
 
-    @Override
-    public void read(ByteArrayDataInput in) {
-        int capeCount = in.readInt();
+		for (String playerName : allPlayerCapes.keySet()) {
+			out.writeUTF(playerName);
+			String capeUrl = allPlayerCapes.get(playerName);
+			out.writeUTF(capeUrl);
+		}
+	}
 
-        for (int i = 0; i < capeCount; i++) {
-            String playerName = in.readUTF();
-            String capeUrl = in.readUTF();
-            allPlayerCapes.put(playerName, capeUrl);
-        }
-    }
+	@Override
+	public void read(ByteArrayDataInput in) {
+		int capeCount = in.readInt();
 
-    @Override
-    public void handleClient(World world, EntityPlayer player) {
-        for (String playerName : allPlayerCapes.keySet()) {
-            String capeUrl = allPlayerCapes.get(playerName);
-            HexxitGear.proxy.setPlayerCape(playerName, capeUrl);
-        }
-    }
+		for (int i = 0; i < capeCount; i++) {
+			String playerName = in.readUTF();
+			String capeUrl = in.readUTF();
+			allPlayerCapes.put(playerName, capeUrl);
+		}
+	}
 
-    @Override
-    public void handleServer(World world, EntityPlayerMP player) {
-        //Server to client packet
-    }
+	@Override
+	public void handleClient(World world, EntityPlayer player) {
+		for (String playerName : allPlayerCapes.keySet()) {
+			String capeUrl = allPlayerCapes.get(playerName);
+			HexxitGear.proxy.setPlayerCape(playerName, capeUrl);
+		}
+	}
+
+	@Override
+	public void handleServer(World world, EntityPlayerMP player) {
+		//Server to client packet
+	}
 }

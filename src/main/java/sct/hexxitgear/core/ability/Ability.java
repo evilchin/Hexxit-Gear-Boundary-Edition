@@ -22,37 +22,37 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public abstract class Ability {
 
-    private String name;
-    private int active;
-    private int cooldown;
-    private boolean instant;
+	private String name;
+	private int active;
+	private int cooldown;
+	private boolean instant;
 
-    public Ability(String name, int active, int cooldown, boolean instant) {
-        this.name = name;
-        this.active = active;
-        this.cooldown = cooldown;
-        this.instant = instant;
-    }
+	public Ability(String name, int active, int cooldown, boolean instant) {
+		this.name = name;
+		this.active = active;
+		this.cooldown = cooldown;
+		this.instant = instant;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public int getActive() {
-        return active;
-    }
+	public int getActive() {
+		return active;
+	}
 
-    public int getCooldown() {
-        return cooldown;
-    }
+	public int getCooldown() {
+		return cooldown;
+	}
 
-    public boolean isInstant() {
-        return instant;
-    }
+	public boolean isInstant() {
+		return instant;
+	}
 
-    public abstract void start(EntityPlayer player);
+	public abstract void start(EntityPlayer player);
 
-    public void end(EntityPlayer player) {
+	public void end(EntityPlayer player) {
 
-    }
+	}
 }

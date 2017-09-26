@@ -27,20 +27,20 @@ import sct.hexxitgear.HexxitGear;
 
 public class HGCreativeTab extends CreativeTabs {
 
-    public static final HGCreativeTab tab = new HGCreativeTab(StatCollector.translateToLocal("gui.hexxitgear.creativetab"));
+	public static final HGCreativeTab tab = new HGCreativeTab(StatCollector.translateToLocal("gui.hexxitgear.creativetab"));
 
-    public HGCreativeTab(String label) {
-        super(label);
-    }
+	public HGCreativeTab(String label) {
+		super(label);
+	}
 
-    @Override
-    public Item getTabIconItem() {
-        return HexxitGear.tribalHelmet;
-    }
+	@Override
+	public Item getTabIconItem() {
+		return HexxitGear.tribalHelmet;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public String getTranslatedTabLabel() {
-        return this.getTabLabel();
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getTranslatedTabLabel() {
+		return this.getTabLabel();
+	}
 }

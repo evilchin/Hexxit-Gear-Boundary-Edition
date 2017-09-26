@@ -24,6 +24,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -31,55 +32,53 @@ import sct.hexxitgear.control.HGKeyHandler;
 
 public class ClientProxy extends CommonProxy {
 
-    @Override
-    public int addArmor(String armorName) {
-        return RenderingRegistry.addNewArmourRendererPrefix(armorName);
-    }
+	@Override
+	public int addArmor(String armorName) {
+		return RenderingRegistry.addNewArmourRendererPrefix(armorName);
+	}
 
-    @Override
-    public EntityPlayer findPlayer(String playerName) {
-        for (Object a : FMLClientHandler.instance().getClient().theWorld.playerEntities) {
-            EntityPlayer player = (EntityPlayer) a;
-            if (player.getDisplayName().toLowerCase().equals(playerName.toLowerCase())) {
-                return player;
-            }
-        }
-        return null;
-    }
+	@Override
+	public EntityPlayer findPlayer(String playerName) {
+		for (Object a : FMLClientHandler.instance().getClient().world.playerEntities) {
+			EntityPlayer player = (EntityPlayer) a;
+			if (player.getDisplayName().toLowerCase().equals(playerName.toLowerCase())) { return player; }
+		}
+		return null;
+	}
 
-    @Override
-    public void setPlayerCape(String playerName, String capeUrl) {
-        EntityPlayer player = HexxitGear.proxy.findPlayer(playerName);
-//      setPlayerCape(player, capeUrl);
-    }
+	@Override
+	public void setPlayerCape(String playerName, String capeUrl) {
+		EntityPlayer player = HexxitGear.proxy.findPlayer(playerName);
+		//      setPlayerCape(player, capeUrl);
+	}
 
-    @Override
-    public void setPlayerCape(EntityPlayer player, String capeUrl) {
-        String token = capeUrl.substring(capeUrl.lastIndexOf("/")+1);
-        ResourceLocation capeResource = new ResourceLocation("hexxitgear:cloaks/"+token);
-        if (player != null && player instanceof AbstractClientPlayer) {
-            ResourceLocation locationCape = ((AbstractClientPlayer)player).locationCape;
+	@Override
+	public void setPlayerCape(EntityPlayer player, String capeUrl) {
+		String token = capeUrl.substring(capeUrl.lastIndexOf("/") + 1);
+		ResourceLocation capeResource = new ResourceLocation("hexxitgear:cloaks/" + token);
+		if (player != null && player instanceof AbstractClientPlayer) {
+			ResourceLocation locationCape = ((AbstractClientPlayer) player).locationCape;
 
-            if (locationCape == null || !locationCape.equals(capeResource)) {
-                AbstractClientPlayer capePlayer = (AbstractClientPlayer) player;
-                capePlayer.func_152121_a(MinecraftProfileTexture.Type.CAPE, capeResource);
-            }
-        }
-    }
+			if (locationCape == null || !locationCape.equals(capeResource)) {
+				AbstractClientPlayer capePlayer = (AbstractClientPlayer) player;
+				capePlayer.func_152121_a(MinecraftProfileTexture.Type.CAPE, capeResource);
+			}
+		}
+	}
 
-    @Override
-    public void resetPlayerCape(String playerName) {
-        EntityPlayer player = HexxitGear.proxy.findPlayer(playerName);
-        if (player != null && player instanceof AbstractClientPlayer) {
-            AbstractClientPlayer capePlayer = (AbstractClientPlayer)player;
-            capePlayer.func_152121_a(MinecraftProfileTexture.Type.CAPE, null);
-            Minecraft.getMinecraft().func_152342_ad().func_152790_a(capePlayer.getGameProfile(), capePlayer, true);
-        }
-    }
+	@Override
+	public void resetPlayerCape(String playerName) {
+		EntityPlayer player = HexxitGear.proxy.findPlayer(playerName);
+		if (player != null && player instanceof AbstractClientPlayer) {
+			AbstractClientPlayer capePlayer = (AbstractClientPlayer) player;
+			capePlayer.func_152121_a(MinecraftProfileTexture.Type.CAPE, null);
+			Minecraft.getMinecraft().func_152342_ad().func_152790_a(capePlayer.getGameProfile(), capePlayer, true);
+		}
+	}
 
-    @Override
-    public void registerHandlers() {
-        super.registerHandlers();
-        FMLCommonHandler.instance().bus().register(new HGKeyHandler());
-    }
+	@Override
+	public void registerHandlers() {
+		super.registerHandlers();
+		MinecraftForge.EVENT_BUS.register(new HGKeyHandler());
+	}
 }

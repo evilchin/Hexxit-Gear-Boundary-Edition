@@ -22,18 +22,17 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class AbilityShield extends Ability {
 
+	public AbilityShield() {
+		super("ability.hexxitgear.shield", 5 * 20, 10 * 20, false);
+	}
 
-    public AbilityShield() {
-        super("ability.hexxitgear.shield", 5 * 20, 10 * 20, false);
-    }
+	@Override
+	public void start(EntityPlayer player) {
+		player.invulnerable = true;
+	}
 
-    @Override
-    public void start(EntityPlayer player) {
-        player.invulnerable = true;
-    }
-
-    @Override
-    public void end(EntityPlayer player) {
-        player.invulnerable = false;
-    }
+	@Override
+	public void end(EntityPlayer player) {
+		player.invulnerable = false;
+	}
 }

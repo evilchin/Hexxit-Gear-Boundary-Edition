@@ -27,23 +27,22 @@ import net.minecraft.util.math.AxisAlignedBB;
 
 public class AbilityKnockback extends Ability {
 
+	public AbilityKnockback() {
+		super("ability.hexxitgear.knockback", 1 * 20, 10 * 20, true);
+	}
 
-    public AbilityKnockback() {
-        super("ability.hexxitgear.knockback", 1 * 20, 10 * 20, true);
-    }
+	@Override
+	public void start(EntityPlayer player) {
+		List<EntityLiving> entities = player.worldObj.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getBoundingBox(player.posX - 5, player.posY, player.posZ - 5, player.posX + 5, player.posY + 3, player.posZ + 5));
 
-    @Override
-    public void start(EntityPlayer player) {
-        List<EntityLiving> entities = player.worldObj.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getBoundingBox(player.posX - 5, player.posY, player.posZ - 5, player.posX + 5, player.posY + 3, player.posZ + 5));
+		for (EntityLiving entity : entities) {
+			double relX = player.posX - entity.posX;
+			double relZ = player.posZ - entity.posZ;
 
-        for (EntityLiving entity : entities) {
-            double relX = player.posX - entity.posX;
-            double relZ = player.posZ - entity.posZ;
-
-            if (!entity.equals(player)) {
-                entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 2);
-                entity.addVelocity((relX * 0.25) * -1, 0.2, (relZ * 0.25) * -1);
-            }
-        }
-    }
+			if (!entity.equals(player)) {
+				entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 2);
+				entity.addVelocity((relX * 0.25) * -1, 0.2, (relZ * 0.25) * -1);
+			}
+		}
+	}
 }

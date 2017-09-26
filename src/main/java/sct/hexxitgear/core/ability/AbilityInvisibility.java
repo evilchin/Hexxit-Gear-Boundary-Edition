@@ -24,17 +24,17 @@ import net.minecraft.potion.PotionEffect;
 
 public class AbilityInvisibility extends Ability {
 
-    public AbilityInvisibility() {
-        super("ability.hexxitgear.invisibility", 20 * 10, 20 * 5, false);
-    }
+	public AbilityInvisibility() {
+		super("ability.hexxitgear.invisibility", 20 * 10, 20 * 5, false);
+	}
 
-    @Override
-    public void start(EntityPlayer player) {
-        player.addPotionEffect(new PotionEffect(Potion.invisibility.id, 10 * 20, 81));
-    }
+	@Override
+	public void start(EntityPlayer player) {
+		player.addPotionEffect(new PotionEffect(Potion.invisibility.id, 10 * 20, 81));
+	}
 
-    @Override
-    public void end(EntityPlayer player) {
-        player.removePotionEffect(Potion.invisibility.id);
-    }
+	@Override
+	public void end(EntityPlayer player) {
+		player.removePotionEffect(Potion.invisibility.id);
+	}
 }

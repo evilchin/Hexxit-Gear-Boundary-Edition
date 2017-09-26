@@ -31,66 +31,65 @@ import sct.hexxitgear.net.packets.CapeJoinPacket;
 
 public class CapeHandler {
 
-    public static Map<String, String> capes = new HashMap<String, String>();
+	public static Map<String, String> capes = new HashMap<String, String>();
 
-    public static void registerCape(String player, String capeUrl) {
-        capes.put(player, capeUrl);
-        sendCapeUpdate(player, capeUrl);
-    }
+	public static void registerCape(String player, String capeUrl) {
+		capes.put(player, capeUrl);
+		sendCapeUpdate(player, capeUrl);
+	}
 
-    public static void removeCape(String playerName) {
-        if (playerName != null) {
-            capes.remove(playerName);
-            sendCapeUpdate(playerName, null);
-        }
-    }
+	public static void removeCape(String playerName) {
+		if (playerName != null) {
+			capes.remove(playerName);
+			sendCapeUpdate(playerName, null);
+		}
+	}
 
-    public static String getCapeUrl(String player) {
-        return capes.get(player);
-    }
+	public static String getCapeUrl(String player) {
+		return capes.get(player);
+	}
 
-    public static void sendCapeUpdate(String player, String capeUrl) {
-        if (capeUrl == null) {
-            capeUrl = "";
-        }
+	public static void sendCapeUpdate(String player, String capeUrl) {
+		if (capeUrl == null) {
+			capeUrl = "";
+		}
 
-        HexxitGearNetwork.sendToAllPlayers(new CapeChangePacket(player, capeUrl));
-    }
+		HexxitGearNetwork.sendToAllPlayers(new CapeChangePacket(player, capeUrl));
+	}
 
-    public static void sendJoinUpdate(EntityPlayer player) {
-        HexxitGearNetwork.sendToPlayer(new CapeJoinPacket(capes), player);
-    }
+	public static void sendJoinUpdate(EntityPlayer player) {
+		HexxitGearNetwork.sendToPlayer(new CapeJoinPacket(capes), player);
+	}
 
-    public static void readCapeUpdate(String playerName, String capeUrl) {
-        EntityPlayer player = HexxitGear.proxy.findPlayer(playerName);
-        if (!capeUrl.equals("")) {
-            capes.put(playerName, capeUrl);
-            if (player != null) {
-                HexxitGear.proxy.setPlayerCape(playerName, capes.get(playerName));
-            }
-        } else {
-            capes.remove(playerName);
-            if (player != null)
-                HexxitGear.proxy.resetPlayerCape(playerName);
-        }
-    }
+	public static void readCapeUpdate(String playerName, String capeUrl) {
+		EntityPlayer player = HexxitGear.proxy.findPlayer(playerName);
+		if (!capeUrl.equals("")) {
+			capes.put(playerName, capeUrl);
+			if (player != null) {
+				HexxitGear.proxy.setPlayerCape(playerName, capes.get(playerName));
+			}
+		} else {
+			capes.remove(playerName);
+			if (player != null) HexxitGear.proxy.resetPlayerCape(playerName);
+		}
+	}
 
-    public static void readJoinUpdate(DataInputStream data) {
-        try {
-            capes = new HashMap<String, String>();
+	public static void readJoinUpdate(DataInputStream data) {
+		try {
+			capes = new HashMap<String, String>();
 
-            int count = data.readByte();
+			int count = data.readByte();
 
-            String playerName, capeUrl;
-            for (int i = 0; i < count; i++) {
-                playerName = data.readUTF();
-                capeUrl = data.readUTF();
-                capes.put(playerName, capeUrl);
-                HexxitGear.proxy.setPlayerCape(playerName, capeUrl);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+			String playerName, capeUrl;
+			for (int i = 0; i < count; i++) {
+				playerName = data.readUTF();
+				capeUrl = data.readUTF();
+				capes.put(playerName, capeUrl);
+				HexxitGear.proxy.setPlayerCape(playerName, capeUrl);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-    }
+	}
 }

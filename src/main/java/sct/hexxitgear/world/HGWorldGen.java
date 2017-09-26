@@ -28,34 +28,31 @@ import sct.hexxitgear.HexxitGear;
 
 public class HGWorldGen implements IWorldGenerator {
 
-    @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
 
-        if (HexxitGear.getDimBlacklist().contains(world.provider.dimensionId))
-            return;
+		if (HexxitGear.getDimBlacklist().contains(world.provider.dimensionId)) return;
 
-        if (world.getWorldInfo().getTerrainType().getWorldTypeName().equals("flat"))
-            return;
+		if (world.getWorldInfo().getTerrainType().getWorldTypeName().equals("flat")) return;
 
-        int xMin = chunkX << 4;
-        int zMin = chunkZ << 4;
+		int xMin = chunkX << 4;
+		int zMin = chunkZ << 4;
 
-        int startX = xMin + random.nextInt(16);
-        int startZ = zMin + random.nextInt(16);
+		int startX = xMin + random.nextInt(16);
+		int startZ = zMin + random.nextInt(16);
 
-        int tries = random.nextInt(2);
+		int tries = random.nextInt(2);
 
-        for (int i=0; i < tries; i++) {
-            int x = startX + random.nextInt(8) - random.nextInt(8);
-            int z = startZ + random.nextInt(8) - random.nextInt(8);
-            int y = world.getHeightValue(x, z);
+		for (int i = 0; i < tries; i++) {
+			int x = startX + random.nextInt(8) - random.nextInt(8);
+			int z = startZ + random.nextInt(8) - random.nextInt(8);
+			int y = world.getHeightValue(x, z);
 
-            if ((world.isAirBlock(x, y, z) || (world.getBlock(x, y, z) == Blocks.snow)) && HexxitGear.hexbiscus.canBlockStay(world, x, y, z)) {
-                if (random.nextInt(50) > 1)
-                    continue;
+			if ((world.isAirBlock(x, y, z) || (world.getBlock(x, y, z) == Blocks.snow)) && HexxitGear.hexbiscus.canBlockStay(world, x, y, z)) {
+				if (random.nextInt(50) > 1) continue;
 
-                world.setBlock(x, y, z, HexxitGear.hexbiscus, 0, 0);
-            }
-        }
-    }
+				world.setBlock(x, y, z, HexxitGear.hexbiscus, 0, 0);
+			}
+		}
+	}
 }

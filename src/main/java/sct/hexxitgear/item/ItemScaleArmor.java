@@ -34,44 +34,41 @@ import sct.hexxitgear.util.FormatCodes;
 
 public class ItemScaleArmor extends ItemHexxitArmor {
 
-    public ItemScaleArmor(int renderIndex, int slot) {
-        super(ArmorMaterial.DIAMOND, renderIndex, slot);
-    }
+	public ItemScaleArmor(int renderIndex, int slot) {
+		super(ArmorMaterial.DIAMOND, renderIndex, slot);
+	}
 
-    @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, int slot, java.lang.String type) {
-        if (slot == 0)
-            return "hexxitgear:textures/maps/ScaleHelmet.png";
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, java.lang.String type) {
+		if (slot == 0) return "hexxitgear:textures/maps/ScaleHelmet.png";
 
-        if (stack.getItem() == HexxitGear.scaleLeggings)
-            return "hexxitgear:textures/armor/scale2.png";
+		if (stack.getItem() == HexxitGear.scaleLeggings) return "hexxitgear:textures/armor/scale2.png";
 
-        return "hexxitgear:textures/armor/scale.png";
-    }
+		return "hexxitgear:textures/armor/scale.png";
+	}
 
-    @SideOnly(Side.CLIENT)
-    private static ModelScaleHelmet scaleHelmet;
+	@SideOnly(Side.CLIENT)
+	private static ModelScaleHelmet scaleHelmet;
 
-    @SideOnly(Side.CLIENT)
-    private ModelBiped getHelmet() {
-        if (scaleHelmet == null)
-            scaleHelmet = new ModelScaleHelmet();
-        return scaleHelmet;
-    }
+	@SideOnly(Side.CLIENT)
+	private ModelBiped getHelmet() {
+		if (scaleHelmet == null) scaleHelmet = new ModelScaleHelmet();
+		return scaleHelmet;
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
-        if (armorSlot == 0) {
-            ModelBiped helmet = getHelmet();
-            helmet.isSneak = entityLiving.isSneaking();
-            return helmet;
-        }
-        return null;
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
+		if (armorSlot == 0) {
+			ModelBiped helmet = getHelmet();
+			helmet.isSneak = entityLiving.isSneaking();
+			return helmet;
+		}
+		return null;
+	}
 
-    @Override
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List infoList, boolean par4) {
-        infoList.add(FormatCodes.Indigo.format + StatCollector.translateToLocal("gui.hexxitgear.set.scale"));
-    }
+	@Override
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List infoList, boolean par4) {
+		infoList.add(FormatCodes.Indigo.format + StatCollector.translateToLocal("gui.hexxitgear.set.scale"));
+	}
 }

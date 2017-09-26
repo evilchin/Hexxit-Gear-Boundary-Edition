@@ -10,30 +10,32 @@ import sct.hexxitgear.core.ability.AbilityHandler;
 
 public class ArmorAbilityPacket extends HexxitGearPacketBase {
 
-    private String playerName;
+	private String playerName;
 
-    public ArmorAbilityPacket() {}
-    public ArmorAbilityPacket(String playerName) {
-        this.playerName = playerName;
-    }
+	public ArmorAbilityPacket() {
+	}
 
-    @Override
-    public void write(ByteArrayDataOutput out) {
-        out.writeUTF(playerName);
-    }
+	public ArmorAbilityPacket(String playerName) {
+		this.playerName = playerName;
+	}
 
-    @Override
-    public void read(ByteArrayDataInput in) {
-        playerName = in.readUTF();
-    }
+	@Override
+	public void write(ByteArrayDataOutput out) {
+		out.writeUTF(playerName);
+	}
 
-    @Override
-    public void handleClient(World world, EntityPlayer player) {
-        //Client to server packet
-    }
+	@Override
+	public void read(ByteArrayDataInput in) {
+		playerName = in.readUTF();
+	}
 
-    @Override
-    public void handleServer(World world, EntityPlayerMP player) {
-        AbilityHandler.readAbilityPacket(playerName);
-    }
+	@Override
+	public void handleClient(World world, EntityPlayer player) {
+		//Client to server packet
+	}
+
+	@Override
+	public void handleServer(World world, EntityPlayerMP player) {
+		AbilityHandler.readAbilityPacket(playerName);
+	}
 }

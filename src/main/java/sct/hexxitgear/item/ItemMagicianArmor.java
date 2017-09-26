@@ -35,51 +35,47 @@ import sct.hexxitgear.util.FormatCodes;
 
 public class ItemMagicianArmor extends ItemHexxitArmor {
 
-    public ItemMagicianArmor(int renderIndex, int slot) {
-        super(ArmorMaterial.DIAMOND, renderIndex, slot);
-    }
+	public ItemMagicianArmor(int renderIndex, int slot) {
+		super(ArmorMaterial.DIAMOND, renderIndex, slot);
+	}
 
-    @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, int slot, java.lang.String type) {
-        if (entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entity;
-            if (player.isPotionActive(Potion.invisibility))
-                return "hexxitgear:textures/armor/invisible.png";
-        }
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, java.lang.String type) {
+		if (entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) entity;
+			if (player.isPotionActive(Potion.invisibility)) return "hexxitgear:textures/armor/invisible.png";
+		}
 
-        // If the helmet slot, return helmet texture map
-        if (slot == 0)
-            return "hexxitgear:textures/maps/SageHood.png";
+		// If the helmet slot, return helmet texture map
+		if (slot == 0) return "hexxitgear:textures/maps/SageHood.png";
 
-        if (stack.getItem() == HexxitGear.magicLeggings)
-            return "hexxitgear:textures/armor/sage2.png";
+		if (stack.getItem() == HexxitGear.magicLeggings) return "hexxitgear:textures/armor/sage2.png";
 
-        return "hexxitgear:textures/armor/sage.png";
-    }
+		return "hexxitgear:textures/armor/sage.png";
+	}
 
-    @SideOnly(Side.CLIENT)
-    private static ModelSageHood hood;
+	@SideOnly(Side.CLIENT)
+	private static ModelSageHood hood;
 
-    @SideOnly(Side.CLIENT)
-    protected ModelSageHood getHoodModel() {
-        if (hood == null)
-            hood = new ModelSageHood();
-        return hood;
-    }
+	@SideOnly(Side.CLIENT)
+	protected ModelSageHood getHoodModel() {
+		if (hood == null) hood = new ModelSageHood();
+		return hood;
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
-        if (armorSlot == 0) {
-            ModelBiped retVal = getHoodModel();
-            retVal.isSneak = entityLiving.isSneaking();
-            return retVal;
-        }
-        return null;
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
+		if (armorSlot == 0) {
+			ModelBiped retVal = getHoodModel();
+			retVal.isSneak = entityLiving.isSneaking();
+			return retVal;
+		}
+		return null;
+	}
 
-    @Override
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List infoList, boolean par4) {
-        infoList.add(FormatCodes.Indigo.format + StatCollector.translateToLocal("gui.hexxitgear.set.magician"));
-    }
+	@Override
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List infoList, boolean par4) {
+		infoList.add(FormatCodes.Indigo.format + StatCollector.translateToLocal("gui.hexxitgear.set.magician"));
+	}
 }

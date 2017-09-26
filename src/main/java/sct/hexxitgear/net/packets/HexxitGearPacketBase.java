@@ -10,11 +10,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class HexxitGearPacketBase {
-    public abstract void write(ByteArrayDataOutput out);
-    public abstract void read(ByteArrayDataInput in);
+	public abstract void write(ByteArrayDataOutput out);
 
-    @SideOnly(Side.CLIENT)
-    public abstract void handleClient(World world, EntityPlayer player);
+	public abstract void read(ByteArrayDataInput in);
 
-    public abstract void handleServer(World world, EntityPlayerMP player);
+	@SideOnly(Side.CLIENT)
+	public abstract void handleClient(World world, EntityPlayer player);
+
+	public abstract void handleServer(World world, EntityPlayerMP player);
 }
