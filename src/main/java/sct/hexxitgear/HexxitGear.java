@@ -93,8 +93,8 @@ public class HexxitGear {
 	@SideOnly(Side.CLIENT)
 	public static void translateAndAdd(String key, List<String> list) {
 		for (int i = 0; i < 10; i++) {
-				list.add(I18n.format(key + i));
-			}
+			list.add(I18n.format(key + i));
 		}
+	}
 
 }

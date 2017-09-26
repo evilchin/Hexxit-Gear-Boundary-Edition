@@ -22,15 +22,18 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.BlockBush;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.model.ModelLoader;
 import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.gui.HGCreativeTab;
+import sct.hexxitgear.util.IHasModel;
 
-public class BlockHexbiscus extends BlockBush {
+public class BlockHexbiscus extends BlockBush implements IHasModel {
 
 	public BlockHexbiscus() {
 		setCreativeTab(HGCreativeTab.tab);
@@ -45,5 +48,10 @@ public class BlockHexbiscus extends BlockBush {
 
 	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> items) {
 		items.add(new ItemStack(this));
+	}
+
+	@Override
+	public void initModel() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
 	}
 }

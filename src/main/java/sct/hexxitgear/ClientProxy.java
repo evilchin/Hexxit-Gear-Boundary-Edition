@@ -33,9 +33,9 @@ public class ClientProxy extends CommonProxy {
 		super.registerHandlers();
 		MinecraftForge.EVENT_BUS.register(new HGKeyHandler());
 	}
-	
+
 	@SubscribeEvent
 	public static void modelRegistry(ModelRegistryEvent e) {
-		
+
 	}
 }

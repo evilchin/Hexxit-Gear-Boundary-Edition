@@ -31,8 +31,9 @@ import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.core.ability.AbilityHandler;
 import sct.hexxitgear.gui.HGCreativeTab;
+import sct.hexxitgear.util.IHasModel;
 
-public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor {
+public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasModel {
 
 	public ItemHexxitArmor(String regname, ArmorMaterial material, int renderindex, EntityEquipmentSlot slot) {
 		super(material, renderindex, slot);

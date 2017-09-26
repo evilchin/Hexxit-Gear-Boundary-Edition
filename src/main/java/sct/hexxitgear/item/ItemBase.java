@@ -4,8 +4,9 @@ import net.minecraft.item.Item;
 import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.gui.HGCreativeTab;
+import sct.hexxitgear.util.IHasModel;
 
-public class ItemBase extends Item{
+public class ItemBase extends Item implements IHasModel {
 
 	public ItemBase(String regname) {
 		setRegistryName(HexxitGear.MODID, regname);

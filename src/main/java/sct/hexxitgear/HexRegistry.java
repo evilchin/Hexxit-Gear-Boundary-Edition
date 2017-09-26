@@ -27,8 +27,8 @@ public class HexRegistry {
 	public static final Item HEXICAL_DIAMOND = new ItemBase("hexical_diamond");
 
 	public static final ItemTribalArmor TRIBAL_HELMET = new ItemTribalArmor("tribal_helmet", EntityEquipmentSlot.HEAD);
-	public static final ItemTribalArmor TRIBAL_CHEST = new ItemTribalArmor("tribal_helmet", EntityEquipmentSlot.HEAD);
-	public static final ItemTribalArmor TRIBAL_LEGS = new ItemTribalArmor("tribal_chest", EntityEquipmentSlot.CHEST);
+	public static final ItemTribalArmor TRIBAL_CHEST = new ItemTribalArmor("tribal_chest", EntityEquipmentSlot.CHEST);
+	public static final ItemTribalArmor TRIBAL_LEGS = new ItemTribalArmor("tribal_legs", EntityEquipmentSlot.LEGS);
 	public static final ItemTribalArmor TRIBAL_BOOTS = new ItemTribalArmor("tribal_boots", EntityEquipmentSlot.FEET);
 
 	public static final Item THIEF_HELMET = new ItemThiefArmor("thief_helmet", EntityEquipmentSlot.HEAD);
