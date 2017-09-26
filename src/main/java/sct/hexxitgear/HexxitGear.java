@@ -38,7 +38,6 @@ import sct.hexxitgear.event.PlayerEventHandler;
 import sct.hexxitgear.net.HexxitGearNetwork;
 import sct.hexxitgear.setup.HexxitGearConfig;
 import sct.hexxitgear.setup.HexxitGearRegistry;
-import sct.hexxitgear.tick.PlayerTracker;
 import sct.hexxitgear.world.HGWorldGen;
 
 @Mod(modid = HexxitGear.MODID, name = HexxitGear.NAME, useMetadata = true, version = HexxitGear.VERSION)
@@ -78,7 +77,6 @@ public class HexxitGear {
 
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent evt) {
-		MinecraftForge.EVENT_BUS.register(new PlayerTracker());
 		HexxitGearRegistry.init();
 	}
 

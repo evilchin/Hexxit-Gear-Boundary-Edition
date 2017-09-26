@@ -52,7 +52,7 @@ public class HGKeyHandler {
 
 			if (activateHexxitArmor.isPressed()) {
 				if (ArmorSet.getPlayerArmorSet(player.getGameProfile().getName()) != null) {
-					HexxitGearNetwork.sendToServer(new ArmorAbilityPacket(player.getGameProfile().getName()));
+					HexxitGearNetwork.sendToServer(new ArmorAbilityPacket(player.getDisplayName().getFormattedText()));
 				}
 			}
 		}

@@ -21,6 +21,8 @@ package sct.hexxitgear.event;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import sct.hexxitgear.core.ArmorSet;
 
 public class PlayerEventHandler {
 
@@ -35,5 +37,10 @@ public class PlayerEventHandler {
 			ticks = 0;
 		}
 		ticks++;
+	}
+
+	@SubscribeEvent
+	public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+		ArmorSet.getMatchingSet(event.player);
 	}
 }

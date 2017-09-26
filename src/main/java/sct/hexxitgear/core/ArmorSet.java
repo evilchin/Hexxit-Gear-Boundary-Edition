@@ -91,7 +91,7 @@ public class ArmorSet {
 	}
 
 	private static List<Item> getPlayerArmors(EntityPlayer player) {
-		List<Item> playerSet = new ArrayList<Item>(4);
+		List<Item> playerSet = new ArrayList<>(4);
 
 		for (ItemStack armor : player.getArmorInventoryList()) {
 			if (!HexUtils.isEmpty(armor)) {

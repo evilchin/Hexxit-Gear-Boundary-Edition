@@ -18,12 +18,14 @@
 
 package sct.hexxitgear;
 
+import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import sct.hexxitgear.control.HGKeyHandler;
+import sct.hexxitgear.util.IHasModel;
 
 @EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
@@ -36,6 +38,8 @@ public class ClientProxy extends CommonProxy {
 
 	@SubscribeEvent
 	public static void modelRegistry(ModelRegistryEvent e) {
-
+		for (Item i : HexRegistry.ITEMS)
+			if (i instanceof IHasModel) ((IHasModel) i).initModel();
+		HexRegistry.HEXBISCUS.initModel();
 	}
 }

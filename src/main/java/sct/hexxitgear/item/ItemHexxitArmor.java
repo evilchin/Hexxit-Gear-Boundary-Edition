@@ -27,6 +27,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
+import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.core.ability.AbilityHandler;
@@ -40,6 +41,7 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasMod
 		setCreativeTab(HGCreativeTab.tab);
 		setRegistryName(HexxitGear.MODID, regname);
 		setUnlocalizedName(HexxitGear.MODID + "." + regname);
+		HexRegistry.ITEMS.add(this);
 	}
 
 	@Override
