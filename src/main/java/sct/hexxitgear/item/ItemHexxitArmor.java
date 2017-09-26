@@ -68,19 +68,17 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasMod
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		if (this.armorType == EntityEquipmentSlot.HEAD) return;
+		if (world.isRemote) return;
+		if (this.armorType != EntityEquipmentSlot.HEAD) return;
 
-		ArmorSet.getMatchingSet(player);
+		ArmorSet set = ArmorSet.getCurrentArmorSet(player);
 
-		if (ArmorSet.getPlayerArmorSet(EntityPlayer.getUUID(player.getGameProfile())) != null) {
-			ArmorSet armorSet = ArmorSet.getPlayerArmorSet(EntityPlayer.getUUID(player.getGameProfile()));
-			armorSet.applyBuffs(player);
-		}
+		if (set != null) set.applyBuffs(player);
 
-		// We run this outside of the check for an armorset just incase a player takes off armor mid ability
-		AbilityHandler bh = AbilityHandler.getPlayerAbilityHandler(EntityPlayer.getUUID(player.getGameProfile()));
-		if (bh != null) {
-			bh.onTick(player);
+		AbilityHandler handler = AbilityHandler.getActiveAbility(player);
+
+		if (handler != null) {
+			handler.onTick(player);
 		}
 	}
 

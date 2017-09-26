@@ -23,7 +23,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class AbilityShield extends Ability {
 
 	public AbilityShield() {
-		super("ability.hexxitgear.shield", 5 * 20, 10 * 20, false);
+		super("ability.hexxitgear.shield", 100, 500);
 	}
 
 	@Override

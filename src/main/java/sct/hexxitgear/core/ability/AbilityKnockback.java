@@ -29,7 +29,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 public class AbilityKnockback extends Ability {
 
 	public AbilityKnockback() {
-		super("ability.hexxitgear.knockback", 1 * 20, 10 * 20, true);
+		super("ability.hexxitgear.knockback", 300);
 	}
 
 	@Override
@@ -46,4 +46,8 @@ public class AbilityKnockback extends Ability {
 			}
 		}
 	}
+
+	@Override
+	public void end(EntityPlayer player) {
+	};
 }

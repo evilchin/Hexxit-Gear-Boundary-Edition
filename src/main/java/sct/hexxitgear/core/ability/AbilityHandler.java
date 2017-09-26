@@ -23,62 +23,63 @@ import java.util.Map;
 import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.entity.player.EntityPlayerMP;
 import sct.hexxitgear.core.ArmorSet;
-import sct.hexxitgear.net.HexxitGearNetwork;
-import sct.hexxitgear.net.packets.AbilityMessage;
+import sct.hexxitgear.net.ActionTextMessage;
+import sct.hexxitgear.net.HexNetwork;
 
 public class AbilityHandler {
 
-	public static Map<UUID, AbilityHandler> buffHandlers = new HashMap<>();
-
-	private int activeTime = 0;
-	private int cooldownTime = 0;
+	private int activeTime;
+	private int cooldownTime;
 	private Ability ability;
+	private boolean ended = false;
 
-	public static Map<UUID, AbilityHandler> getBuffHandlers() {
-		return buffHandlers;
-	}
+	private static final Map<UUID, AbilityHandler> CURRENT = new HashMap<>();
 
-	public static AbilityHandler getPlayerAbilityHandler(UUID playerId) {
-		return buffHandlers.get(playerId);
-	}
-
-	public static void removePlayer(EntityPlayer player) {
-		buffHandlers.remove(EntityPlayer.getUUID(player.getGameProfile()));
-		if (!player.world.isRemote) HexxitGearNetwork.INSTANCE.sendToAll(new AbilityMessage(player));
-	}
-
-	public static void readAbilityPacket(UUID playerId) {
-		if (!buffHandlers.containsKey(playerId)) buffHandlers.put(playerId, new AbilityHandler(playerId));
-		else buffHandlers.remove(playerId);
-	}
-
-	public AbilityHandler(UUID playerId) {
-		this.ability = ArmorSet.getPlayerArmorSet(playerId).getAbility();
+	private AbilityHandler(EntityPlayer player) {
+		if (player.world.isRemote) throw new IllegalArgumentException("Ability handler has been constructed on a client world, please report this!");
+		this.ability = ArmorSet.getCurrentArmorSet(player).getAbility();
 		this.activeTime = ability.getActive();
 		this.cooldownTime = ability.getCooldown();
+	}
+
+	public static AbilityHandler getActiveAbility(EntityPlayer player) {
+		if (player.world.isRemote) return null;
+		return CURRENT.get(player.getUniqueID());
+	}
+
+	public static void activateAbility(EntityPlayer player) {
+		if (CURRENT.get(player.getUniqueID()) != null) {
+			Ability ability = CURRENT.get(player.getUniqueID()).ability;
+			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(0, ability.getId()), (EntityPlayerMP) player);
+			return;
+		}
+		AbilityHandler handler = new AbilityHandler(player);
+		CURRENT.put(player.getUniqueID(), handler);
 	}
 
 	public void onTick(EntityPlayer player) {
 		if (activeTime > 0) {
 			if (ability != null) {
-				if (ability.getActive() == activeTime) {
-					player.sendMessage(new TextComponentTranslation("ability.hexxitgear.activated", ability.getName()));
+				if (ability.getActive() == activeTime || ability.isInstant()) {
+					HexNetwork.INSTANCE.sendTo(new ActionTextMessage(1, ability.getId()), (EntityPlayerMP) player);
 				}
-
 				ability.start(player);
 				if (ability.isInstant()) activeTime = 0;
 			}
 			activeTime--;
 		} else if (cooldownTime > 0) {
-			if (ability != null) {
+			if (ability != null && !ended) {
 				ability.end(player);
+				ended = true;
+				HexNetwork.INSTANCE.sendTo(new ActionTextMessage(2, ability.getId()), (EntityPlayerMP) player);
 			}
 			cooldownTime--;
 		} else {
-			player.sendMessage(new TextComponentTranslation("ability.hexxitgear.refreshed"));
-			removePlayer(player);
+			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(3, ability.getId()), (EntityPlayerMP) player);
+			ability = null;
+			CURRENT.remove(player.getUniqueID());
 		}
 	}
 }

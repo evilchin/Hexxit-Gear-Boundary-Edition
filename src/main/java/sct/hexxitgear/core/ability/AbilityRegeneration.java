@@ -25,7 +25,7 @@ import net.minecraft.potion.PotionEffect;
 public class AbilityRegeneration extends Ability {
 
 	public AbilityRegeneration() {
-		super("ability.hexxitgear.regeneration", 20 * 10, 20 * 5, false);
+		super("ability.hexxitgear.regeneration", 200, 400);
 	}
 
 	@Override

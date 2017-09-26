@@ -21,10 +21,8 @@ package sct.hexxitgear.control;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -32,8 +30,8 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.core.ArmorSet;
-import sct.hexxitgear.net.HexxitGearNetwork;
-import sct.hexxitgear.net.packets.AbilityActivateMessage;
+import sct.hexxitgear.net.ActivateMessage;
+import sct.hexxitgear.net.HexNetwork;
 
 @SideOnly(Side.CLIENT)
 public class HGKeyHandler {
@@ -48,14 +46,9 @@ public class HGKeyHandler {
 
 	@SubscribeEvent
 	public void keyEvent(InputEvent.KeyInputEvent event) {
-		if (!FMLClientHandler.instance().isGUIOpen(GuiChat.class)) {
-			EntityPlayerSP player = Minecraft.getMinecraft().player;
+		if (!FMLClientHandler.instance().isGUIOpen(GuiChat.class) && activateHexxitArmor.isPressed() && ArmorSet.getCurrentArmorSet(Minecraft.getMinecraft().player) != null) 
+			HexNetwork.INSTANCE.sendToServer(new ActivateMessage());
 
-			if (activateHexxitArmor.isPressed()) {
-				if (ArmorSet.getPlayerArmorSet(EntityPlayer.getUUID(player.getGameProfile())) != null) {
-					HexxitGearNetwork.INSTANCE.sendToServer(new AbilityActivateMessage());
-				}
-			}
-		}
 	}
+
 }

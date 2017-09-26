@@ -26,8 +26,9 @@ public class BuffMagicianSet implements IBuffHandler {
 
 	@Override
 	public void applyPlayerBuffs(EntityPlayer player) {
-		player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 2));
-		player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 2));
+		player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 45, 0));
+		player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 45, 0));
+		player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 45, 2));
 		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 21 * 20, 0));
 	}
 

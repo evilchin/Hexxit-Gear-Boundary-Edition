@@ -18,20 +18,49 @@
 
 package sct.hexxitgear.core.ability;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 
 public abstract class Ability {
+	
+	public static final List<Ability> ABILITIES = new ArrayList<>();
+	private static int curId = 0;
 
-	private String name;
-	private int active;
-	private int cooldown;
-	private boolean instant;
+	private final String name;
+	private final int active;
+	private final int cooldown;
+	private final boolean instant;
+	private final int id;
 
-	public Ability(String name, int active, int cooldown, boolean instant) {
+	/**
+	 * Generates an ability
+	 * @param name The ability name
+	 * @param active The active duration (in ticks)
+	 * @param cooldown The cooldown (in ticks)
+	 */
+	public Ability(String name, int active, int cooldown) {
 		this.name = name;
 		this.active = active;
 		this.cooldown = cooldown;
-		this.instant = instant;
+		this.instant = false;
+		id = curId++;
+		ABILITIES.add(this);
+	}
+	
+	/**
+	 * Generates an instant ability
+	 * @param name The ability name
+	 * @param cooldown The cooldown (in ticks)
+	 */
+	public Ability(String name, int cooldown) {
+		this.name = name;
+		this.active = 1;
+		this.cooldown = cooldown;
+		this.instant = true;
+		id = curId++;
+		ABILITIES.add(this);
 	}
 
 	public String getName() {
@@ -49,10 +78,12 @@ public abstract class Ability {
 	public boolean isInstant() {
 		return instant;
 	}
+	
+	public int getId() {
+		return id;
+	}
 
 	public abstract void start(EntityPlayer player);
 
-	public void end(EntityPlayer player) {
-
-	}
+	public abstract void end(EntityPlayer player);
 }

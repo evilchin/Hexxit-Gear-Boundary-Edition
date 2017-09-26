@@ -23,21 +23,16 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.client.resources.I18n;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import sct.hexxitgear.event.PlayerEventHandler;
-import sct.hexxitgear.net.HexxitGearNetwork;
+import sct.hexxitgear.net.HexNetwork;
+import sct.hexxitgear.proxy.IProxy;
 import sct.hexxitgear.setup.HexxitGearConfig;
-import sct.hexxitgear.setup.HexxitGearRegistry;
 import sct.hexxitgear.world.HGWorldGen;
 
 @Mod(modid = HexxitGear.MODID, name = HexxitGear.NAME, useMetadata = true, version = HexxitGear.VERSION)
@@ -50,34 +45,26 @@ public class HexxitGear {
 	@Instance
 	public static HexxitGear instance;
 
-	@SidedProxy(clientSide = "sct.hexxitgear.ClientProxy", serverSide = "sct.hexxitgear.CommonProxy")
-	public static CommonProxy proxy;
+	@SidedProxy(clientSide = "sct.hexxitgear.proxy.ClientProxy", serverSide = "sct.hexxitgear.proxy.ServerProxy")
+	public static IProxy proxy;
 
 	public static Logger logger;
-	public static PlayerEventHandler playerEventHandler;
 
 	public static List<Integer> dimensionalBlacklist = new ArrayList<Integer>();
 
-	@Mod.EventHandler
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
 		HexxitGearConfig.loadCommonConfig(evt);
 		HexxitGearConfig.registerDimBlacklist();
 
 		logger = evt.getModLog();
-		playerEventHandler = new PlayerEventHandler();
-		MinecraftForge.EVENT_BUS.register(playerEventHandler);
 	}
 
-	@Mod.EventHandler
+	@EventHandler
 	public void init(FMLInitializationEvent evt) {
-		HexxitGearNetwork.init();
+		HexNetwork.init();
 		GameRegistry.registerWorldGenerator(new HGWorldGen(), 100);
-		proxy.init();
-	}
-
-	@Mod.EventHandler
-	public void postInit(FMLPostInitializationEvent evt) {
-		HexxitGearRegistry.init();
+		proxy.registerHandlers();
 	}
 
 	public static void addToDimBlacklist(int dimID) {
@@ -86,13 +73,6 @@ public class HexxitGear {
 
 	public static List<Integer> getDimBlacklist() {
 		return dimensionalBlacklist;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void translateAndAdd(String key, List<String> list) {
-		for (int i = 0; i < 10; i++) {
-			list.add(I18n.format(key + i));
-		}
 	}
 
 }
