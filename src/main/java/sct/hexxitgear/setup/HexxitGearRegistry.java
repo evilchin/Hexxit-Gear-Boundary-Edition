@@ -22,8 +22,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import sct.hexxitgear.HexxitGear;
+import sct.hexxitgear.HexRegistry;
 
 public class HexxitGearRegistry {
 
@@ -32,41 +33,41 @@ public class HexxitGearRegistry {
 	}
 
 	public static void registerRecipes() {
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.hexicalDiamond), new Object[] { " I ", "IDI", " I ", 'I', HexxitGear.hexicalEssence, 'D', Items.diamond }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.HEXICAL_DIAMOND), " I ", "IDI", " I ", 'I', HexRegistry.HEXICAL_ESSENCE, 'D', Items.DIAMOND));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.tribalHelmet), new Object[] { "BBB", "BHB", "   ", 'B', Items.bone, 'H', HexxitGear.hexicalDiamond }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.TRIBAL_HELMET), "BBB", "BHB", "   ", 'B', Items.BONE, 'H', HexRegistry.HEXICAL_DIAMOND));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.tribalChest), new Object[] { "I I", "LHL", "ILI", 'I', "ingotIron", 'L', Items.leather, 'H', HexxitGear.hexicalDiamond }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.TRIBAL_CHEST), "I I", "LHL", "ILI", 'I', "ingotIron", 'L', Items.LEATHER, 'H', HexRegistry.HEXICAL_DIAMOND));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.tribalLeggings), new Object[] { "LLL", "IHI", "L L", 'I', "ingotIron", 'L', Items.leather, 'H', HexxitGear.hexicalDiamond }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.TRIBAL_LEGS), "LLL", "IHI", "L L", 'I', "ingotIron", 'L', Items.LEATHER, 'H', HexRegistry.HEXICAL_DIAMOND));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.tribalShoes), new Object[] { "   ", "SHS", "L L", 'S', Items.string, 'L', Items.leather, 'H', HexxitGear.hexicalDiamond }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.TRIBAL_BOOTS), "   ", "SHS", "L L", 'S', Items.STRING, 'L', Items.LEATHER, 'H', HexRegistry.HEXICAL_DIAMOND));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.thiefHelmet), new Object[] { "RRR", "RHR", "   ", 'R', new ItemStack(Blocks.wool, 1, 14), 'H', HexxitGear.hexicalDiamond }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.THIEF_HELMET), "RRR", "RHR", "   ", 'R', new ItemStack(Blocks.WOOL, 1, 14), 'H', HexRegistry.HEXICAL_DIAMOND));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.thiefChest), new Object[] { "R R", "LHL", "LLL", 'R', new ItemStack(Blocks.wool, 1, 14), 'L', Items.leather, 'H', HexxitGear.hexicalDiamond }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.THIEF_CHEST), "R R", "LHL", "LLL", 'R', new ItemStack(Blocks.WOOL, 1, 14), 'L', Items.LEATHER, 'H', HexRegistry.HEXICAL_DIAMOND));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.thiefLeggings), new Object[] { "LSL", "LHL", "L L", 'L', Items.leather, 'S', Items.string, 'H', HexxitGear.hexicalDiamond }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.THIEF_LEGS), "LSL", "LHL", "L L", 'L', Items.LEATHER, 'S', Items.STRING, 'H', HexRegistry.HEXICAL_DIAMOND));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.thiefBoots), new Object[] { "   ", "LHL", "B B", 'L', Items.leather, 'H', HexxitGear.hexicalDiamond, 'B', new ItemStack(Blocks.wool, 1, 7) }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.THIEF_BOOTS), "   ", "LHL", "B B", 'L', Items.LEATHER, 'H', HexRegistry.HEXICAL_DIAMOND, 'B', new ItemStack(Blocks.WOOL, 1, 7)));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.scaleHelmet), new Object[] { "GOG", "OHO", "   ", 'G', "ingotGold", 'O', Blocks.obsidian, 'H', HexxitGear.hexicalDiamond }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SCALE_HELMET), "GOG", "OHO", "   ", 'G', "ingotGold", 'O', Blocks.OBSIDIAN, 'H', HexRegistry.HEXICAL_DIAMOND));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.scaleChest), new Object[] { "G G", "OHO", "GOG", 'G', "ingotGold", 'O', Blocks.obsidian, 'H', HexxitGear.hexicalDiamond }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SCALE_CHEST), "G G", "OHO", "GOG", 'G', "ingotGold", 'O', Blocks.OBSIDIAN, 'H', HexRegistry.HEXICAL_DIAMOND));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.scaleLeggings), new Object[] { "OOO", "GHG", "O O", 'O', Blocks.obsidian, 'G', "ingotGold", 'H', HexxitGear.hexicalDiamond }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SCALE_LEGS), "OOO", "GHG", "O O", 'O', Blocks.OBSIDIAN, 'G', "ingotGold", 'H', HexRegistry.HEXICAL_DIAMOND));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.scaleBoots), new Object[] { "   ", "OHO", "O O", 'O', Blocks.obsidian, 'H', HexxitGear.hexicalDiamond }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SCALE_BOOTS), "   ", "OHO", "O O", 'O', Blocks.OBSIDIAN, 'H', HexRegistry.HEXICAL_DIAMOND));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.magicHelmet), new Object[] { " B ", "OHO", "W W", 'B', Items.book, 'O', Blocks.obsidian, 'H', HexxitGear.hexicalDiamond, 'W', Blocks.wool }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.MAGIC_HELMET), " B ", "OHO", "W W", 'B', Items.BOOK, 'O', Blocks.OBSIDIAN, 'H', HexRegistry.HEXICAL_DIAMOND, 'W', Blocks.WOOL));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.magicChest), new Object[] { "G G", "WHW", "GBG", 'G', "ingotGold", 'W', Blocks.wool, 'H', HexxitGear.hexicalDiamond, 'B', Items.book }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.MAGIC_CHEST), "G G", "WHW", "GBG", 'G', "ingotGold", 'W', Blocks.WOOL, 'H', HexRegistry.HEXICAL_DIAMOND, 'B', Items.BOOK));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.magicLeggings), new Object[] { "GBG", "WHW", "G G", 'G', "ingotGold", 'W', Blocks.wool, 'H', HexxitGear.hexicalDiamond, 'B', Items.book }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.MAGIC_LEGS), "GBG", "WHW", "G G", 'G', "ingotGold", 'W', Blocks.WOOL, 'H', HexRegistry.HEXICAL_DIAMOND, 'B', Items.BOOK));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexxitGear.magicBoots), new Object[] { "WHW", "G G", 'G', "ingotGold", 'W', Blocks.wool, 'H', HexxitGear.hexicalDiamond }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.MAGIC_BOOTS), "WHW", "G G", 'G', "ingotGold", 'W', Blocks.WOOL, 'H', HexRegistry.HEXICAL_DIAMOND));
 
 		/* Add repair recipes */
-		GameRegistry.addShapelessRecipe(new ItemStack(HexxitGear.tribalHelmet, 1, 0), new ItemStack(HexxitGear.tribalHelmet, 1, Short.MAX_VALUE), HexxitGear.hexicalEssence);
+		GameRegistry.addShapelessRecipe(new ItemStack(HexRegistry.TRIBAL_HELMET, 1, 0), new ItemStack(HexRegistry.TRIBAL_HELMET, 1, OreDictionary.WILDCARD_VALUE), HexRegistry.HEXICAL_ESSENCE);
 	}
 }

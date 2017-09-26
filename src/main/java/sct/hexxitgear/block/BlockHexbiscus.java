@@ -24,9 +24,9 @@ import java.util.Random;
 import net.minecraft.block.BlockBush;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.gui.HGCreativeTab;
 
@@ -35,28 +35,15 @@ public class BlockHexbiscus extends BlockBush {
 	public BlockHexbiscus() {
 		setCreativeTab(HGCreativeTab.tab);
 		setRegistryName("hexbiscus");
-		setUnlocalizedName(HexxitGear.modId + ".hexbiscus");
+		setUnlocalizedName(HexxitGear.MODID + ".hexbiscus");
+		HexRegistry.ITEMS.add(new ItemBlock(this).setRegistryName(getRegistryName()));
 	}
 
-	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
-		return HexxitGear.hexicalEssence;
+	public Item getItemDropped(int p_149650_1_, Random rand, int p_149650_3_) {
+		return HexRegistry.HEXICAL_ESSENCE;
 	}
 
-	/**
-	 * Gets the block's texture. Args: side, meta
-	 */
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int p_149691_1_, int p_149691_2_) {
-		return blockIcon;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister p_149651_1_) {
-		blockIcon = p_149651_1_.registerIcon(getTextureName());
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item p_149666_1_, CreativeTabs p_149666_2_, List p_149666_3_) {
-		p_149666_3_.add(new ItemStack(p_149666_1_, 1, 0));
+	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> items) {
+		items.add(new ItemStack(this));
 	}
 }

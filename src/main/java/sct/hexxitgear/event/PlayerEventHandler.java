@@ -18,12 +18,9 @@
 
 package sct.hexxitgear.event;
 
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import sct.hexxitgear.HexxitGear;
-import sct.hexxitgear.core.CapeHandler;
 
 public class PlayerEventHandler {
 
@@ -32,14 +29,8 @@ public class PlayerEventHandler {
 	@SubscribeEvent
 	public void playerUpdate(LivingEvent.LivingUpdateEvent event) {
 		if (ticks > 16) {
-			if (event.entityLiving != null && event.entityLiving instanceof EntityPlayer) {
-				if (!event.entityLiving.worldObj.isRemote) return;
-
-				EntityPlayer player = (EntityPlayer) event.entityLiving;
-				String capeUrl = CapeHandler.getCapeUrl(player.getDisplayName());
-				if (capeUrl != null && player instanceof AbstractClientPlayer) {
-					HexxitGear.proxy.setPlayerCape(player, capeUrl);
-				}
+			if (event.getEntityLiving() != null && event.getEntityLiving() instanceof EntityPlayer) {
+				if (!event.getEntityLiving().world.isRemote) return;
 			}
 			ticks = 0;
 		}

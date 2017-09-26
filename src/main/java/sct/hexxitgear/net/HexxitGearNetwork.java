@@ -22,8 +22,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.net.packets.ArmorAbilityPacket;
-import sct.hexxitgear.net.packets.CapeChangePacket;
-import sct.hexxitgear.net.packets.CapeJoinPacket;
 import sct.hexxitgear.net.packets.HexxitGearPacketBase;
 
 @ChannelHandler.Sharable
@@ -34,10 +32,7 @@ public class HexxitGearNetwork extends FMLIndexedMessageToMessageCodec<HexxitGea
 
 	public static void init() {
 		if (!channels.isEmpty()) return;
-
-		INSTANCE.addDiscriminator(0, CapeChangePacket.class);
-		INSTANCE.addDiscriminator(1, CapeJoinPacket.class);
-		INSTANCE.addDiscriminator(2, ArmorAbilityPacket.class);
+		INSTANCE.addDiscriminator(0, ArmorAbilityPacket.class);
 
 		channels.putAll(NetworkRegistry.INSTANCE.newChannel("HexxitGear", INSTANCE));
 	}
@@ -61,12 +56,12 @@ public class HexxitGearNetwork extends FMLIndexedMessageToMessageCodec<HexxitGea
 
 	@SideOnly(Side.CLIENT)
 	private void handleClient(HexxitGearPacketBase msg) {
-		msg.handleClient(Minecraft.getMinecraft().theWorld, Minecraft.getMinecraft().thePlayer);
+		msg.handleClient(Minecraft.getMinecraft().world, Minecraft.getMinecraft().player);
 	}
 
 	private void handleServer(ChannelHandlerContext ctx, HexxitGearPacketBase msg) {
 		EntityPlayerMP player = ((NetHandlerPlayServer) ctx.channel().attr(NetworkRegistry.NET_HANDLER).get()).playerEntity;
-		msg.handleServer(player.worldObj, player);
+		msg.handleServer(player.world, player);
 	}
 
 	public static void sendToServer(HexxitGearPacketBase packet) {

@@ -21,12 +21,13 @@ package sct.hexxitgear.control;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.core.ArmorSet;
@@ -47,11 +48,11 @@ public class HGKeyHandler {
 	@SubscribeEvent
 	public void keyEvent(InputEvent.KeyInputEvent event) {
 		if (!FMLClientHandler.instance().isGUIOpen(GuiChat.class)) {
-			EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+			EntityPlayerSP player = Minecraft.getMinecraft().player;
 
 			if (activateHexxitArmor.isPressed()) {
-				if (ArmorSet.getPlayerArmorSet(player.getDisplayName()) != null) {
-					HexxitGearNetwork.sendToServer(new ArmorAbilityPacket(player.getDisplayName()));
+				if (ArmorSet.getPlayerArmorSet(player.getGameProfile().getName()) != null) {
+					HexxitGearNetwork.sendToServer(new ArmorAbilityPacket(player.getGameProfile().getName()));
 				}
 			}
 		}

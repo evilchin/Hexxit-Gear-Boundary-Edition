@@ -19,76 +19,31 @@
 package sct.hexxitgear.setup;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import sct.hexxitgear.HexxitGear;
 
 public class HexxitGearConfig {
 
-	public static Property dimensionalBlacklist;
+	public static String[] dimBlacklist;
 
 	public static File configFolder;
 
 	public static void loadCommonConfig(FMLPreInitializationEvent evt) {
 		Configuration c = new Configuration(evt.getSuggestedConfigurationFile());
-		try {
-			c.load();
+		c.load();
 
-			dimensionalBlacklist = c.get("World Generation", "Dimensional Blacklist", "");
-			dimensionalBlacklist.comment = "Comma separated list of all blacklisted dimension IDs";
+		dimBlacklist = c.getStringList("Dimensional Blacklist", "worldgen", new String[0], "Comma separated list of all blacklisted dimension IDs");
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			c.save();
-		}
-	}
-
-	public static String getConfigBaseFolder() {
-		return "sct";
-	}
-
-	public static void setConfigFolderBase(File folder) {
-		configFolder = new File(folder.getAbsolutePath() + "/" + getConfigBaseFolder() + "/" + HexxitGear.modId + "/");
-	}
-
-	public static void extractLang(String[] languages) {
-		String langResourceBase = "/sct/" + HexxitGear.modId + "/lang/";
-		for (String lang : languages) {
-			InputStream is = HexxitGear.instance.getClass().getResourceAsStream(langResourceBase + lang + ".lang");
-			try {
-				File f = new File(configFolder.getAbsolutePath() + "/lang/" + lang + ".lang");
-				if (!f.exists()) f.getParentFile().mkdirs();
-				OutputStream os = new FileOutputStream(f);
-				byte[] buffer = new byte[1024];
-				int read = 0;
-				while ((read = is.read(buffer)) != -1) {
-					os.write(buffer, 0, read);
-				}
-				is.close();
-				os.flush();
-				os.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		if (c.hasChanged()) c.save();
 	}
 
 	public static void registerDimBlacklist() {
-		String blacklist = dimensionalBlacklist.getString().trim();
+		for (String dim : dimBlacklist) {
+			Integer dimID = Integer.parseInt(dim);
+			HexxitGear.addToDimBlacklist(dimID);
 
-		for (String dim : blacklist.split(",")) {
-			try {
-				Integer dimID = Integer.parseInt(dim);
-				HexxitGear.addToDimBlacklist(dimID);
-			} catch (Exception e) {
-			}
 		}
 	}
 }

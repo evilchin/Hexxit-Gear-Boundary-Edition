@@ -20,20 +20,22 @@ package sct.hexxitgear.world;
 
 import java.util.Random;
 
-import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
+import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.HexxitGear;
 
 public class HGWorldGen implements IWorldGenerator {
 
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 
-		if (HexxitGear.getDimBlacklist().contains(world.provider.dimensionId)) return;
+		if (HexxitGear.getDimBlacklist().contains(world.provider.getDimension())) return;
 
-		if (world.getWorldInfo().getTerrainType().getWorldTypeName().equals("flat")) return;
+		if (world.getWorldInfo().getTerrainType().getName().equals("flat")) return;
 
 		int xMin = chunkX << 4;
 		int zMin = chunkZ << 4;
@@ -46,12 +48,12 @@ public class HGWorldGen implements IWorldGenerator {
 		for (int i = 0; i < tries; i++) {
 			int x = startX + random.nextInt(8) - random.nextInt(8);
 			int z = startZ + random.nextInt(8) - random.nextInt(8);
-			int y = world.getHeightValue(x, z);
+			BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 
-			if ((world.isAirBlock(x, y, z) || (world.getBlock(x, y, z) == Blocks.snow)) && HexxitGear.hexbiscus.canBlockStay(world, x, y, z)) {
+			if ((world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && HexRegistry.HEXBISCUS.canBlockStay(world, pos, HexRegistry.HEXBISCUS.getDefaultState())) {
 				if (random.nextInt(50) > 1) continue;
 
-				world.setBlock(x, y, z, HexxitGear.hexbiscus, 0, 0);
+				world.setBlockState(pos, HexRegistry.HEXBISCUS.getDefaultState());
 			}
 		}
 	}

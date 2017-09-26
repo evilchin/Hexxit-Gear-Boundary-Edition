@@ -19,7 +19,7 @@
 package sct.hexxitgear.core.ability;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 
 public class AbilityInvisibility extends Ability {
@@ -30,11 +30,11 @@ public class AbilityInvisibility extends Ability {
 
 	@Override
 	public void start(EntityPlayer player) {
-		player.addPotionEffect(new PotionEffect(Potion.invisibility.id, 10 * 20, 81));
+		player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 10 * 20, 81));
 	}
 
 	@Override
 	public void end(EntityPlayer player) {
-		player.removePotionEffect(Potion.invisibility.id);
+		player.removePotionEffect(MobEffects.INVISIBILITY);
 	}
 }

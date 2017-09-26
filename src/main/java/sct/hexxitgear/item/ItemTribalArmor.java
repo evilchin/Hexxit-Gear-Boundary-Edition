@@ -21,28 +21,29 @@ package sct.hexxitgear.item;
 import java.util.List;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import sct.hexxitgear.HexxitGear;
+import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.model.ModelSkullHelmet;
-import sct.hexxitgear.util.FormatCodes;
 
 public class ItemTribalArmor extends ItemHexxitArmor {
 
-	public ItemTribalArmor(int renderIndex, int slot) {
-		super(ArmorMaterial.DIAMOND, renderIndex, slot);
+	public ItemTribalArmor(String regname, EntityEquipmentSlot slot) {
+		super(regname, ArmorMaterial.DIAMOND, 0, slot);
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, java.lang.String type) {
-		if (slot == 0) return "hexxitgear:textures/maps/SkullHelmet.png";
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/SkullHelmet.png";
 
-		if (stack.getItem() == HexxitGear.tribalLeggings) return "hexxitgear:textures/armor/tribal2.png";
+		if (stack.getItem() == HexRegistry.TRIBAL_LEGS) return "hexxitgear:textures/armor/tribal2.png";
 
 		return "hexxitgear:textures/armor/tribal.png";
 	}
@@ -58,8 +59,8 @@ public class ItemTribalArmor extends ItemHexxitArmor {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
-		if (armorSlot == 0) {
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
+		if (armorSlot == EntityEquipmentSlot.HEAD) {
 			ModelBiped skull = getHelmet();
 			skull.isSneak = entityLiving.isSneaking();
 			return skull;
@@ -68,7 +69,8 @@ public class ItemTribalArmor extends ItemHexxitArmor {
 	}
 
 	@Override
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List infoList, boolean par4) {
-		infoList.add(FormatCodes.Indigo.format + StatCollector.translateToLocal("gui.hexxitgear.set.tribal"));
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List<String> infoList, boolean par4) {
+		infoList.add(TextFormatting.DARK_PURPLE + I18n.format("gui.hexxitgear.set.tribal"));
 	}
 }

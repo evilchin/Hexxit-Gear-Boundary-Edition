@@ -20,21 +20,25 @@ package sct.hexxitgear.item;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
+import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.core.ability.AbilityHandler;
 import sct.hexxitgear.gui.HGCreativeTab;
-import sct.hexxitgear.util.FormatCodes;
 
 public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor {
 
-	public ItemHexxitArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4) {
-		super(par2EnumArmorMaterial, par3, par4);
+	public ItemHexxitArmor(String regname, ArmorMaterial material, int renderindex, EntityEquipmentSlot slot) {
+		super(material, renderindex, slot);
 		setCreativeTab(HGCreativeTab.tab);
+		setRegistryName(HexxitGear.MODID, regname);
+		setUnlocalizedName(HexxitGear.MODID + "." + regname);
 	}
 
 	@Override
@@ -60,17 +64,17 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		if (this.armorType == 0) return;
+		if (this.armorType == EntityEquipmentSlot.HEAD) return;
 
 		ArmorSet.getMatchingSet(player);
 
-		if (ArmorSet.getPlayerArmorSet(player.getDisplayName()) != null) {
-			ArmorSet armorSet = ArmorSet.getPlayerArmorSet(player.getDisplayName());
+		if (ArmorSet.getPlayerArmorSet(player.getDisplayName().getFormattedText()) != null) {
+			ArmorSet armorSet = ArmorSet.getPlayerArmorSet(player.getDisplayName().getFormattedText());
 			armorSet.applyBuffs(player);
 		}
 
 		// We run this outside of the check for an armorset just incase a player takes off armor mid ability
-		AbilityHandler bh = AbilityHandler.getPlayerAbilityHandler(player.getDisplayName());
+		AbilityHandler bh = AbilityHandler.getPlayerAbilityHandler(player.getDisplayName().getFormattedText());
 		if (bh != null) {
 			bh.onTick(player);
 		}
@@ -78,6 +82,6 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		return FormatCodes.Yellow.format + super.getItemStackDisplayName(par1ItemStack);
+		return TextFormatting.YELLOW + super.getItemStackDisplayName(par1ItemStack);
 	}
 }

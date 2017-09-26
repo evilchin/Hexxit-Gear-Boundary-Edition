@@ -22,8 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextComponentTranslation;
 import sct.hexxitgear.core.ArmorSet;
 
 public class AbilityHandler {
@@ -64,10 +63,7 @@ public class AbilityHandler {
 		if (activeTime > 0) {
 			if (ability != null) {
 				if (ability.getActive() == activeTime) {
-					String abilityName = StatCollector.translateToLocal(ability.getName());
-					String activated = StatCollector.translateToLocal("ability.hexxitgear.activated");
-					activated = activated.replace("{0}", abilityName);
-					player.addChatMessage(new ChatComponentText(activated));
+					player.sendMessage(new TextComponentTranslation("ability.hexxitgear.activated", ability.getName()));
 				}
 
 				ability.start(player);
@@ -80,7 +76,7 @@ public class AbilityHandler {
 			}
 			cooldownTime--;
 		} else {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("ability.hexxitgear.refreshed")));
+			player.sendMessage(new TextComponentTranslation("ability.hexxitgear.refreshed"));
 			removePlayer(playerName);
 		}
 	}

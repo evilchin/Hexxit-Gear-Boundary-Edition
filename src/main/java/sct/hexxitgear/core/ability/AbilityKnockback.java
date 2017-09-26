@@ -33,7 +33,7 @@ public class AbilityKnockback extends Ability {
 
 	@Override
 	public void start(EntityPlayer player) {
-		List<EntityLiving> entities = player.worldObj.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getBoundingBox(player.posX - 5, player.posY, player.posZ - 5, player.posX + 5, player.posY + 3, player.posZ + 5));
+		List<EntityLiving> entities = player.world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(player.posX - 5, player.posY, player.posZ - 5, player.posX + 5, player.posY + 3, player.posZ + 5));
 
 		for (EntityLiving entity : entities) {
 			double relX = player.posX - entity.posX;

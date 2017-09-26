@@ -21,28 +21,29 @@ package sct.hexxitgear.item;
 import java.util.List;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import sct.hexxitgear.HexxitGear;
+import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.model.ModelScaleHelmet;
-import sct.hexxitgear.util.FormatCodes;
 
 public class ItemScaleArmor extends ItemHexxitArmor {
 
-	public ItemScaleArmor(int renderIndex, int slot) {
-		super(ArmorMaterial.DIAMOND, renderIndex, slot);
+	public ItemScaleArmor(String regname, EntityEquipmentSlot slot) {
+		super(regname, ArmorMaterial.DIAMOND, 1, slot);
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, java.lang.String type) {
-		if (slot == 0) return "hexxitgear:textures/maps/ScaleHelmet.png";
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/ScaleHelmet.png";
 
-		if (stack.getItem() == HexxitGear.scaleLeggings) return "hexxitgear:textures/armor/scale2.png";
+		if (stack.getItem() == HexRegistry.SCALE_LEGS) return "hexxitgear:textures/armor/scale2.png";
 
 		return "hexxitgear:textures/armor/scale.png";
 	}
@@ -58,8 +59,8 @@ public class ItemScaleArmor extends ItemHexxitArmor {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
-		if (armorSlot == 0) {
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
+		if (armorSlot == EntityEquipmentSlot.HEAD) {
 			ModelBiped helmet = getHelmet();
 			helmet.isSneak = entityLiving.isSneaking();
 			return helmet;
@@ -68,7 +69,8 @@ public class ItemScaleArmor extends ItemHexxitArmor {
 	}
 
 	@Override
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List infoList, boolean par4) {
-		infoList.add(FormatCodes.Indigo.format + StatCollector.translateToLocal("gui.hexxitgear.set.scale"));
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List<String> infoList, boolean par4) {
+		infoList.add(TextFormatting.DARK_PURPLE + I18n.format("gui.hexxitgear.set.scale"));
 	}
 }

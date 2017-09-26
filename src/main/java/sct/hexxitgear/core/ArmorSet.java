@@ -26,7 +26,8 @@ import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import sct.hexxitgear.HexxitGear;
+import net.minecraft.item.ItemStack;
+import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.core.ability.Ability;
 import sct.hexxitgear.core.ability.AbilityInvisibility;
 import sct.hexxitgear.core.ability.AbilityKnockback;
@@ -37,19 +38,19 @@ import sct.hexxitgear.core.buff.BuffScaleSet;
 import sct.hexxitgear.core.buff.BuffThiefSet;
 import sct.hexxitgear.core.buff.BuffTribalSet;
 import sct.hexxitgear.core.buff.IBuffHandler;
+import sct.hexxitgear.util.HexUtils;
 
 public class ArmorSet {
 
-	public static ArmorSet tribalSet = new ArmorSet("Tribal", "http://hexxit.sctgaming.com/capes/brownrags.png", Arrays.asList(HexxitGear.tribalHelmet, HexxitGear.tribalChest, HexxitGear.tribalLeggings, HexxitGear.tribalShoes), new BuffTribalSet(), new AbilityKnockback());
-	public static ArmorSet thiefSet = new ArmorSet("Thief", "http://hexxit.sctgaming.com/capes/redcape.png", Arrays.asList(HexxitGear.thiefHelmet, HexxitGear.thiefChest, HexxitGear.thiefLeggings, HexxitGear.thiefBoots), new BuffThiefSet(), new AbilityInvisibility());
-	public static ArmorSet scaleSet = new ArmorSet("Scale", "http://hexxit.sctgaming.com/capes/purplecape.png", Arrays.asList(HexxitGear.scaleHelmet, HexxitGear.scaleChest, HexxitGear.scaleLeggings, HexxitGear.scaleBoots), new BuffScaleSet(), new AbilityShield());
-	public static ArmorSet magicSet = new ArmorSet("Magician", "http://hexxit.sctgaming.com/capes/magiccape.png", Arrays.asList(HexxitGear.magicHelmet, HexxitGear.magicChest, HexxitGear.magicLeggings, HexxitGear.magicBoots), new BuffMagicianSet(), new AbilityRegeneration());
+	public static ArmorSet tribalSet = new ArmorSet("Tribal", Arrays.asList(HexRegistry.TRIBAL_HELMET, HexRegistry.TRIBAL_CHEST, HexRegistry.TRIBAL_LEGS, HexRegistry.TRIBAL_BOOTS), new BuffTribalSet(), new AbilityKnockback());
+	public static ArmorSet thiefSet = new ArmorSet("Thief", Arrays.asList(HexRegistry.THIEF_HELMET, HexRegistry.THIEF_CHEST, HexRegistry.THIEF_LEGS, HexRegistry.THIEF_BOOTS), new BuffThiefSet(), new AbilityInvisibility());
+	public static ArmorSet scaleSet = new ArmorSet("Scale", Arrays.asList(HexRegistry.SCALE_HELMET, HexRegistry.SCALE_CHEST, HexRegistry.SCALE_LEGS, HexRegistry.SCALE_BOOTS), new BuffScaleSet(), new AbilityShield());
+	public static ArmorSet magicSet = new ArmorSet("Magician", Arrays.asList(HexRegistry.MAGIC_HELMET, HexRegistry.MAGIC_CHEST, HexRegistry.MAGIC_LEGS, HexRegistry.MAGIC_BOOTS), new BuffMagicianSet(), new AbilityRegeneration());
 	private static List<ArmorSet> armorSets;
 	private static Map<String, ArmorSet> playerMap = new HashMap<String, ArmorSet>();
 	private static List<String> activeArmors = new ArrayList<String>();
 
 	private List<Item> armors = new ArrayList<Item>();
-	private String capeUrl;
 	private String name;
 	private IBuffHandler buffHandler;
 	private Ability ability;
@@ -75,16 +76,16 @@ public class ArmorSet {
 				}
 			}
 			if (matched == 4) {
-				if (getPlayerArmorSet(player.getDisplayName()) == null || !getPlayerArmorSet(player.getDisplayName()).equals(armorSet)) {
-					addPlayerArmorSet(player.getDisplayName(), armorSet);
+				if (getPlayerArmorSet(player.getDisplayName().getFormattedText()) == null || !getPlayerArmorSet(player.getDisplayName().getFormattedText()).equals(armorSet)) {
+					addPlayerArmorSet(player.getDisplayName().getFormattedText(), armorSet);
 				}
 				foundMatch = true;
 			}
 		}
 
-		if (!foundMatch && getPlayerArmorSet(player.getDisplayName()) != null) {
-			ArmorSet as = getPlayerArmorSet(player.getDisplayName());
-			removePlayerArmorSet(player.getDisplayName());
+		if (!foundMatch && getPlayerArmorSet(player.getDisplayName().getFormattedText()) != null) {
+			ArmorSet as = getPlayerArmorSet(player.getDisplayName().getFormattedText());
+			removePlayerArmorSet(player.getDisplayName().getFormattedText());
 			as.removeBuffs(player);
 		}
 	}
@@ -92,9 +93,9 @@ public class ArmorSet {
 	private static List<Item> getPlayerArmors(EntityPlayer player) {
 		List<Item> playerSet = new ArrayList<Item>(4);
 
-		for (int i = 0; i < 4; i++) {
-			if (player.getCurrentArmor(i) != null) {
-				playerSet.add(player.getCurrentArmor(i).getItem());
+		for (ItemStack armor : player.getArmorInventoryList()) {
+			if (!HexUtils.isEmpty(armor)) {
+				playerSet.add(armor.getItem());
 			}
 		}
 
@@ -107,15 +108,9 @@ public class ArmorSet {
 
 	public static void addPlayerArmorSet(String playerName, ArmorSet armorSet) {
 		playerMap.put(playerName, armorSet);
-		if (armorSet.getCapeUrl() != null) {
-			CapeHandler.registerCape(playerName, armorSet.getCapeUrl());
-		}
 	}
 
 	public static void removePlayerArmorSet(String playerName) {
-		if (getPlayerArmorSet(playerName) != null && getPlayerArmorSet(playerName).getCapeUrl() != null) {
-			CapeHandler.removeCape(playerName);
-		}
 		playerMap.remove(playerName);
 	}
 
@@ -126,10 +121,9 @@ public class ArmorSet {
 		}
 	}
 
-	public ArmorSet(String name, String capeUrl, List<Item> armor, IBuffHandler buffHandler, Ability ability) {
+	public ArmorSet(String name, List<Item> armor, IBuffHandler buffHandler, Ability ability) {
 		this.name = name;
 		this.armors = armor;
-		this.capeUrl = capeUrl;
 		this.buffHandler = buffHandler;
 		this.ability = ability;
 
@@ -138,20 +132,12 @@ public class ArmorSet {
 		armorSets.add(this);
 	}
 
-	public ArmorSet(String name, List<Item> armor, IBuffHandler buffHandler, Ability ability) {
-		this(name, null, armor, buffHandler, ability);
-	}
-
 	public String getName() {
 		return name;
 	}
 
 	public List<Item> getArmors() {
 		return armors;
-	}
-
-	public String getCapeUrl() {
-		return capeUrl;
 	}
 
 	public Ability getAbility() {

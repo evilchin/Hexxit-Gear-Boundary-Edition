@@ -18,29 +18,10 @@
 
 package sct.hexxitgear;
 
-import net.minecraft.entity.player.EntityPlayer;
-
 public class CommonProxy {
 
 	public void init() {
 		registerHandlers();
-	}
-
-	public int addArmor(String armorName) {
-		return 0;
-	}
-
-	public EntityPlayer findPlayer(String playerName) {
-		return null;
-	}
-
-	public void setPlayerCape(String playerName, String capeUrl) {
-	}
-
-	public void setPlayerCape(EntityPlayer player, String capeUrl) {
-	}
-
-	public void resetPlayerCape(String playerName) {
 	}
 
 	public void registerHandlers() {

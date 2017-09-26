@@ -21,12 +21,10 @@ package sct.hexxitgear.tick;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import sct.hexxitgear.core.ArmorSet;
-import sct.hexxitgear.core.CapeHandler;
 
 public class PlayerTracker {
 	@SubscribeEvent
 	public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
 		ArmorSet.getMatchingSet(event.player);
-		CapeHandler.sendJoinUpdate(event.player);
 	}
 }

@@ -19,16 +19,16 @@
 package sct.hexxitgear.core.buff;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 
 public class BuffScaleSet implements IBuffHandler {
 
 	@Override
 	public void applyPlayerBuffs(EntityPlayer player) {
-		player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20, 0));
-		player.addPotionEffect(new PotionEffect(Potion.resistance.id, 20, 0));
-		player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 21 * 20, 0));
+		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20, 0));
+		player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0));
+		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 21 * 20, 0));
 	}
 
 	@Override

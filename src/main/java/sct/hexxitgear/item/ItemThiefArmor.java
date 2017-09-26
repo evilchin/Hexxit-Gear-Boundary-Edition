@@ -21,35 +21,36 @@ package sct.hexxitgear.item;
 import java.util.List;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import sct.hexxitgear.HexxitGear;
+import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.model.ModelHoodHelmet;
-import sct.hexxitgear.util.FormatCodes;
 
 public class ItemThiefArmor extends ItemHexxitArmor {
 
-	public ItemThiefArmor(int renderIndex, int slot) {
-		super(ArmorMaterial.DIAMOND, renderIndex, slot);
+	public ItemThiefArmor(String regname, EntityEquipmentSlot slot) {
+		super(regname, ArmorMaterial.DIAMOND, 0, slot);
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, java.lang.String type) {
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
 		if (entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entity;
-			if (player.isPotionActive(Potion.invisibility)) return "hexxitgear:textures/armor/invisible.png";
+			if (player.isPotionActive(MobEffects.INVISIBILITY)) return "hexxitgear:textures/armor/invisible.png";
 		}
 
 		// If the helmet slot, return helmet texture map
-		if (slot == 0) return "hexxitgear:textures/maps/HoodHelmet.png";
+		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/HoodHelmet.png";
 
-		if (stack.getItem() == HexxitGear.thiefLeggings) return "hexxitgear:textures/armor/thief2.png";
+		if (stack.getItem() == HexRegistry.THIEF_LEGS) return "hexxitgear:textures/armor/thief2.png";
 
 		return "hexxitgear:textures/armor/thief.png";
 	}
@@ -66,8 +67,8 @@ public class ItemThiefArmor extends ItemHexxitArmor {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
-		if (armorSlot == 0) {
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
+		if (armorSlot == EntityEquipmentSlot.HEAD) {
 			ModelBiped helmet = getHelmet();
 			helmet.isSneak = entityLiving.isSneaking();
 			return helmet;
@@ -76,7 +77,8 @@ public class ItemThiefArmor extends ItemHexxitArmor {
 	}
 
 	@Override
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List infoList, boolean par4) {
-		infoList.add(FormatCodes.Indigo.format + StatCollector.translateToLocal("gui.hexxitgear.set.thief"));
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List<String> infoList, boolean par4) {
+		infoList.add(TextFormatting.DARK_PURPLE + I18n.format("gui.hexxitgear.set.thief"));
 	}
 }
