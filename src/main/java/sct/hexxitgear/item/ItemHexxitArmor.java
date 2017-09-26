@@ -32,6 +32,7 @@ import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.core.ability.AbilityHandler;
 import sct.hexxitgear.gui.HGCreativeTab;
+import sct.hexxitgear.util.HexUtils;
 import sct.hexxitgear.util.IHasModel;
 
 public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasModel {
@@ -60,7 +61,7 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasMod
 			if (stack.getItemDamage() < stack.getMaxDamage()) {
 				stack.setItemDamage(stack.getItemDamage() + 1);
 			} else {
-				// Create broken item here
+				HexUtils.setEmpty(stack);
 			}
 		}
 	}
@@ -71,13 +72,13 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasMod
 
 		ArmorSet.getMatchingSet(player);
 
-		if (ArmorSet.getPlayerArmorSet(player.getDisplayName().getFormattedText()) != null) {
-			ArmorSet armorSet = ArmorSet.getPlayerArmorSet(player.getDisplayName().getFormattedText());
+		if (ArmorSet.getPlayerArmorSet(EntityPlayer.getUUID(player.getGameProfile())) != null) {
+			ArmorSet armorSet = ArmorSet.getPlayerArmorSet(EntityPlayer.getUUID(player.getGameProfile()));
 			armorSet.applyBuffs(player);
 		}
 
 		// We run this outside of the check for an armorset just incase a player takes off armor mid ability
-		AbilityHandler bh = AbilityHandler.getPlayerAbilityHandler(player.getDisplayName().getFormattedText());
+		AbilityHandler bh = AbilityHandler.getPlayerAbilityHandler(EntityPlayer.getUUID(player.getGameProfile()));
 		if (bh != null) {
 			bh.onTick(player);
 		}

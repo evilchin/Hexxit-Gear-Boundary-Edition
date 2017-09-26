@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -47,8 +48,8 @@ public class ArmorSet {
 	public static ArmorSet scaleSet = new ArmorSet("Scale", Arrays.asList(HexRegistry.SCALE_HELMET, HexRegistry.SCALE_CHEST, HexRegistry.SCALE_LEGS, HexRegistry.SCALE_BOOTS), new BuffScaleSet(), new AbilityShield());
 	public static ArmorSet magicSet = new ArmorSet("Magician", Arrays.asList(HexRegistry.MAGIC_HELMET, HexRegistry.MAGIC_CHEST, HexRegistry.MAGIC_LEGS, HexRegistry.MAGIC_BOOTS), new BuffMagicianSet(), new AbilityRegeneration());
 	private static List<ArmorSet> armorSets;
-	private static Map<String, ArmorSet> playerMap = new HashMap<String, ArmorSet>();
-	private static List<String> activeArmors = new ArrayList<String>();
+	private static Map<UUID, ArmorSet> playerMap = new HashMap<>();
+	private static List<UUID> activeArmors = new ArrayList<>();
 
 	private List<Item> armors = new ArrayList<Item>();
 	private String name;
@@ -65,7 +66,7 @@ public class ArmorSet {
 
 	public static void getMatchingSet(EntityPlayer player) {
 		List<Item> playerSet = getPlayerArmors(player);
-
+		UUID playerId = EntityPlayer.getUUID(player.getGameProfile());
 		boolean foundMatch = false;
 
 		for (ArmorSet armorSet : getArmorSets()) {
@@ -76,16 +77,16 @@ public class ArmorSet {
 				}
 			}
 			if (matched == 4) {
-				if (getPlayerArmorSet(player.getDisplayName().getFormattedText()) == null || !getPlayerArmorSet(player.getDisplayName().getFormattedText()).equals(armorSet)) {
-					addPlayerArmorSet(player.getDisplayName().getFormattedText(), armorSet);
+				if (getPlayerArmorSet(playerId) == null || !getPlayerArmorSet(playerId).equals(armorSet)) {
+					addPlayerArmorSet(playerId, armorSet);
 				}
 				foundMatch = true;
 			}
 		}
 
-		if (!foundMatch && getPlayerArmorSet(player.getDisplayName().getFormattedText()) != null) {
-			ArmorSet as = getPlayerArmorSet(player.getDisplayName().getFormattedText());
-			removePlayerArmorSet(player.getDisplayName().getFormattedText());
+		if (!foundMatch && getPlayerArmorSet(playerId) != null) {
+			ArmorSet as = getPlayerArmorSet(playerId);
+			removePlayerArmorSet(playerId);
 			as.removeBuffs(player);
 		}
 	}
@@ -102,19 +103,19 @@ public class ArmorSet {
 		return playerSet;
 	}
 
-	public static ArmorSet getPlayerArmorSet(String playerName) {
-		return playerMap.get(playerName);
+	public static ArmorSet getPlayerArmorSet(UUID playerId) {
+		return playerMap.get(playerId);
 	}
 
-	public static void addPlayerArmorSet(String playerName, ArmorSet armorSet) {
-		playerMap.put(playerName, armorSet);
+	public static void addPlayerArmorSet(UUID playerId, ArmorSet armorSet) {
+		playerMap.put(playerId, armorSet);
 	}
 
-	public static void removePlayerArmorSet(String playerName) {
-		playerMap.remove(playerName);
+	public static void removePlayerArmorSet(UUID playerId) {
+		playerMap.remove(playerId);
 	}
 
-	public static void readArmorPacket(String playerName) {
+	public static void readArmorPacket(UUID playerName) {
 		ArmorSet as = getPlayerArmorSet(playerName);
 		if (as != null && !activeArmors.contains(playerName)) {
 			activeArmors.add(playerName);

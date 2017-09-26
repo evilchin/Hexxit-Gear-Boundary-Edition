@@ -20,41 +20,42 @@ package sct.hexxitgear.core.ability;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import sct.hexxitgear.core.ArmorSet;
+import sct.hexxitgear.net.HexxitGearNetwork;
+import sct.hexxitgear.net.packets.AbilityMessage;
 
 public class AbilityHandler {
 
-	public static Map<String, AbilityHandler> buffHandlers = new HashMap<String, AbilityHandler>();
+	public static Map<UUID, AbilityHandler> buffHandlers = new HashMap<>();
 
 	private int activeTime = 0;
 	private int cooldownTime = 0;
-	private String playerName;
 	private Ability ability;
 
-	public static Map<String, AbilityHandler> getBuffHandlers() {
+	public static Map<UUID, AbilityHandler> getBuffHandlers() {
 		return buffHandlers;
 	}
 
-	public static AbilityHandler getPlayerAbilityHandler(String playerName) {
-		return buffHandlers.get(playerName);
+	public static AbilityHandler getPlayerAbilityHandler(UUID playerId) {
+		return buffHandlers.get(playerId);
 	}
 
-	public static void removePlayer(String playerName) {
-		buffHandlers.remove(playerName);
+	public static void removePlayer(EntityPlayer player) {
+		buffHandlers.remove(EntityPlayer.getUUID(player.getGameProfile()));
+		if (!player.world.isRemote) HexxitGearNetwork.INSTANCE.sendToAll(new AbilityMessage(player));
 	}
 
-	public static void readAbilityPacket(String playerName) {
-		if (playerName != null && !buffHandlers.containsKey(playerName)) {
-			buffHandlers.put(playerName, new AbilityHandler(playerName));
-		}
+	public static void readAbilityPacket(UUID playerId) {
+		if (!buffHandlers.containsKey(playerId)) buffHandlers.put(playerId, new AbilityHandler(playerId));
+		else buffHandlers.remove(playerId);
 	}
 
-	public AbilityHandler(String playerName) {
-		this.playerName = playerName;
-		this.ability = ArmorSet.getPlayerArmorSet(playerName).getAbility();
+	public AbilityHandler(UUID playerId) {
+		this.ability = ArmorSet.getPlayerArmorSet(playerId).getAbility();
 		this.activeTime = ability.getActive();
 		this.cooldownTime = ability.getCooldown();
 	}
@@ -77,7 +78,7 @@ public class AbilityHandler {
 			cooldownTime--;
 		} else {
 			player.sendMessage(new TextComponentTranslation("ability.hexxitgear.refreshed"));
-			removePlayer(playerName);
+			removePlayer(player);
 		}
 	}
 }

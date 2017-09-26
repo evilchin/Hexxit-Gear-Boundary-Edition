@@ -24,6 +24,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -32,7 +33,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.net.HexxitGearNetwork;
-import sct.hexxitgear.net.packets.ArmorAbilityPacket;
+import sct.hexxitgear.net.packets.AbilityActivateMessage;
 
 @SideOnly(Side.CLIENT)
 public class HGKeyHandler {
@@ -51,8 +52,8 @@ public class HGKeyHandler {
 			EntityPlayerSP player = Minecraft.getMinecraft().player;
 
 			if (activateHexxitArmor.isPressed()) {
-				if (ArmorSet.getPlayerArmorSet(player.getGameProfile().getName()) != null) {
-					HexxitGearNetwork.sendToServer(new ArmorAbilityPacket(player.getDisplayName().getFormattedText()));
+				if (ArmorSet.getPlayerArmorSet(EntityPlayer.getUUID(player.getGameProfile())) != null) {
+					HexxitGearNetwork.INSTANCE.sendToServer(new AbilityActivateMessage());
 				}
 			}
 		}

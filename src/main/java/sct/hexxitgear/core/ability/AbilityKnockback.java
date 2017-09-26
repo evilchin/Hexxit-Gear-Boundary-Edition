@@ -21,6 +21,7 @@ package sct.hexxitgear.core.ability;
 import java.util.List;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -33,13 +34,13 @@ public class AbilityKnockback extends Ability {
 
 	@Override
 	public void start(EntityPlayer player) {
-		List<EntityLiving> entities = player.world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(player.posX - 5, player.posY, player.posZ - 5, player.posX + 5, player.posY + 3, player.posZ + 5));
+		List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(player.posX - 5, player.posY, player.posZ - 5, player.posX + 5, player.posY + 3, player.posZ + 5));
 
-		for (EntityLiving entity : entities) {
+		for (EntityLivingBase entity : entities) {
 			double relX = player.posX - entity.posX;
 			double relZ = player.posZ - entity.posZ;
 
-			if (!entity.equals(player)) {
+			if (!entity.equals((EntityLivingBase) player)) {
 				entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 2);
 				entity.addVelocity((relX * 0.25) * -1, 0.2, (relZ * 0.25) * -1);
 			}
