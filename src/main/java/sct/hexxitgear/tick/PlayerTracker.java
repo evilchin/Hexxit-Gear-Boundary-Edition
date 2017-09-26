@@ -18,8 +18,7 @@
 
 package sct.hexxitgear.tick;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.core.CapeHandler;
 

@@ -18,24 +18,20 @@
 
 package sct.hexxitgear.control;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.InputEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.settings.KeyBinding;
-import org.lwjgl.input.Keyboard;
-import sct.hexxitgear.HexxitGear;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.net.HexxitGearNetwork;
-import sct.hexxitgear.net.Packets;
 import sct.hexxitgear.net.packets.ArmorAbilityPacket;
-
-import java.util.EnumSet;
 
 @SideOnly(Side.CLIENT)
 public class HGKeyHandler {

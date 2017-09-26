@@ -1,14 +1,15 @@
 package sct.hexxitgear.net.packets;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import sct.hexxitgear.HexxitGear;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class CapeJoinPacket extends HexxitGearPacketBase {
 

@@ -18,19 +18,16 @@
 
 package sct.hexxitgear.core;
 
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.entity.player.EntityPlayer;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.net.HexxitGearNetwork;
-import sct.hexxitgear.net.Packets;
 import sct.hexxitgear.net.packets.CapeChangePacket;
 import sct.hexxitgear.net.packets.CapeJoinPacket;
-
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class CapeHandler {
 

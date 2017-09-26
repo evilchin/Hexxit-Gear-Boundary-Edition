@@ -18,14 +18,16 @@
 
 package sct.hexxitgear.setup;
 
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.LanguageRegistry;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import sct.hexxitgear.HexxitGear;
-
-import java.io.*;
-import java.util.Properties;
 
 public class HexxitGearConfig {
 

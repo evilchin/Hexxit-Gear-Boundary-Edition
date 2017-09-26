@@ -1,10 +1,8 @@
 package sct.hexxitgear.model;
 
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import org.lwjgl.opengl.GL11;
 
 public class ModelSageHood extends ModelBiped
 {

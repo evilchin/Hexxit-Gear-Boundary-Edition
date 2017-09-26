@@ -18,12 +18,12 @@
 
 package sct.hexxitgear.core.ability;
 
+import java.util.List;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-
-import java.util.List;
+import net.minecraft.util.math.AxisAlignedBB;
 
 public class AbilityKnockback extends Ability {
 

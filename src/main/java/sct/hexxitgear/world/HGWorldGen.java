@@ -18,14 +18,13 @@
 
 package sct.hexxitgear.world;
 
-import cpw.mods.fml.common.IWorldGenerator;
-import net.minecraft.block.Block;
+import java.util.Random;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.fml.common.IWorldGenerator;
 import sct.hexxitgear.HexxitGear;
-
-import java.util.Random;
 
 public class HGWorldGen implements IWorldGenerator {
 

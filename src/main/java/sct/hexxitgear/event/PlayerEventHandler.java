@@ -18,15 +18,12 @@
 
 package sct.hexxitgear.event;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.core.CapeHandler;
-
-import java.util.logging.Level;
 
 public class PlayerEventHandler {
 

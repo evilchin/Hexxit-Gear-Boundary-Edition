@@ -18,13 +18,13 @@
 
 package sct.hexxitgear.core.ability;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import sct.hexxitgear.core.ArmorSet;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class AbilityHandler {
 

@@ -18,30 +18,34 @@
 
 package sct.hexxitgear;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.logging.log4j.Logger;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
-import org.apache.logging.log4j.Logger;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import sct.hexxitgear.block.BlockHexbiscus;
-import sct.hexxitgear.gui.HGCreativeTab;
-import sct.hexxitgear.net.HexxitGearNetwork;
-import sct.hexxitgear.setup.HexxitGearRegistry;
 import sct.hexxitgear.event.PlayerEventHandler;
-import sct.hexxitgear.tick.PlayerTracker;
-import sct.hexxitgear.item.*;
+import sct.hexxitgear.gui.HGCreativeTab;
+import sct.hexxitgear.item.ItemMagicianArmor;
+import sct.hexxitgear.item.ItemScaleArmor;
+import sct.hexxitgear.item.ItemThiefArmor;
+import sct.hexxitgear.item.ItemTribalArmor;
+import sct.hexxitgear.net.HexxitGearNetwork;
 import sct.hexxitgear.setup.HexxitGearConfig;
+import sct.hexxitgear.setup.HexxitGearRegistry;
+import sct.hexxitgear.tick.PlayerTracker;
 import sct.hexxitgear.world.HGWorldGen;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Mod(modid = HexxitGear.modId, name = "Hexxit Gear", useMetadata = true, version = HexxitGear.version)
 public class HexxitGear {

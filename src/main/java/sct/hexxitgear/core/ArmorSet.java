@@ -18,21 +18,25 @@
 
 package sct.hexxitgear.core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.core.ability.Ability;
 import sct.hexxitgear.core.ability.AbilityInvisibility;
 import sct.hexxitgear.core.ability.AbilityKnockback;
-import sct.hexxitgear.core.ability.AbilityShield;
 import sct.hexxitgear.core.ability.AbilityRegeneration;
+import sct.hexxitgear.core.ability.AbilityShield;
+import sct.hexxitgear.core.buff.BuffMagicianSet;
 import sct.hexxitgear.core.buff.BuffScaleSet;
 import sct.hexxitgear.core.buff.BuffThiefSet;
 import sct.hexxitgear.core.buff.BuffTribalSet;
-import sct.hexxitgear.core.buff.BuffMagicianSet;
 import sct.hexxitgear.core.buff.IBuffHandler;
-
-import java.util.*;
 
 public class ArmorSet {
 
