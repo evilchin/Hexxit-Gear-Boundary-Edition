@@ -19,19 +19,24 @@
 package sct.hexxitgear.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.core.ability.Ability;
-import sct.hexxitgear.core.ability.AbilityInvisibility;
-import sct.hexxitgear.core.ability.AbilityKnockback;
-import sct.hexxitgear.core.ability.AbilityRegeneration;
+import sct.hexxitgear.core.ability.AbilityLift;
+import sct.hexxitgear.core.ability.AbilityRampage;
 import sct.hexxitgear.core.ability.AbilityShield;
+import sct.hexxitgear.core.ability.AbilityStealth;
 import sct.hexxitgear.core.buff.BuffMagicianSet;
 import sct.hexxitgear.core.buff.BuffScaleSet;
 import sct.hexxitgear.core.buff.BuffThiefSet;
@@ -41,12 +46,14 @@ import sct.hexxitgear.util.HexUtils;
 
 public class ArmorSet {
 
+	public static final Map<UUID, ArmorSet> CACHED_SETS = new HashMap<>();
+
 	public static final List<ArmorSet> SETS = new ArrayList<>();
 
-	public static final ArmorSet TRIBAL = new ArmorSet("Tribal", new Item[] { HexRegistry.TRIBAL_HELMET, HexRegistry.TRIBAL_CHEST, HexRegistry.TRIBAL_LEGS, HexRegistry.TRIBAL_BOOTS }, new BuffTribalSet(), new AbilityKnockback());
-	public static final ArmorSet THIEF = new ArmorSet("Thief", new Item[] { HexRegistry.THIEF_HELMET, HexRegistry.THIEF_CHEST, HexRegistry.THIEF_LEGS, HexRegistry.THIEF_BOOTS }, new BuffThiefSet(), new AbilityInvisibility());
+	public static final ArmorSet TRIBAL = new ArmorSet("Tribal", new Item[] { HexRegistry.TRIBAL_HELMET, HexRegistry.TRIBAL_CHEST, HexRegistry.TRIBAL_LEGS, HexRegistry.TRIBAL_BOOTS }, new BuffTribalSet(), new AbilityRampage());
+	public static final ArmorSet THIEF = new ArmorSet("Thief", new Item[] { HexRegistry.THIEF_HELMET, HexRegistry.THIEF_CHEST, HexRegistry.THIEF_LEGS, HexRegistry.THIEF_BOOTS }, new BuffThiefSet(), new AbilityStealth());
 	public static final ArmorSet SCALE = new ArmorSet("Scale", new Item[] { HexRegistry.SCALE_HELMET, HexRegistry.SCALE_CHEST, HexRegistry.SCALE_LEGS, HexRegistry.SCALE_BOOTS }, new BuffScaleSet(), new AbilityShield());
-	public static final ArmorSet SAGE = new ArmorSet("Magician", new Item[] { HexRegistry.MAGIC_HELMET, HexRegistry.MAGIC_CHEST, HexRegistry.MAGIC_LEGS, HexRegistry.MAGIC_BOOTS }, new BuffMagicianSet(), new AbilityRegeneration());
+	public static final ArmorSet SAGE = new ArmorSet("Sage", new Item[] { HexRegistry.SAGE_HELMET, HexRegistry.SAGE_CHEST, HexRegistry.SAGE_LEGS, HexRegistry.SAGE_BOOTS }, new BuffMagicianSet(), new AbilityLift());
 
 	private final Item[] armors;
 	private final String name;
@@ -93,5 +100,14 @@ public class ArmorSet {
 			if (matched == 4) return set;
 		}
 		return null;
+	}
+
+	@SubscribeEvent
+	public static void onPlayerTick(PlayerTickEvent e) {
+		ArmorSet s = CACHED_SETS.get(e.player.getUniqueID());
+		if (!e.player.world.isRemote && s != null && getCurrentArmorSet(e.player) != s) {
+			s.removeBuffs(e.player);
+			CACHED_SETS.put(e.player.getUniqueID(), null);
+		}
 	}
 }

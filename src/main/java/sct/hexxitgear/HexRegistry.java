@@ -47,10 +47,10 @@ public class HexRegistry {
 	public static final Item SCALE_LEGS = new ItemScaleArmor("scale_legs", EntityEquipmentSlot.LEGS);
 	public static final Item SCALE_BOOTS = new ItemScaleArmor("scale_boots", EntityEquipmentSlot.FEET);
 
-	public static final Item MAGIC_HELMET = new ItemMagicianArmor("magic_helmet", EntityEquipmentSlot.HEAD);
-	public static final Item MAGIC_CHEST = new ItemMagicianArmor("magic_chest", EntityEquipmentSlot.CHEST);
-	public static final Item MAGIC_LEGS = new ItemMagicianArmor("magic_legs", EntityEquipmentSlot.LEGS);
-	public static final Item MAGIC_BOOTS = new ItemMagicianArmor("magic_boots", EntityEquipmentSlot.FEET);
+	public static final Item SAGE_HELMET = new ItemMagicianArmor("sage_helmet", EntityEquipmentSlot.HEAD);
+	public static final Item SAGE_CHEST = new ItemMagicianArmor("sage_chest", EntityEquipmentSlot.CHEST);
+	public static final Item SAGE_LEGS = new ItemMagicianArmor("sage_legs", EntityEquipmentSlot.LEGS);
+	public static final Item SAGE_BOOTS = new ItemMagicianArmor("sage_boots", EntityEquipmentSlot.FEET);
 
 	@SubscribeEvent
 	public static void registerItems(Register<Item> event) {
@@ -77,10 +77,10 @@ public class HexRegistry {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SCALE_CHEST), "G G", "OHO", "GOG", 'G', "ingotGold", 'O', Blocks.OBSIDIAN, 'H', HexRegistry.HEXICAL_DIAMOND));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SCALE_LEGS), "OOO", "GHG", "O O", 'O', Blocks.OBSIDIAN, 'G', "ingotGold", 'H', HexRegistry.HEXICAL_DIAMOND));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SCALE_BOOTS), "   ", "OHO", "O O", 'O', Blocks.OBSIDIAN, 'H', HexRegistry.HEXICAL_DIAMOND));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.MAGIC_HELMET), " B ", "OHO", "W W", 'B', Items.BOOK, 'O', Blocks.OBSIDIAN, 'H', HexRegistry.HEXICAL_DIAMOND, 'W', Blocks.WOOL));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.MAGIC_CHEST), "G G", "WHW", "GBG", 'G', "ingotGold", 'W', Blocks.WOOL, 'H', HexRegistry.HEXICAL_DIAMOND, 'B', Items.BOOK));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.MAGIC_LEGS), "GBG", "WHW", "G G", 'G', "ingotGold", 'W', Blocks.WOOL, 'H', HexRegistry.HEXICAL_DIAMOND, 'B', Items.BOOK));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.MAGIC_BOOTS), "WHW", "G G", 'G', "ingotGold", 'W', Blocks.WOOL, 'H', HexRegistry.HEXICAL_DIAMOND));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SAGE_HELMET), " B ", "OHO", "W W", 'B', Items.BOOK, 'O', Blocks.OBSIDIAN, 'H', HexRegistry.HEXICAL_DIAMOND, 'W', Blocks.WOOL));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SAGE_CHEST), "G G", "WHW", "GBG", 'G', "ingotGold", 'W', Blocks.WOOL, 'H', HexRegistry.HEXICAL_DIAMOND, 'B', Items.BOOK));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SAGE_LEGS), "GBG", "WHW", "G G", 'G', "ingotGold", 'W', Blocks.WOOL, 'H', HexRegistry.HEXICAL_DIAMOND, 'B', Items.BOOK));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SAGE_BOOTS), "WHW", "G G", 'G', "ingotGold", 'W', Blocks.WOOL, 'H', HexRegistry.HEXICAL_DIAMOND));
 		GameRegistry.addShapelessRecipe(new ItemStack(HexRegistry.TRIBAL_HELMET, 1, 0), new ItemStack(HexRegistry.TRIBAL_HELMET, 1, OreDictionary.WILDCARD_VALUE), HexRegistry.HEXICAL_ESSENCE);
 	}
 

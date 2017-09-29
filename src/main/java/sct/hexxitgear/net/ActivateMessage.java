@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import sct.hexxitgear.core.ability.AbilityHandler;
+import sct.hexxitgear.core.AbilityHandler;
 
 public class ActivateMessage implements IMessage {
 
@@ -19,7 +19,7 @@ public class ActivateMessage implements IMessage {
 	@Override
 	public void fromBytes(ByteBuf buf) {
 	}
-	
+
 	public static class ActivateMessageHandler implements IMessageHandler<ActivateMessage, IMessage> {
 
 		@Override
@@ -27,7 +27,7 @@ public class ActivateMessage implements IMessage {
 			AbilityHandler.activateAbility(ctx.getServerHandler().playerEntity);
 			return null;
 		}
-		
+
 	}
 
 }

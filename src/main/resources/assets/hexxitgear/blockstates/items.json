@@ -16,24 +16,24 @@
 					"layer0": "hexxitgear:items/hexical_essence"
 				}
 			},
-			"magic_boots": {
+			"sage_boots": {
 				"textures": {
-					"layer0": "hexxitgear:items/magic_boots"
+					"layer0": "hexxitgear:items/sage_boots"
 				}
 			},
-			"magic_chest": {
+			"sage_chest": {
 				"textures": {
-					"layer0": "hexxitgear:items/magic_chest"
+					"layer0": "hexxitgear:items/sage_chest"
 				}
 			},
-			"magic_helmet": {
+			"sage_helmet": {
 				"textures": {
-					"layer0": "hexxitgear:items/magic_helmet"
+					"layer0": "hexxitgear:items/sage_helmet"
 				}
 			},
-			"magic_legs": {
+			"sage_legs": {
 				"textures": {
-					"layer0": "hexxitgear:items/magic_legs"
+					"layer0": "hexxitgear:items/sage_legs"
 				}
 			},
 			"scale_boots": {

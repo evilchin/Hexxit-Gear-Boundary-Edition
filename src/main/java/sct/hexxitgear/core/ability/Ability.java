@@ -22,14 +22,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class Ability {
-	
+
 	public static final List<Ability> ABILITIES = new ArrayList<>();
 	private static int curId = 0;
 
 	private final String name;
-	private final int active;
+	private final int duration;
 	private final int cooldown;
 	private final boolean instant;
 	private final int id;
@@ -37,18 +39,18 @@ public abstract class Ability {
 	/**
 	 * Generates an ability
 	 * @param name The ability name
-	 * @param active The active duration (in ticks)
+	 * @param duration The active duration (in ticks)
 	 * @param cooldown The cooldown (in ticks)
 	 */
-	public Ability(String name, int active, int cooldown) {
+	public Ability(String name, int duration, int cooldown) {
 		this.name = name;
-		this.active = active;
+		this.duration = duration;
 		this.cooldown = cooldown;
 		this.instant = false;
 		id = curId++;
 		ABILITIES.add(this);
 	}
-	
+
 	/**
 	 * Generates an instant ability
 	 * @param name The ability name
@@ -56,7 +58,7 @@ public abstract class Ability {
 	 */
 	public Ability(String name, int cooldown) {
 		this.name = name;
-		this.active = 1;
+		this.duration = 1;
 		this.cooldown = cooldown;
 		this.instant = true;
 		id = curId++;
@@ -67,8 +69,8 @@ public abstract class Ability {
 		return name;
 	}
 
-	public int getActive() {
-		return active;
+	public int getDuration() {
+		return duration;
 	}
 
 	public int getCooldown() {
@@ -78,12 +80,42 @@ public abstract class Ability {
 	public boolean isInstant() {
 		return instant;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Called on the first tick of this ability's activation.
+	 * @param player The ability caster.
+	 */
 	public abstract void start(EntityPlayer player);
 
+	/**
+	 * Called every subsequent tick after the first tick.
+	 * @param player The ability caster.
+	 */
+	public abstract void tick(EntityPlayer player, int duration);
+
+	/**
+	 * Called after the duration of this ability has ended.
+	 * @param player The ability caster.
+	 */
 	public abstract void end(EntityPlayer player);
+
+	/**
+	 * Render effects for this ability, called when start is called.
+	 * Can also be used to play cast sounds.
+	 * @param player The ability caster.
+	 */
+	@SideOnly(Side.CLIENT)
+	public abstract void renderFirst(EntityPlayer player);
+
+	/**
+	 * Render effects for this ability, called when tick is called.
+	 * @param player The ability caster.
+	 * @param duration The remaining duration of the ability.
+	 */
+	@SideOnly(Side.CLIENT)
+	public abstract void renderAt(EntityPlayer player, int duration);
 }

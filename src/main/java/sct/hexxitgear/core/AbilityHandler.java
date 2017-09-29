@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package sct.hexxitgear.core.ability;
+package sct.hexxitgear.core;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +24,8 @@ import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import sct.hexxitgear.core.ArmorSet;
+import sct.hexxitgear.core.ability.Ability;
+import sct.hexxitgear.net.AbilityRenderMessage;
 import sct.hexxitgear.net.ActionTextMessage;
 import sct.hexxitgear.net.HexNetwork;
 
@@ -34,13 +35,14 @@ public class AbilityHandler {
 	private int cooldownTime;
 	private Ability ability;
 	private boolean ended = false;
+	private boolean started = false;
 
 	private static final Map<UUID, AbilityHandler> CURRENT = new HashMap<>();
 
 	private AbilityHandler(EntityPlayer player) {
 		if (player.world.isRemote) throw new IllegalArgumentException("Ability handler has been constructed on a client world, please report this!");
 		this.ability = ArmorSet.getCurrentArmorSet(player).getAbility();
-		this.activeTime = ability.getActive();
+		this.activeTime = ability.getDuration();
 		this.cooldownTime = ability.getCooldown();
 	}
 
@@ -62,10 +64,17 @@ public class AbilityHandler {
 	public void onTick(EntityPlayer player) {
 		if (activeTime > 0) {
 			if (ability != null) {
-				if (ability.getActive() == activeTime || ability.isInstant()) {
+				if (ability.getDuration() == activeTime || ability.isInstant()) {
 					HexNetwork.INSTANCE.sendTo(new ActionTextMessage(1, ability.getId()), (EntityPlayerMP) player);
 				}
-				ability.start(player);
+				if (!started) {
+					ability.start(player);
+					HexNetwork.INSTANCE.sendToAll(new AbilityRenderMessage(0, ability.getId(), player, 0));
+					started = true;
+				} else {
+					ability.tick(player, activeTime);
+					HexNetwork.INSTANCE.sendToAll(new AbilityRenderMessage(1, ability.getId(), player, activeTime));
+				}
 				if (ability.isInstant()) activeTime = 0;
 			}
 			activeTime--;
@@ -73,7 +82,7 @@ public class AbilityHandler {
 			if (ability != null && !ended) {
 				ability.end(player);
 				ended = true;
-				HexNetwork.INSTANCE.sendTo(new ActionTextMessage(2, ability.getId()), (EntityPlayerMP) player);
+				if (ability.getDuration() >= 100) HexNetwork.INSTANCE.sendTo(new ActionTextMessage(2, ability.getId()), (EntityPlayerMP) player);
 			}
 			cooldownTime--;
 		} else {

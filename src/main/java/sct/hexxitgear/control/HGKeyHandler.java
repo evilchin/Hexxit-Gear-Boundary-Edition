@@ -46,8 +46,7 @@ public class HGKeyHandler {
 
 	@SubscribeEvent
 	public void keyEvent(InputEvent.KeyInputEvent event) {
-		if (!FMLClientHandler.instance().isGUIOpen(GuiChat.class) && activateHexxitArmor.isPressed() && ArmorSet.getCurrentArmorSet(Minecraft.getMinecraft().player) != null) 
-			HexNetwork.INSTANCE.sendToServer(new ActivateMessage());
+		if (!FMLClientHandler.instance().isGUIOpen(GuiChat.class) && activateHexxitArmor.isPressed() && ArmorSet.getCurrentArmorSet(Minecraft.getMinecraft().player) != null) HexNetwork.INSTANCE.sendToServer(new ActivateMessage());
 
 	}
 

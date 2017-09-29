@@ -48,7 +48,7 @@ public class ItemThiefArmor extends ItemHexxitArmor {
 		}
 
 		// If the helmet slot, return helmet texture map
-		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/HoodHelmet.png";
+		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/thief_hood.png";
 
 		if (stack.getItem() == HexRegistry.THIEF_LEGS) return "hexxitgear:textures/armor/thief2.png";
 

@@ -28,6 +28,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -48,9 +49,9 @@ public class ItemMagicianArmor extends ItemHexxitArmor {
 		}
 
 		// If the helmet slot, return helmet texture map
-		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/SageHood.png";
+		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/sage_hood.png";
 
-		if (stack.getItem() == HexRegistry.MAGIC_LEGS) return "hexxitgear:textures/armor/sage2.png";
+		if (stack.getItem() == HexRegistry.SAGE_LEGS) return "hexxitgear:textures/armor/sage2.png";
 
 		return "hexxitgear:textures/armor/sage.png";
 	}
@@ -62,6 +63,12 @@ public class ItemMagicianArmor extends ItemHexxitArmor {
 	protected ModelSageHood getHoodModel() {
 		if (hood == null) hood = new ModelSageHood();
 		return hood;
+	}
+
+	@Override
+	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
+		if (source.isMagicDamage()) return new ArmorProperties(1, damageReduceAmount / 15D, armor.getMaxDamage() + 5);
+		return super.getProperties(player, armor, source, damage, slot);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -78,6 +85,6 @@ public class ItemMagicianArmor extends ItemHexxitArmor {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List<String> infoList, boolean par4) {
-		infoList.add(TextFormatting.DARK_PURPLE + I18n.format("gui.hexxitgear.set.magician"));
+		infoList.add(TextFormatting.DARK_PURPLE + I18n.format("gui.hexxitgear.set.sage"));
 	}
 }

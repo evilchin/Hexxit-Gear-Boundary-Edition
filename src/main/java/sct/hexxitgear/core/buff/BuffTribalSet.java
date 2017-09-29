@@ -26,13 +26,13 @@ public class BuffTribalSet implements IBuffHandler {
 
 	@Override
 	public void applyPlayerBuffs(EntityPlayer player) {
-		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 45, 0));
-		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 21 * 20, 0));
-		player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 45, 2));
+		player.addPotionEffect(new PotionEffect(MobEffects.HASTE, 45, 1, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 420, 0, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 45, 2, false, false));
 	}
 
 	@Override
 	public void removePlayerBuffs(EntityPlayer player) {
-
+		player.removePotionEffect(MobEffects.NIGHT_VISION);
 	}
 }

@@ -26,14 +26,16 @@ public class BuffScaleSet implements IBuffHandler {
 
 	@Override
 	public void applyPlayerBuffs(EntityPlayer player) {
-		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 45, 0));
-		player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 45, 0));
-		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 21 * 20, 0));
+		player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 45, 0, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 45, 0, false, false));
+		if(!player.isPotionActive(MobEffects.HEALTH_BOOST)) player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, Integer.MAX_VALUE, 4, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 420, 0, false, false));
 	}
 
 	@Override
 	public void removePlayerBuffs(EntityPlayer player) {
-
+		player.removePotionEffect(MobEffects.HEALTH_BOOST);
+		player.removePotionEffect(MobEffects.NIGHT_VISION);
 	}
 
 }

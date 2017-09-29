@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -30,6 +31,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.net.HexNetwork;
 import sct.hexxitgear.proxy.IProxy;
 import sct.hexxitgear.setup.HexxitGearConfig;
@@ -65,6 +67,7 @@ public class HexxitGear {
 		HexNetwork.init();
 		GameRegistry.registerWorldGenerator(new HGWorldGen(), 100);
 		proxy.registerHandlers();
+		MinecraftForge.EVENT_BUS.register(ArmorSet.class);
 	}
 
 	public static void addToDimBlacklist(int dimID) {

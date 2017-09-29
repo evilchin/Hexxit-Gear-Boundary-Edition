@@ -41,7 +41,7 @@ public class ItemScaleArmor extends ItemHexxitArmor {
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/ScaleHelmet.png";
+		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/scale_helm.png";
 
 		if (stack.getItem() == HexRegistry.SCALE_LEGS) return "hexxitgear:textures/armor/scale2.png";
 

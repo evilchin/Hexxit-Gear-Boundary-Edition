@@ -10,8 +10,8 @@ import sct.hexxitgear.core.ability.Ability;
 
 public class ActionTextMessage implements IMessage {
 
-	public int messageId;
-	public int abilityId;
+	private int messageId;
+	private int abilityId;
 
 	public ActionTextMessage() {
 	}
@@ -38,7 +38,7 @@ public class ActionTextMessage implements IMessage {
 		@Override
 		public IMessage onMessage(ActionTextMessage message, MessageContext ctx) {
 			Ability ability = Ability.ABILITIES.get(message.abilityId);
-			if(ability.isInstant() && message.messageId == 2) return null;
+			if (ability.isInstant() && message.messageId == 2) return null;
 			switch (message.messageId) {
 			case 0:
 				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.cooldown", new TextComponentTranslation(ability.getName())));

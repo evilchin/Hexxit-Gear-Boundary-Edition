@@ -24,12 +24,6 @@ minecraft {
     runDir = "run"
 }
 
-jar {
-    manifest {
-        attributes 'FMLAT': 'hexxitgear_at.cfg'
-    }
-}
-
 processResources
 {
     // this will ensure that this task is redone when the versions change.

@@ -18,28 +18,26 @@
 
 package sct.hexxitgear.core.ability;
 
-
-
-import java.awt.Color;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleEndRod;
-import net.minecraft.client.particle.ParticleSimpleAnimated;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class AbilityShield extends Ability {
+public class AbilityStealth extends Ability {
 
-	public static final int BLUE = Color.BLUE.getRGB();
-	
-	public AbilityShield() {
-		super("ability.hexxitgear.shield", 100, 1600);
+	public AbilityStealth() {
+		super("ability.hexxitgear.stealth", 200, 800);
 	}
 
 	@Override
 	public void start(EntityPlayer player) {
-		player.setEntityInvulnerable(true);
+		player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 200, 81, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 1, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 200, 0, false, false));
 	}
 
 	@Override
@@ -48,23 +46,18 @@ public class AbilityShield extends Ability {
 
 	@Override
 	public void end(EntityPlayer player) {
-		player.setEntityInvulnerable(false);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderFirst(EntityPlayer player) {
-		renderAt(player, 0);
+		for (int i = 0; i < 360; i += 10) {
+			player.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, player.posX, player.posY + 4, player.posZ, Math.sin(i) * 0.1F, -0.8F, Math.cos(i) * 0.1F);
+		}
+		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.PLAYERS, 1, 1, false);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void renderAt(EntityPlayer player, int duration) {
-		if (duration % 10 == 0) for (int i = 0; i < 360; i += 10) {
-			ParticleSimpleAnimated p = new ParticleEndRod(Minecraft.getMinecraft().world, player.posX + Math.sin(i), player.posY, player.posZ + Math.cos(i), 0, 0.2F, 0);
-			p.setColor(BLUE);
-			p.setColorFade(BLUE);
-			Minecraft.getMinecraft().effectRenderer.addEffect(p);
-		}
 	}
 }

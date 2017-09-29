@@ -41,7 +41,7 @@ public class ItemTribalArmor extends ItemHexxitArmor {
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/SkullHelmet.png";
+		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/tribal_skull.png";
 
 		if (stack.getItem() == HexRegistry.TRIBAL_LEGS) return "hexxitgear:textures/armor/tribal2.png";
 
