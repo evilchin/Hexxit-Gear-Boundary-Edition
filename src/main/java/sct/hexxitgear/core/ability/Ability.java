@@ -35,19 +35,25 @@ public abstract class Ability {
 	private final int cooldown;
 	private final boolean instant;
 	private final int id;
+	private final int xpCost;
+	private final int hungerCost;
 
 	/**
 	 * Generates an ability
 	 * @param name The ability name
 	 * @param duration The active duration (in ticks)
 	 * @param cooldown The cooldown (in ticks)
+	 * @param xpCost The value of XP to remove to activate.  Not in levels.
+	 * @param hungerCost The amount of hunger to remove to activate. 
 	 */
-	public Ability(String name, int duration, int cooldown) {
+	public Ability(String name, int duration, int cooldown, int xpCost, int hungerCost) {
 		this.name = name;
 		this.duration = duration;
 		this.cooldown = cooldown;
 		this.instant = false;
 		id = curId++;
+		this.xpCost = xpCost;
+		this.hungerCost = hungerCost;
 		ABILITIES.add(this);
 	}
 
@@ -56,12 +62,14 @@ public abstract class Ability {
 	 * @param name The ability name
 	 * @param cooldown The cooldown (in ticks)
 	 */
-	public Ability(String name, int cooldown) {
+	public Ability(String name, int cooldown, int xpCost, int hungerCost) {
 		this.name = name;
 		this.duration = 1;
 		this.cooldown = cooldown;
 		this.instant = true;
 		id = curId++;
+		this.xpCost = xpCost;
+		this.hungerCost = hungerCost;
 		ABILITIES.add(this);
 	}
 
@@ -83,6 +91,18 @@ public abstract class Ability {
 
 	public int getId() {
 		return id;
+	}
+	
+	public int getXpCost() {
+		return xpCost;
+	}
+	
+	public int getHungerCost() {
+		return hungerCost;
+	}
+	
+	public boolean canCast(EntityPlayer player) {
+		return player.experience >= getXpCost() && player.getFoodStats().getFoodLevel() >= hungerCost;
 	}
 
 	/**

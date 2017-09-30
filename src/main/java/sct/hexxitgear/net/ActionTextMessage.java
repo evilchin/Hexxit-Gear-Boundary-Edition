@@ -52,6 +52,12 @@ public class ActionTextMessage implements IMessage {
 			case 3:
 				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.refreshed", new TextComponentTranslation(ability.getName())));
 				break;
+			case 4:
+				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.needxp", new TextComponentTranslation(ability.getName())));
+				break;
+			case 5:
+				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.needfood", new TextComponentTranslation(ability.getName())));
+				break;
 			default:
 				break;
 			}

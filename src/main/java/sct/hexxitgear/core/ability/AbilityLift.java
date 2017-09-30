@@ -32,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class AbilityLift extends Ability {
 
 	public AbilityLift() {
-		super("ability.hexxitgear.lift", 5, 900);
+		super("ability.hexxitgear.lift", 5, 900, 500, 6);
 	}
 
 	@Override

@@ -40,14 +40,14 @@ public class AbilityRampage extends Ability {
 	public static final int RED = Color.RED.getRGB();
 
 	public AbilityRampage() {
-		super("ability.hexxitgear.rampage", 200, 1600);
+		super("ability.hexxitgear.rampage", 200, 1600, 400, 9);
 	}
 
 	@Override
 	public void start(EntityPlayer player) {
-		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 200, 2));
-		player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 2));
-		player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 200, 2));
+		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, getDuration(), 2));
+		player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, getDuration(), 2));
+		player.addPotionEffect(new PotionEffect(MobEffects.SPEED, getDuration(), 2));
 	}
 
 	@Override
