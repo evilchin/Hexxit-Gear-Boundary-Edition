@@ -20,6 +20,7 @@ package sct.hexxitgear.model;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
 public class ModelHoodHelmet extends ModelBiped {
@@ -71,11 +72,15 @@ public class ModelHoodHelmet extends ModelBiped {
 		float scaledUp = f5 + 0.009F;
 		float suLarge = f5 + 0.002F;
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		GlStateManager.pushMatrix();
+		if(entity.isSneaking())
+			GlStateManager.translate(0, .2, 0);
 		head.render(scaledUp);
 		Shape1.render(suLarge);
 		Shape2.render(suLarge);
 		Shape3.render(suLarge);
 		Shape4.render(suLarge);
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
