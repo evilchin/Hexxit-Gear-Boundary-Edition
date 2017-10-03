@@ -42,7 +42,7 @@ public class HexxitGear {
 
 	public static final String MODID = "hexxitgear";
 	public static final String NAME = "Hexxit Gear";
-	public static final String VERSION = "2.2.1";
+	public static final String VERSION = "2.2.2";
 
 	@Instance
 	public static HexxitGear instance;
