@@ -41,22 +41,22 @@ public class ActionTextMessage implements IMessage {
 			if (ability.isInstant() && message.messageId == 2) return null;
 			switch (message.messageId) {
 			case 0:
-				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.cooldown", new TextComponentTranslation(ability.getName())));
+				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.cooldown", new TextComponentTranslation(ability.getUnlocalizedName())));
 				break;
 			case 1:
-				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.activated", new TextComponentTranslation(ability.getName())));
+				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.activated", new TextComponentTranslation(ability.getUnlocalizedName())));
 				break;
 			case 2:
-				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.ended", new TextComponentTranslation(ability.getName())));
+				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.ended", new TextComponentTranslation(ability.getUnlocalizedName())));
 				break;
 			case 3:
-				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.refreshed", new TextComponentTranslation(ability.getName())));
+				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.refreshed", new TextComponentTranslation(ability.getUnlocalizedName())));
 				break;
 			case 4:
-				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.needxp", new TextComponentTranslation(ability.getName())));
+				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.needxp", new TextComponentTranslation(ability.getUnlocalizedName())));
 				break;
 			case 5:
-				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.needfood", new TextComponentTranslation(ability.getName())));
+				HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.needfood", new TextComponentTranslation(ability.getUnlocalizedName())));
 				break;
 			default:
 				break;

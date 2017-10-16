@@ -24,6 +24,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEndRod;
 import net.minecraft.client.particle.ParticleSimpleAnimated;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -32,7 +34,7 @@ public class AbilityShield extends Ability {
 	public static final int BLUE = Color.BLUE.getRGB();
 
 	public AbilityShield() {
-		super("ability.hexxitgear.shield", 100, 1600, 400, 12);
+		super("Adaptive Shielding", "ability.hexxitgear.shield", 100, 1600, 400, 12);
 	}
 
 	@Override
@@ -53,6 +55,7 @@ public class AbilityShield extends Ability {
 	@SideOnly(Side.CLIENT)
 	public void renderFirst(EntityPlayer player) {
 		renderAt(player, 0);
+		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.BLOCK_ANVIL_LAND, SoundCategory.PLAYERS, 1, 1, false);
 	}
 
 	@Override

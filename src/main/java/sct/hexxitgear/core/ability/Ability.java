@@ -24,13 +24,14 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import sct.hexxitgear.init.HexConfig;
 
 public abstract class Ability {
 
 	public static final List<Ability> ABILITIES = new ArrayList<>();
 	private static int curId = 0;
 
-	private final String name;
+	private final String unlocName;
 	private final int duration;
 	private final int cooldown;
 	private final boolean instant;
@@ -40,41 +41,45 @@ public abstract class Ability {
 
 	/**
 	 * Generates an ability
-	 * @param name The ability name
+	 * @param name The ability name (used for configs)
+	 * @param unlocalized The unlocalized name
 	 * @param duration The active duration (in ticks)
 	 * @param cooldown The cooldown (in ticks)
 	 * @param xpCost The value of XP to remove to activate.  Not in levels.
 	 * @param hungerCost The amount of hunger to remove to activate. 
 	 */
-	public Ability(String name, int duration, int cooldown, int xpCost, int hungerCost) {
-		this.name = name;
-		this.duration = duration;
-		this.cooldown = cooldown;
+	public Ability(String name, String unlocalized, int duration, int cooldown, int xpCost, int hungerCost) {
+		this.unlocName = unlocalized;
+		this.duration = HexConfig.config.getInt(name + " Duration", "ability - " + name, duration, 2, Integer.MAX_VALUE, "The duration of " + name + " in ticks.");
+		this.cooldown = HexConfig.config.getInt(name + " Cooldown", "ability - " + name, cooldown, 1, Integer.MAX_VALUE, "The cooldown of " + name + " in ticks.");
 		this.instant = false;
 		id = curId++;
-		this.xpCost = xpCost;
-		this.hungerCost = hungerCost;
+		this.xpCost = HexConfig.config.getInt(name + " XP Cost", "ability - " + name, xpCost, 0, Integer.MAX_VALUE, "The xp cost of " + name + " in numerical xp.");
+		this.hungerCost = HexConfig.config.getInt(name + " Hunger Cost", "ability - " + name, hungerCost, 0, Integer.MAX_VALUE, "The hunger cost of " + name + " in half-shanks.");
 		ABILITIES.add(this);
 	}
 
 	/**
 	 * Generates an instant ability
-	 * @param name The ability name
+	 * @param name The ability name (used for configs)
+	 * @param unlocalized The unlocalized name
 	 * @param cooldown The cooldown (in ticks)
+	 * @param xpCost The value of XP to remove to activate.  Not in levels.
+	 * @param hungerCost The amount of hunger to remove to activate. 
 	 */
-	public Ability(String name, int cooldown, int xpCost, int hungerCost) {
-		this.name = name;
+	public Ability(String name, String unlocalized, int cooldown, int xpCost, int hungerCost) {
+		this.unlocName = unlocalized;
 		this.duration = 1;
-		this.cooldown = cooldown;
+		this.cooldown = HexConfig.config.getInt(name + " Cooldown", "ability - " + name, cooldown, 1, Integer.MAX_VALUE, "The cooldown of " + name + " in ticks.");
 		this.instant = true;
 		id = curId++;
-		this.xpCost = xpCost;
-		this.hungerCost = hungerCost;
+		this.xpCost = HexConfig.config.getInt(name + " XP Cost", "ability - " + name, xpCost, 0, Integer.MAX_VALUE, "The xp cost of " + name + " in numerical xp.");
+		this.hungerCost = HexConfig.config.getInt(name + " Hunger Cost", "ability - " + name, hungerCost, 0, Integer.MAX_VALUE, "The hunger cost of " + name + " in half-shanks.");
 		ABILITIES.add(this);
 	}
 
-	public String getName() {
-		return name;
+	public String getUnlocalizedName() {
+		return unlocName;
 	}
 
 	public int getDuration() {

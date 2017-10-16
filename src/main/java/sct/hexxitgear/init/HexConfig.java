@@ -19,10 +19,12 @@
 package sct.hexxitgear.init;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import sct.hexxitgear.HexxitGear;
+import sct.hexxitgear.core.ArmorSet;
 
 public class HexConfig {
 
@@ -30,11 +32,16 @@ public class HexConfig {
 
 	public static Configuration config;
 
+	private static final List<Integer> DIM_BLACKLIST = new ArrayList<Integer>();
+	private static int hexbiscusChance = 0;
+
 	public static void loadCommonConfig(FMLPreInitializationEvent evt) {
 		config = new Configuration(evt.getSuggestedConfigurationFile());
 		config.load();
 
-		registerDimBlacklist(config.getStringList("Dimensional Blacklist", "worldgen", new String[0], "Newline list of all blacklisted dimension IDs"));
+		registerDimBlacklist(config.getStringList("Dimensional Blacklist", "worldgen", new String[0], "Dimensions where hexbiscuses will not generate. New line per id."));
+		ArmorSet.classloadForConfigs();
+		hexbiscusChance = config.getInt("Hexbiscus Chance", "worldgen", 50, 1, 600, "The 1/n chance for a hexbiscus to generate. Lower numbers means more.");
 
 		if (config.hasChanged()) config.save();
 	}
@@ -42,7 +49,15 @@ public class HexConfig {
 	private static void registerDimBlacklist(String[] parsed) {
 		for (String dim : parsed) {
 			Integer dimID = Integer.parseInt(dim);
-			HexxitGear.addToDimBlacklist(dimID);
+			if (!DIM_BLACKLIST.contains(dimID)) DIM_BLACKLIST.add(dimID);
 		}
+	}
+
+	public static List<Integer> getDimBlacklist() {
+		return DIM_BLACKLIST;
+	}
+	
+	public static int getHexbiscusChance() {
+		return hexbiscusChance;
 	}
 }

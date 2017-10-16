@@ -40,7 +40,7 @@ public class AbilityRampage extends Ability {
 	public static final int RED = Color.RED.getRGB();
 
 	public AbilityRampage() {
-		super("ability.hexxitgear.rampage", 200, 1600, 400, 9);
+		super("Rampage", "ability.hexxitgear.rampage", 200, 1600, 400, 9);
 	}
 
 	@Override

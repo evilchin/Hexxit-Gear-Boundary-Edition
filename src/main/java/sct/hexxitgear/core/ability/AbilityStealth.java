@@ -30,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class AbilityStealth extends Ability {
 
 	public AbilityStealth() {
-		super("ability.hexxitgear.stealth", 200, 800, 160, 4);
+		super("Stealth", "ability.hexxitgear.stealth", 200, 800, 160, 4);
 	}
 
 	@Override

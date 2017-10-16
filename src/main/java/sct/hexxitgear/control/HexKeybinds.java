@@ -34,13 +34,13 @@ import sct.hexxitgear.net.ActivateMessage;
 import sct.hexxitgear.net.HexNetwork;
 
 @SideOnly(Side.CLIENT)
-public class HGKeyHandler {
+public class HexKeybinds {
 
 	public static KeyBinding activateHexxitArmor = new KeyBinding("Activate Hexxit Gear Armor", Keyboard.KEY_X, "Hexxit Gear");
 	public static KeyBinding[] keybindArray = new KeyBinding[] { activateHexxitArmor };
 	public static boolean[] repeats = new boolean[keybindArray.length];
 
-	public HGKeyHandler() {
+	public HexKeybinds() {
 		ClientRegistry.registerKeyBinding(activateHexxitArmor);
 	}
 

@@ -22,37 +22,29 @@ import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraftforge.fml.common.IWorldGenerator;
-import sct.hexxitgear.HexxitGear;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import sct.hexxitgear.init.HexConfig;
 import sct.hexxitgear.init.HexRegistry;
 
-public class HGWorldGen implements IWorldGenerator {
+public class HexGenerator {
 
-	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+	@SubscribeEvent
+	public void generate(DecorateBiomeEvent.Decorate event) {
+		if(event.getType() != DecorateBiomeEvent.Decorate.EventType.FLOWERS) return;
+		World world = event.getWorld();
+		BlockPos start = event.getPos().add(8,0,8);
+		Random random = event.getRand();
 
-		if (HexxitGear.getDimBlacklist().contains(world.provider.getDimension())) return;
-
-		if (world.getWorldInfo().getTerrainType().getName().equals("flat")) return;
-
-		int xMin = chunkX << 4;
-		int zMin = chunkZ << 4;
-
-		int startX = xMin + random.nextInt(16);
-		int startZ = zMin + random.nextInt(16);
-
+		if (HexConfig.getDimBlacklist().contains(world.provider.getDimension())) return;
 		int tries = random.nextInt(2);
 
 		for (int i = 0; i < tries; i++) {
-			int x = startX + random.nextInt(8) - random.nextInt(8);
-			int z = startZ + random.nextInt(8) - random.nextInt(8);
+			int x = start.getX() + random.nextInt(6) - random.nextInt(6);
+			int z = start.getZ() + random.nextInt(6) - random.nextInt(6);
 			BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
-
 			if ((world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && HexRegistry.HEXBISCUS.canBlockStay(world, pos, HexRegistry.HEXBISCUS.getDefaultState())) {
-				if (random.nextInt(50) > 1) continue;
-
+				if (random.nextInt(HexConfig.getHexbiscusChance()) > 1) continue;
 				world.setBlockState(pos, HexRegistry.HEXBISCUS.getDefaultState());
 			}
 		}

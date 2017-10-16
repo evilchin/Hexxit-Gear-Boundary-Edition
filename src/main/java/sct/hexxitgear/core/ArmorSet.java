@@ -111,6 +111,6 @@ public class ArmorSet {
 		}
 	}
 
-	public static void classLoadForConfigs() {
+	public static void classloadForConfigs() {
 	}
 }

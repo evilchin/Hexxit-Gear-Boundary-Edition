@@ -18,9 +18,6 @@
 
 package sct.hexxitgear;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.logging.log4j.Logger;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -30,12 +27,11 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import sct.hexxitgear.core.ArmorSet;
+import sct.hexxitgear.init.HexConfig;
 import sct.hexxitgear.net.HexNetwork;
 import sct.hexxitgear.proxy.IProxy;
-import sct.hexxitgear.init.HexConfig;
-import sct.hexxitgear.world.HGWorldGen;
+import sct.hexxitgear.world.HexGenerator;
 
 @Mod(modid = HexxitGear.MODID, name = HexxitGear.NAME, useMetadata = true, version = HexxitGear.VERSION)
 public class HexxitGear {
@@ -52,28 +48,18 @@ public class HexxitGear {
 
 	public static Logger logger;
 
-	public static final List<Integer> DIM_BLACKLIST = new ArrayList<Integer>();
-
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
-		HexConfig.loadCommonConfig(evt);
 		logger = evt.getModLog();
+		HexConfig.loadCommonConfig(evt);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent evt) {
 		HexNetwork.init();
-		GameRegistry.registerWorldGenerator(new HGWorldGen(), 100);
 		proxy.registerKeybinds();
+		MinecraftForge.TERRAIN_GEN_BUS.register(new HexGenerator());
 		MinecraftForge.EVENT_BUS.register(ArmorSet.class);
-	}
-
-	public static void addToDimBlacklist(int id) {
-		if (!DIM_BLACKLIST.contains(id)) DIM_BLACKLIST.add(id);
-	}
-
-	public static List<Integer> getDimBlacklist() {
-		return DIM_BLACKLIST;
 	}
 
 }
