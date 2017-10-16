@@ -18,8 +18,6 @@
 
 package sct.hexxitgear.core.ability;
 
-
-
 import java.awt.Color;
 
 import net.minecraft.client.Minecraft;
@@ -32,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class AbilityShield extends Ability {
 
 	public static final int BLUE = Color.BLUE.getRGB();
-	
+
 	public AbilityShield() {
 		super("ability.hexxitgear.shield", 100, 1600, 400, 12);
 	}

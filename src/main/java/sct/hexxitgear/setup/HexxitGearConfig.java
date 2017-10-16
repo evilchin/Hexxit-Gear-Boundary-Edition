@@ -26,24 +26,23 @@ import sct.hexxitgear.HexxitGear;
 
 public class HexxitGearConfig {
 
-	public static String[] dimBlacklist;
-
 	public static File configFolder;
 
+	public static Configuration config;
+
 	public static void loadCommonConfig(FMLPreInitializationEvent evt) {
-		Configuration c = new Configuration(evt.getSuggestedConfigurationFile());
-		c.load();
+		config = new Configuration(evt.getSuggestedConfigurationFile());
+		config.load();
 
-		dimBlacklist = c.getStringList("Dimensional Blacklist", "worldgen", new String[0], "Comma separated list of all blacklisted dimension IDs");
+		registerDimBlacklist(config.getStringList("Dimensional Blacklist", "worldgen", new String[0], "Newline list of all blacklisted dimension IDs"));
 
-		if (c.hasChanged()) c.save();
+		if (config.hasChanged()) config.save();
 	}
 
-	public static void registerDimBlacklist() {
-		for (String dim : dimBlacklist) {
+	private static void registerDimBlacklist(String[] parsed) {
+		for (String dim : parsed) {
 			Integer dimID = Integer.parseInt(dim);
 			HexxitGear.addToDimBlacklist(dimID);
-
 		}
 	}
 }

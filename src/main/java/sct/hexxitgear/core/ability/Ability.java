@@ -92,15 +92,15 @@ public abstract class Ability {
 	public int getId() {
 		return id;
 	}
-	
+
 	public int getXpCost() {
 		return xpCost;
 	}
-	
+
 	public int getHungerCost() {
 		return hungerCost;
 	}
-	
+
 	public boolean canCast(EntityPlayer player) {
 		return player.experience >= getXpCost() && player.getFoodStats().getFoodLevel() >= hungerCost;
 	}

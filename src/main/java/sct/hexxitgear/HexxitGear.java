@@ -42,7 +42,7 @@ public class HexxitGear {
 
 	public static final String MODID = "hexxitgear";
 	public static final String NAME = "Hexxit Gear";
-	public static final String VERSION = "2.2.2";
+	public static final String VERSION = "2.3.0";
 
 	@Instance
 	public static HexxitGear instance;
@@ -52,13 +52,11 @@ public class HexxitGear {
 
 	public static Logger logger;
 
-	public static List<Integer> dimensionalBlacklist = new ArrayList<Integer>();
+	public static final List<Integer> DIM_BLACKLIST = new ArrayList<Integer>();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
 		HexxitGearConfig.loadCommonConfig(evt);
-		HexxitGearConfig.registerDimBlacklist();
-
 		logger = evt.getModLog();
 	}
 
@@ -66,16 +64,16 @@ public class HexxitGear {
 	public void init(FMLInitializationEvent evt) {
 		HexNetwork.init();
 		GameRegistry.registerWorldGenerator(new HGWorldGen(), 100);
-		proxy.registerHandlers();
+		proxy.registerKeybinds();
 		MinecraftForge.EVENT_BUS.register(ArmorSet.class);
 	}
 
-	public static void addToDimBlacklist(int dimID) {
-		if (!dimensionalBlacklist.contains(dimID)) dimensionalBlacklist.add(dimID);
+	public static void addToDimBlacklist(int id) {
+		if (!DIM_BLACKLIST.contains(id)) DIM_BLACKLIST.add(id);
 	}
 
 	public static List<Integer> getDimBlacklist() {
-		return dimensionalBlacklist;
+		return DIM_BLACKLIST;
 	}
 
 }

@@ -58,12 +58,12 @@ public class AbilityHandler {
 			return;
 		}
 		AbilityHandler handler = new AbilityHandler(player);
-		if(player.experienceTotal < handler.ability.getXpCost()) {
+		if (player.experienceTotal < handler.ability.getXpCost()) {
 			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(4, handler.ability.getId()), (EntityPlayerMP) player);
 			return;
 		}
 		int food = player.getFoodStats().getFoodLevel();
-		if(food < handler.ability.getHungerCost()) {
+		if (food < handler.ability.getHungerCost()) {
 			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(5, handler.ability.getId()), (EntityPlayerMP) player);
 			return;
 		}

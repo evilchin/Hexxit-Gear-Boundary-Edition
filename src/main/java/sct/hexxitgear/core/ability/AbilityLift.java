@@ -39,7 +39,7 @@ public class AbilityLift extends Ability {
 	public void start(EntityPlayer player) {
 		Vec3i lookVec = player.getHorizontalFacing().getDirectionVec();
 		BlockPos pos2 = player.getPosition().add(lookVec);
-		AxisAlignedBB box = new AxisAlignedBB(pos2.getX(), pos2.getY(), pos2.getZ(), pos2.getX() + lookVec.getX()*5, pos2.getY() + 2, pos2.getZ() + lookVec.getZ()*5).expand(3, 0, 3);
+		AxisAlignedBB box = new AxisAlignedBB(pos2.getX(), pos2.getY(), pos2.getZ(), pos2.getX() + lookVec.getX() * 5, pos2.getY() + 2, pos2.getZ() + lookVec.getZ() * 5).expand(3, 0, 3);
 		for (EntityLivingBase e : player.world.getEntitiesWithinAABB(EntityLivingBase.class, box)) {
 			if (e != player) e.addVelocity(0, 2, 0);
 		}
@@ -52,7 +52,7 @@ public class AbilityLift extends Ability {
 	@Override
 	public void tick(EntityPlayer player, int duration) {
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderFirst(EntityPlayer player) {

@@ -34,7 +34,7 @@ import sct.hexxitgear.util.IHasModel;
 public class ClientProxy implements IProxy {
 
 	@Override
-	public void registerHandlers() {
+	public void registerKeybinds() {
 		MinecraftForge.EVENT_BUS.register(new HGKeyHandler());
 	}
 

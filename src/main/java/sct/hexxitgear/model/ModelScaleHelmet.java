@@ -123,8 +123,7 @@ public class ModelScaleHelmet extends ModelBiped {
 		float suLarge = f5 + 0.002F;
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		GlStateManager.pushMatrix();
-		if(entity.isSneaking())
-			GlStateManager.translate(0, .2, 0);
+		if (entity.isSneaking()) GlStateManager.translate(0, .2, 0);
 		head.render(scaledUp);
 		Shape1.render(suLarge);
 		Shape2.render(suLarge);
