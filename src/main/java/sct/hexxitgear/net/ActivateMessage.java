@@ -24,7 +24,7 @@ public class ActivateMessage implements IMessage {
 
 		@Override
 		public IMessage onMessage(ActivateMessage message, MessageContext ctx) {
-			AbilityHandler.activateAbility(ctx.getServerHandler().playerEntity);
+			AbilityHandler.activateAbility(ctx.getServerHandler().player);
 			return null;
 		}
 
