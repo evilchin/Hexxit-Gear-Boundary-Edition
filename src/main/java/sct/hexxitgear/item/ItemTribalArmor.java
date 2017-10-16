@@ -30,7 +30,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import sct.hexxitgear.HexRegistry;
+import sct.hexxitgear.init.HexRegistry;
 import sct.hexxitgear.model.ModelSkullHelmet;
 
 public class ItemTribalArmor extends ItemHexxitArmor {

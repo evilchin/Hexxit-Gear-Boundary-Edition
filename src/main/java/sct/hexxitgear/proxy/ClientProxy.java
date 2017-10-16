@@ -26,8 +26,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.control.HGKeyHandler;
+import sct.hexxitgear.init.HexRegistry;
 import sct.hexxitgear.util.IHasModel;
 
 @EventBusSubscriber(Side.CLIENT)

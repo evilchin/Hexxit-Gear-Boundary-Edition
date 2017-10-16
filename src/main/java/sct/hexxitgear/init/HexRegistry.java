@@ -1,4 +1,4 @@
-package sct.hexxitgear;
+package sct.hexxitgear.init;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,6 @@ import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import sct.hexxitgear.block.BlockHexbiscus;
 import sct.hexxitgear.item.ItemBase;
@@ -81,7 +80,6 @@ public class HexRegistry {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SAGE_CHEST), "G G", "WHW", "GBG", 'G', "ingotGold", 'W', Blocks.WOOL, 'H', HexRegistry.HEXICAL_DIAMOND, 'B', Items.BOOK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SAGE_LEGS), "GBG", "WHW", "G G", 'G', "ingotGold", 'W', Blocks.WOOL, 'H', HexRegistry.HEXICAL_DIAMOND, 'B', Items.BOOK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(HexRegistry.SAGE_BOOTS), "WHW", "G G", 'G', "ingotGold", 'W', Blocks.WOOL, 'H', HexRegistry.HEXICAL_DIAMOND));
-		GameRegistry.addShapelessRecipe(new ItemStack(HexRegistry.TRIBAL_HELMET, 1, 0), new ItemStack(HexRegistry.TRIBAL_HELMET, 1, OreDictionary.WILDCARD_VALUE), HexRegistry.HEXICAL_ESSENCE);
 	}
 
 }

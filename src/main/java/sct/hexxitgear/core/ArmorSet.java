@@ -31,7 +31,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
-import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.core.ability.Ability;
 import sct.hexxitgear.core.ability.AbilityLift;
 import sct.hexxitgear.core.ability.AbilityRampage;
@@ -42,6 +41,7 @@ import sct.hexxitgear.core.buff.BuffScaleSet;
 import sct.hexxitgear.core.buff.BuffThiefSet;
 import sct.hexxitgear.core.buff.BuffTribalSet;
 import sct.hexxitgear.core.buff.IBuffHandler;
+import sct.hexxitgear.init.HexRegistry;
 import sct.hexxitgear.util.HexUtils;
 
 public class ArmorSet {
@@ -109,5 +109,8 @@ public class ArmorSet {
 			s.removeBuffs(e.player);
 			CACHED_SETS.put(e.player.getUniqueID(), null);
 		}
+	}
+
+	public static void classLoadForConfigs() {
 	}
 }

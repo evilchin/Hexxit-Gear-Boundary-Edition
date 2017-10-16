@@ -23,7 +23,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import sct.hexxitgear.HexRegistry;
+import sct.hexxitgear.init.HexRegistry;
 
 public class HGCreativeTab extends CreativeTabs {
 

@@ -27,11 +27,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
-import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.core.AbilityHandler;
 import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.gui.HGCreativeTab;
+import sct.hexxitgear.init.HexRegistry;
 import sct.hexxitgear.util.HexUtils;
 import sct.hexxitgear.util.IHasModel;
 
@@ -86,5 +86,10 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasMod
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 		return TextFormatting.YELLOW + super.getItemStackDisplayName(par1ItemStack);
+	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return toRepair.isItemDamaged() && repair.getItem() == HexRegistry.HEXICAL_ESSENCE;
 	}
 }

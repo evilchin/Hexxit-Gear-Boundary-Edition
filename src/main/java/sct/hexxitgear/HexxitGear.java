@@ -34,7 +34,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.net.HexNetwork;
 import sct.hexxitgear.proxy.IProxy;
-import sct.hexxitgear.setup.HexxitGearConfig;
+import sct.hexxitgear.init.HexConfig;
 import sct.hexxitgear.world.HGWorldGen;
 
 @Mod(modid = HexxitGear.MODID, name = HexxitGear.NAME, useMetadata = true, version = HexxitGear.VERSION)
@@ -56,7 +56,7 @@ public class HexxitGear {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
-		HexxitGearConfig.loadCommonConfig(evt);
+		HexConfig.loadCommonConfig(evt);
 		logger = evt.getModLog();
 	}
 

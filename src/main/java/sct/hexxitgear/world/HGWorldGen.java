@@ -25,8 +25,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
-import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.HexxitGear;
+import sct.hexxitgear.init.HexRegistry;
 
 public class HGWorldGen implements IWorldGenerator {
 

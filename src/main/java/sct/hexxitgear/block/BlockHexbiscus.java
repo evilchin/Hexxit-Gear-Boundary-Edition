@@ -34,9 +34,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import sct.hexxitgear.HexRegistry;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.gui.HGCreativeTab;
+import sct.hexxitgear.init.HexRegistry;
 import sct.hexxitgear.util.IHasModel;
 
 public class BlockHexbiscus extends BlockBush implements IHasModel {

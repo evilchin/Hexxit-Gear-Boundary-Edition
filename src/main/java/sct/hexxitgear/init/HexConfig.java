@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package sct.hexxitgear.setup;
+package sct.hexxitgear.init;
 
 import java.io.File;
 
@@ -24,7 +24,7 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import sct.hexxitgear.HexxitGear;
 
-public class HexxitGearConfig {
+public class HexConfig {
 
 	public static File configFolder;
 
