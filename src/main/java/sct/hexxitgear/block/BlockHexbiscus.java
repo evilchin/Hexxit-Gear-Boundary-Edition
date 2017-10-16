@@ -18,51 +18,59 @@
 
 package sct.hexxitgear.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import java.util.Arrays;
+import java.util.List;
+
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.gui.HGCreativeTab;
+import sct.hexxitgear.init.HexRegistry;
+import sct.hexxitgear.util.IHasModel;
 
-import java.util.List;
-import java.util.Random;
+public class BlockHexbiscus extends BlockBush implements IHasModel {
 
-public class BlockHexbiscus extends BlockFlower {
+	public BlockHexbiscus() {
+		setCreativeTab(HGCreativeTab.tab);
+		setRegistryName("hexbiscus");
+		setUnlocalizedName(HexxitGear.MODID + ".hexbiscus");
+		setSoundType(SoundType.PLANT);
+		HexRegistry.ITEMS.add(new ItemBlock(this).setRegistryName(getRegistryName()));
+	}
 
-    public BlockHexbiscus() {
-        super(0);
-        setCreativeTab(HGCreativeTab.tab);
-        setBlockName("hexxitgear.flora.hexbiscus");
-    }
+	@Override
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		return Arrays.asList(new ItemStack(HexRegistry.HEXICAL_ESSENCE));
+	}
 
-    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
-    {
-        return HexxitGear.hexicalEssence;
-    }
+	@Override
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+		return true;
+	}
 
-    /**
-     * Gets the block's texture. Args: side, meta
-     */
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int p_149691_1_, int p_149691_2_)
-    {
-        return blockIcon;
-    }
+	@Override
+	protected ItemStack getSilkTouchDrop(IBlockState state) {
+		return new ItemStack(this);
+	}
 
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister p_149651_1_)
-    {
-        blockIcon = p_149651_1_.registerIcon(getTextureName());
-    }
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> items) {
+		items.add(new ItemStack(this));
+	}
 
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item p_149666_1_, CreativeTabs p_149666_2_, List p_149666_3_)
-    {
-        p_149666_3_.add(new ItemStack(p_149666_1_, 1, 0));
-    }
+	@Override
+	public void initModel() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+	}
 }

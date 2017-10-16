@@ -18,41 +18,129 @@
 
 package sct.hexxitgear.core.ability;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import sct.hexxitgear.init.HexConfig;
 
 public abstract class Ability {
 
-    private String name;
-    private int active;
-    private int cooldown;
-    private boolean instant;
+	public static final List<Ability> ABILITIES = new ArrayList<>();
+	private static int curId = 0;
 
-    public Ability(String name, int active, int cooldown, boolean instant) {
-        this.name = name;
-        this.active = active;
-        this.cooldown = cooldown;
-        this.instant = instant;
-    }
+	private final String unlocName;
+	private final int duration;
+	private final int cooldown;
+	private final boolean instant;
+	private final int id;
+	private final int xpCost;
+	private final int hungerCost;
 
-    public String getName() {
-        return name;
-    }
+	/**
+	 * Generates an ability
+	 * @param name The ability name (used for configs)
+	 * @param unlocalized The unlocalized name
+	 * @param duration The active duration (in ticks)
+	 * @param cooldown The cooldown (in ticks)
+	 * @param xpCost The value of XP to remove to activate.  Not in levels.
+	 * @param hungerCost The amount of hunger to remove to activate. 
+	 */
+	public Ability(String name, String unlocalized, int duration, int cooldown, int xpCost, int hungerCost) {
+		this.unlocName = unlocalized;
+		this.duration = HexConfig.config.getInt(name + " Duration", "ability - " + name, duration, 2, Integer.MAX_VALUE, "The duration of " + name + " in ticks.");
+		this.cooldown = HexConfig.config.getInt(name + " Cooldown", "ability - " + name, cooldown, 1, Integer.MAX_VALUE, "The cooldown of " + name + " in ticks.");
+		this.instant = false;
+		id = curId++;
+		this.xpCost = HexConfig.config.getInt(name + " XP Cost", "ability - " + name, xpCost, 0, Integer.MAX_VALUE, "The xp cost of " + name + " in numerical xp.");
+		this.hungerCost = HexConfig.config.getInt(name + " Hunger Cost", "ability - " + name, hungerCost, 0, Integer.MAX_VALUE, "The hunger cost of " + name + " in half-shanks.");
+		ABILITIES.add(this);
+	}
 
-    public int getActive() {
-        return active;
-    }
+	/**
+	 * Generates an instant ability
+	 * @param name The ability name (used for configs)
+	 * @param unlocalized The unlocalized name
+	 * @param cooldown The cooldown (in ticks)
+	 * @param xpCost The value of XP to remove to activate.  Not in levels.
+	 * @param hungerCost The amount of hunger to remove to activate. 
+	 */
+	public Ability(String name, String unlocalized, int cooldown, int xpCost, int hungerCost) {
+		this.unlocName = unlocalized;
+		this.duration = 1;
+		this.cooldown = HexConfig.config.getInt(name + " Cooldown", "ability - " + name, cooldown, 1, Integer.MAX_VALUE, "The cooldown of " + name + " in ticks.");
+		this.instant = true;
+		id = curId++;
+		this.xpCost = HexConfig.config.getInt(name + " XP Cost", "ability - " + name, xpCost, 0, Integer.MAX_VALUE, "The xp cost of " + name + " in numerical xp.");
+		this.hungerCost = HexConfig.config.getInt(name + " Hunger Cost", "ability - " + name, hungerCost, 0, Integer.MAX_VALUE, "The hunger cost of " + name + " in half-shanks.");
+		ABILITIES.add(this);
+	}
 
-    public int getCooldown() {
-        return cooldown;
-    }
+	public String getUnlocalizedName() {
+		return unlocName;
+	}
 
-    public boolean isInstant() {
-        return instant;
-    }
+	public int getDuration() {
+		return duration;
+	}
 
-    public abstract void start(EntityPlayer player);
+	public int getCooldown() {
+		return cooldown;
+	}
 
-    public void end(EntityPlayer player) {
+	public boolean isInstant() {
+		return instant;
+	}
 
-    }
+	public int getId() {
+		return id;
+	}
+
+	public int getXpCost() {
+		return xpCost;
+	}
+
+	public int getHungerCost() {
+		return hungerCost;
+	}
+
+	public boolean canCast(EntityPlayer player) {
+		return player.experience >= getXpCost() && player.getFoodStats().getFoodLevel() >= hungerCost;
+	}
+
+	/**
+	 * Called on the first tick of this ability's activation.
+	 * @param player The ability caster.
+	 */
+	public abstract void start(EntityPlayer player);
+
+	/**
+	 * Called every subsequent tick after the first tick.
+	 * @param player The ability caster.
+	 */
+	public abstract void tick(EntityPlayer player, int duration);
+
+	/**
+	 * Called after the duration of this ability has ended.
+	 * @param player The ability caster.
+	 */
+	public abstract void end(EntityPlayer player);
+
+	/**
+	 * Render effects for this ability, called when start is called.
+	 * Can also be used to play cast sounds.
+	 * @param player The ability caster.
+	 */
+	@SideOnly(Side.CLIENT)
+	public abstract void renderFirst(EntityPlayer player);
+
+	/**
+	 * Render effects for this ability, called when tick is called.
+	 * @param player The ability caster.
+	 * @param duration The remaining duration of the ability.
+	 */
+	@SideOnly(Side.CLIENT)
+	public abstract void renderAt(EntityPlayer player, int duration);
 }

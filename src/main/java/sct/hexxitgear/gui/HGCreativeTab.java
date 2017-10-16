@@ -18,30 +18,29 @@
 
 package sct.hexxitgear.gui;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-import sct.hexxitgear.HexxitGear;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import sct.hexxitgear.init.HexRegistry;
 
 public class HGCreativeTab extends CreativeTabs {
 
-    public static final HGCreativeTab tab = new HGCreativeTab(StatCollector.translateToLocal("gui.hexxitgear.creativetab"));
+	public static final HGCreativeTab tab = new HGCreativeTab("Hexxit Gear");
 
-    public HGCreativeTab(String label) {
-        super(label);
-    }
+	public HGCreativeTab(String label) {
+		super(label);
+	}
 
-    @Override
-    public Item getTabIconItem() {
-        return HexxitGear.tribalHelmet;
-    }
+	@Override
+	public Item getTabIconItem() {
+		return HexRegistry.TRIBAL_HELMET;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public String getTranslatedTabLabel() {
-        return this.getTabLabel();
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getTranslatedTabLabel() {
+		return I18n.format("gui.hexxitgear.creativetab");
+	}
 }

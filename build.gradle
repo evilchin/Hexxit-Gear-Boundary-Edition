@@ -1,35 +1,27 @@
 buildscript {
     repositories {
-        mavenCentral()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
     }
 }
+apply plugin: 'net.minecraftforge.gradle.forge'
 
-apply plugin: 'forge'
-
-version = "1.0"
+version = "2.3.0"
 group= "sct.hexxitgear" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "hexxitgear"
 
-minecraft {
-    version = "1.7.10-10.13.2.1230"
-    runDir = "eclipse"
+sourceCompatibility = targetCompatibility = "1.8"
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.8"
 }
 
-jar {
-    manifest {
-        attributes 'FMLAT': 'hexxitgear_at.cfg'
-    }
+minecraft {
+    version = "1.10.2-12.18.3.2488"
+	mappings = "stable_29"
+    runDir = "run"
 }
 
 processResources

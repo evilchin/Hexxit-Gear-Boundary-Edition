@@ -19,20 +19,22 @@
 package sct.hexxitgear.core.buff;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 
 public class BuffMagicianSet implements IBuffHandler {
 
-    @Override
-    public void applyPlayerBuffs(EntityPlayer player) {
-        player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 20, 2));
-        player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 20, 2));
-        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 21 * 20, 0));
-    }
+	@Override
+	public void applyPlayerBuffs(EntityPlayer player) {
+		if (!player.isPotionActive(MobEffects.ABSORPTION)) player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 500, 2, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 45, 0, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 45, 0, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 21 * 20, 0, false, false));
+	}
 
-    @Override
-    public void removePlayerBuffs(EntityPlayer player) {
-
-    }
+	@Override
+	public void removePlayerBuffs(EntityPlayer player) {
+		player.removePotionEffect(MobEffects.ABSORPTION);
+		player.removePotionEffect(MobEffects.NIGHT_VISION);
+	}
 }

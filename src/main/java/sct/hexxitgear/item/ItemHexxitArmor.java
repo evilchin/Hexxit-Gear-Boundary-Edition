@@ -20,67 +20,76 @@ package sct.hexxitgear.item;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
+import sct.hexxitgear.HexxitGear;
+import sct.hexxitgear.core.AbilityHandler;
 import sct.hexxitgear.core.ArmorSet;
-import sct.hexxitgear.core.ability.AbilityHandler;
 import sct.hexxitgear.gui.HGCreativeTab;
-import sct.hexxitgear.util.FormatCodes;
+import sct.hexxitgear.init.HexRegistry;
+import sct.hexxitgear.util.HexUtils;
+import sct.hexxitgear.util.IHasModel;
 
-public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor {
+public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasModel {
 
-    public ItemHexxitArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4) {
-        super(par2EnumArmorMaterial, par3, par4);
-        setCreativeTab(HGCreativeTab.tab);
-    }
+	public ItemHexxitArmor(String regname, ArmorMaterial material, int renderindex, EntityEquipmentSlot slot) {
+		super(material, renderindex, slot);
+		setCreativeTab(HGCreativeTab.tab);
+		setRegistryName(HexxitGear.MODID, regname);
+		setUnlocalizedName(HexxitGear.MODID + "." + regname);
+		HexRegistry.ITEMS.add(this);
+	}
 
-    @Override
-    public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
-        return new ArmorProperties(1, damageReduceAmount / 22D, armor.getMaxDamage() + 1);
-    }
+	@Override
+	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
+		return new ArmorProperties(1, damageReduceAmount / 22D, armor.getMaxDamage() + 1);
+	}
 
-    @Override
-    public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-        return damageReduceAmount;
-    }
+	@Override
+	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
+		return damageReduceAmount;
+	}
 
-    @Override
-    public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
-        if (entity instanceof EntityPlayer && !(((EntityPlayer) entity).capabilities.isCreativeMode)) {
-            if (stack.getItemDamage() < stack.getMaxDamage()) {
-                stack.setItemDamage(stack.getItemDamage() + 1);
-            } else {
-                // Create broken item here
-            }
-        }
-    }
+	@Override
+	public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
+		if (entity instanceof EntityPlayer && !(((EntityPlayer) entity).capabilities.isCreativeMode)) {
+			if (stack.getItemDamage() < stack.getMaxDamage()) {
+				stack.setItemDamage(stack.getItemDamage() + 1);
+			} else {
+				HexUtils.setEmpty(stack);
+			}
+		}
+	}
 
-    @Override
-    public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
-    {
-        if (this.armorType == 0)
-            return;
+	@Override
+	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+		if (world.isRemote) return;
+		if (this.armorType != EntityEquipmentSlot.HEAD) return;
 
-        ArmorSet.getMatchingSet(player);
+		ArmorSet set = ArmorSet.getCurrentArmorSet(player);
+		if (set != null) set.applyBuffs(player);
 
-        if (ArmorSet.getPlayerArmorSet(player.getDisplayName()) != null) {
-            ArmorSet armorSet = ArmorSet.getPlayerArmorSet(player.getDisplayName());
-            armorSet.applyBuffs(player);
-        }
+		AbilityHandler handler = AbilityHandler.getActiveAbility(player);
 
-        // We run this outside of the check for an armorset just incase a player takes off armor mid ability
-        AbilityHandler bh = AbilityHandler.getPlayerAbilityHandler(player.getDisplayName());
-        if (bh != null) {
-            bh.onTick(player);
-        }
-    }
+		if (handler != null) {
+			handler.onTick(player);
+		}
 
-    @Override
-    public String getItemStackDisplayName(ItemStack par1ItemStack)
-    {
-        return FormatCodes.Yellow.format + super.getItemStackDisplayName(par1ItemStack);
-    }
+		if (set != null) ArmorSet.CACHED_SETS.put(player.getUniqueID(), set);
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+		return TextFormatting.YELLOW + super.getItemStackDisplayName(par1ItemStack);
+	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return toRepair.isItemDamaged() && repair.getItem() == HexRegistry.HEXICAL_ESSENCE;
+	}
 }

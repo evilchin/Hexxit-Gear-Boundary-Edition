@@ -19,25 +19,24 @@
 package sct.hexxitgear.core.buff;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 
 public class BuffThiefSet implements IBuffHandler {
 
-    @Override
-    public void applyPlayerBuffs(EntityPlayer player) {
-        player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20, 0));
-        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 21 * 20, 0));
-        player.landMovementFactor = 0.15f;
-        player.jumpMovementFactor = player.landMovementFactor * 0.5F;
+	@Override
+	public void applyPlayerBuffs(EntityPlayer player) {
+		player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 45, 1, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 420, 0, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 45, 2, false, false));
+		player.stepHeight = 1.5001F;
+	}
 
-        player.stepHeight = 1.003F;
-    }
-
-    @Override
-    public void removePlayerBuffs(EntityPlayer player) {
-        if (player.stepHeight == 1.003F) {
-            player.stepHeight = 0.5001F;
-        }
-    }
+	@Override
+	public void removePlayerBuffs(EntityPlayer player) {
+		if (player.stepHeight == 1.5001F) {
+			player.stepHeight = 0.5001F;
+		}
+		player.removePotionEffect(MobEffects.NIGHT_VISION);
+	}
 }

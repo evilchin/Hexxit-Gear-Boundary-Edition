@@ -18,60 +18,59 @@
 
 package sct.hexxitgear.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-import sct.hexxitgear.HexxitGear;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import sct.hexxitgear.init.HexRegistry;
 import sct.hexxitgear.model.ModelScaleHelmet;
-import sct.hexxitgear.util.FormatCodes;
-
-import java.util.List;
 
 public class ItemScaleArmor extends ItemHexxitArmor {
 
-    public ItemScaleArmor(int renderIndex, int slot) {
-        super(ArmorMaterial.DIAMOND, renderIndex, slot);
-    }
+	public ItemScaleArmor(String regname, EntityEquipmentSlot slot) {
+		super(regname, ArmorMaterial.DIAMOND, 1, slot);
+	}
 
-    @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, int slot, java.lang.String type) {
-        if (slot == 0)
-            return "hexxitgear:textures/maps/ScaleHelmet.png";
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/scale_helm.png";
 
-        if (stack.getItem() == HexxitGear.scaleLeggings)
-            return "hexxitgear:textures/armor/scale2.png";
+		if (stack.getItem() == HexRegistry.SCALE_LEGS) return "hexxitgear:textures/armor/scale2.png";
 
-        return "hexxitgear:textures/armor/scale.png";
-    }
+		return "hexxitgear:textures/armor/scale.png";
+	}
 
-    @SideOnly(Side.CLIENT)
-    private static ModelScaleHelmet scaleHelmet;
+	@SideOnly(Side.CLIENT)
+	private static ModelScaleHelmet scaleHelmet;
 
-    @SideOnly(Side.CLIENT)
-    private ModelBiped getHelmet() {
-        if (scaleHelmet == null)
-            scaleHelmet = new ModelScaleHelmet();
-        return scaleHelmet;
-    }
+	@SideOnly(Side.CLIENT)
+	private ModelBiped getHelmet() {
+		if (scaleHelmet == null) scaleHelmet = new ModelScaleHelmet();
+		return scaleHelmet;
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
-        if (armorSlot == 0) {
-            ModelBiped helmet = getHelmet();
-            helmet.isSneak = entityLiving.isSneaking();
-            return helmet;
-        }
-        return null;
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
+		if (armorSlot == EntityEquipmentSlot.HEAD) {
+			ModelBiped helmet = getHelmet();
+			helmet.isSneak = entityLiving.isSneaking();
+			return helmet;
+		}
+		return null;
+	}
 
-    @Override
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List infoList, boolean par4) {
-        infoList.add(FormatCodes.Indigo.format + StatCollector.translateToLocal("gui.hexxitgear.set.scale"));
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List<String> infoList, boolean par4) {
+		infoList.add(TextFormatting.DARK_PURPLE + I18n.format("gui.hexxitgear.set.scale"));
+	}
 }
