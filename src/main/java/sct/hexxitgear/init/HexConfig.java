@@ -56,7 +56,7 @@ public class HexConfig {
 	public static List<Integer> getDimBlacklist() {
 		return DIM_BLACKLIST;
 	}
-	
+
 	public static int getHexbiscusChance() {
 		return hexbiscusChance;
 	}

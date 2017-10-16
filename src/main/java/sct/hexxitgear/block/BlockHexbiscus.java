@@ -66,7 +66,7 @@ public class BlockHexbiscus extends BlockBush implements IHasModel {
 	}
 
 	@Override
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> items) {
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
 		items.add(new ItemStack(this));
 	}
 

@@ -31,9 +31,9 @@ public class HexGenerator {
 
 	@SubscribeEvent
 	public void generate(DecorateBiomeEvent.Decorate event) {
-		if(event.getType() != DecorateBiomeEvent.Decorate.EventType.FLOWERS) return;
+		if (event.getType() != DecorateBiomeEvent.Decorate.EventType.FLOWERS) return;
 		World world = event.getWorld();
-		BlockPos start = event.getPos().add(8,0,8);
+		BlockPos start = event.getPos().add(8, 0, 8);
 		Random random = event.getRand();
 
 		if (HexConfig.getDimBlacklist().contains(world.provider.getDimension())) return;
