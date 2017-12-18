@@ -9,9 +9,9 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "2.6.0"
+version = "1.12.2-2.6.0"
 group= "sct.hexxitgear"
-archivesBaseName = "hexxitgear"
+archivesBaseName = "Hexxit Gear"
 
 sourceCompatibility = targetCompatibility = "1.8"
 compileJava {

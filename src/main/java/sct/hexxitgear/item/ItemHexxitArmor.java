@@ -51,7 +51,7 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasMod
 
 	@Override
 	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-		return damageReduceAmount;
+		return 0;
 	}
 
 	@Override
