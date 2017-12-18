@@ -25,11 +25,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.init.HexRegistry;
 
-public class HGCreativeTab extends CreativeTabs {
+public class HexTab extends CreativeTabs {
 
-	public static final HGCreativeTab tab = new HGCreativeTab("Hexxit Gear");
+	public static final HexTab INSTANCE = new HexTab("Hexxit Gear");
 
-	public HGCreativeTab(String label) {
+	public HexTab(String label) {
 		super(label);
 	}
 

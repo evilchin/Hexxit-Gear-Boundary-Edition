@@ -21,28 +21,27 @@ package sct.hexxitgear.item;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.core.AbilityHandler;
 import sct.hexxitgear.core.ArmorSet;
-import sct.hexxitgear.gui.HGCreativeTab;
+import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.init.HexRegistry;
-import sct.hexxitgear.util.HexUtils;
-import sct.hexxitgear.util.IHasModel;
+import shadows.placebo.client.IHasModel;
 
 public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasModel {
 
 	public ItemHexxitArmor(String regname, ArmorMaterial material, int renderindex, EntityEquipmentSlot slot) {
 		super(material, renderindex, slot);
-		setCreativeTab(HGCreativeTab.tab);
+		setCreativeTab(HexTab.INSTANCE);
 		setRegistryName(HexxitGear.MODID, regname);
 		setUnlocalizedName(HexxitGear.MODID + "." + regname);
-		HexRegistry.ITEMS.add(this);
+		HexxitGear.INFO.getItemList().add(this);
 	}
 
 	@Override
@@ -60,8 +59,6 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasMod
 		if (entity instanceof EntityPlayer && !(((EntityPlayer) entity).capabilities.isCreativeMode)) {
 			if (stack.getItemDamage() < stack.getMaxDamage()) {
 				stack.setItemDamage(stack.getItemDamage() + 1);
-			} else {
-				HexUtils.setEmpty(stack);
 			}
 		}
 	}
@@ -84,8 +81,8 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasMod
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		return TextFormatting.YELLOW + super.getItemStackDisplayName(par1ItemStack);
+	public EnumRarity getRarity(ItemStack stack) {
+		return EnumRarity.UNCOMMON;
 	}
 
 	@Override

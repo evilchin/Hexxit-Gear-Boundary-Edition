@@ -27,13 +27,10 @@ import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.net.ActivateMessage;
 import sct.hexxitgear.net.HexNetwork;
 
-@SideOnly(Side.CLIENT)
 public class HexKeybinds {
 
 	public static KeyBinding activateHexxitArmor = new KeyBinding("Activate Hexxit Gear Armor", Keyboard.KEY_X, "Hexxit Gear");

@@ -23,35 +23,39 @@ import org.apache.logging.log4j.Logger;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import sct.hexxitgear.core.ArmorSet;
+import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.init.HexConfig;
+import sct.hexxitgear.init.HexRegistry;
 import sct.hexxitgear.net.HexNetwork;
 import sct.hexxitgear.proxy.IProxy;
 import sct.hexxitgear.world.HexGenerator;
+import shadows.placebo.registry.RegistryInformation;
+import shadows.placebo.util.RecipeHelper;
 
-@Mod(modid = HexxitGear.MODID, name = HexxitGear.NAME, useMetadata = true, version = HexxitGear.VERSION)
+@Mod(modid = HexxitGear.MODID, name = HexxitGear.MODNAME, version = HexxitGear.VERSION, dependencies = "required-after:placebo@[1.1.0,)")
 public class HexxitGear {
 
 	public static final String MODID = "hexxitgear";
-	public static final String NAME = "Hexxit Gear";
-	public static final String VERSION = "2.5.1";
-
-	@Instance
-	public static HexxitGear instance;
-
+	public static final String MODNAME = "Hexxit Gear";
+	public static final String VERSION = "2.6.0";
+	
 	@SidedProxy(clientSide = "sct.hexxitgear.proxy.ClientProxy", serverSide = "sct.hexxitgear.proxy.ServerProxy")
 	public static IProxy proxy;
 
 	public static Logger logger;
+	
+	public static final RegistryInformation INFO = new RegistryInformation(MODID, HexTab.INSTANCE);
+	public static final RecipeHelper HELPER = new RecipeHelper(MODID, MODNAME, INFO.getRecipeList());
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
 		logger = evt.getModLog();
 		HexConfig.loadCommonConfig(evt);
+		MinecraftForge.EVENT_BUS.register(new HexRegistry());
 	}
 
 	@EventHandler

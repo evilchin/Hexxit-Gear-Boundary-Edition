@@ -24,30 +24,27 @@ import java.util.List;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import sct.hexxitgear.HexxitGear;
-import sct.hexxitgear.gui.HGCreativeTab;
+import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.init.HexRegistry;
-import sct.hexxitgear.util.IHasModel;
+import shadows.placebo.client.IHasModel;
 
 public class BlockHexbiscus extends BlockBush implements IHasModel {
 
 	public BlockHexbiscus() {
-		setCreativeTab(HGCreativeTab.tab);
+		setCreativeTab(HexTab.INSTANCE);
 		setRegistryName("hexbiscus");
 		setUnlocalizedName(HexxitGear.MODID + ".hexbiscus");
 		setSoundType(SoundType.PLANT);
-		HexRegistry.ITEMS.add(new ItemBlock(this).setRegistryName(getRegistryName()));
+		HexxitGear.INFO.getItemList().add(new ItemBlock(this).setRegistryName(getRegistryName()));
 	}
 
 	@Override
@@ -68,10 +65,5 @@ public class BlockHexbiscus extends BlockBush implements IHasModel {
 	@Override
 	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
 		items.add(new ItemStack(this));
-	}
-
-	@Override
-	public void initModel() {
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
 	}
 }

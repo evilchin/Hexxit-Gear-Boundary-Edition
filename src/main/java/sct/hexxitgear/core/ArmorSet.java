@@ -42,7 +42,6 @@ import sct.hexxitgear.core.buff.BuffThiefSet;
 import sct.hexxitgear.core.buff.BuffTribalSet;
 import sct.hexxitgear.core.buff.IBuffHandler;
 import sct.hexxitgear.init.HexRegistry;
-import sct.hexxitgear.util.HexUtils;
 
 public class ArmorSet {
 
@@ -95,7 +94,7 @@ public class ArmorSet {
 			int i = 0;
 			int matched = 0;
 			for (ItemStack s : curArmor)
-				if (!HexUtils.isEmpty(s) && s.getItem() == set.armors[3 - i++]) ++matched;
+				if (!s.isEmpty() && s.getItem() == set.armors[3 - i++]) ++matched;
 
 			if (matched == 4) return set;
 		}

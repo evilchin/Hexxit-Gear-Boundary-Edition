@@ -26,9 +26,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.control.HexKeybinds;
 import sct.hexxitgear.init.HexRegistry;
-import sct.hexxitgear.util.IHasModel;
+import shadows.placebo.client.IHasModel;
 
 @EventBusSubscriber(Side.CLIENT)
 public class ClientProxy implements IProxy {
@@ -40,9 +41,9 @@ public class ClientProxy implements IProxy {
 
 	@SubscribeEvent
 	public static void modelRegistry(ModelRegistryEvent e) {
-		for (Item i : HexRegistry.ITEMS)
-			if (i instanceof IHasModel) ((IHasModel) i).initModel();
-		HexRegistry.HEXBISCUS.initModel();
+		for (Item i : HexxitGear.INFO.getItemList())
+			if (i instanceof IHasModel) ((IHasModel) i).initModels(e);
+		HexRegistry.HEXBISCUS.initModels(e);
 	}
 
 	@Override
