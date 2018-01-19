@@ -24,6 +24,7 @@ import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import sct.hexxitgear.core.ability.Ability;
 import sct.hexxitgear.net.AbilityRenderMessage;
 import sct.hexxitgear.net.ActionTextMessage;
@@ -80,11 +81,11 @@ public class AbilityHandler {
 				}
 				if (!started) {
 					ability.start(player);
-					HexNetwork.INSTANCE.sendToAll(new AbilityRenderMessage(0, ability.getId(), player, 0));
+					HexNetwork.INSTANCE.sendToAllAround(new AbilityRenderMessage(0, ability.getId(), player, 0), new TargetPoint(player.world.provider.getDimension(), player.posX, player.posY, player.posZ, 50));
 					started = true;
 				} else {
 					ability.tick(player, activeTime);
-					HexNetwork.INSTANCE.sendToAll(new AbilityRenderMessage(1, ability.getId(), player, activeTime));
+					HexNetwork.INSTANCE.sendToAllAround(new AbilityRenderMessage(1, ability.getId(), player, activeTime), new TargetPoint(player.world.provider.getDimension(), player.posX, player.posY, player.posZ, 50));
 				}
 				if (ability.isInstant()) activeTime = 0;
 			}
