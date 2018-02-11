@@ -15,7 +15,7 @@ import sct.hexxitgear.item.ItemMagicianArmor;
 import sct.hexxitgear.item.ItemScaleArmor;
 import sct.hexxitgear.item.ItemThiefArmor;
 import sct.hexxitgear.item.ItemTribalArmor;
-import shadows.placebo.item.base.ItemBase;
+import shadows.placebo.item.ItemBase;
 
 public class HexRegistry {
 
