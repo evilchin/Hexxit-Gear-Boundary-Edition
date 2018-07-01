@@ -36,6 +36,8 @@ public class BuffScaleSet implements IBuffHandler {
 	public void removePlayerBuffs(EntityPlayer player) {
 		player.removePotionEffect(MobEffects.HEALTH_BOOST);
 		player.removePotionEffect(MobEffects.NIGHT_VISION);
+		player.removePotionEffect(MobEffects.SLOWNESS);
+		player.removePotionEffect(MobEffects.RESISTANCE);
 	}
 
 }

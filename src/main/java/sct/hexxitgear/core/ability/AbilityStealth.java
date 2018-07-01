@@ -26,6 +26,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import sct.hexxitgear.core.AbilityHandler;
 
 public class AbilityStealth extends Ability {
 
@@ -42,14 +43,15 @@ public class AbilityStealth extends Ability {
 
 	@Override
 	public void tick(EntityPlayer player, int duration) {
-		if(player.getLastAttackedEntityTime() == player.ticksExisted) end(player);
+		if(player.ticksExisted - player.getLastAttackedEntityTime() <= 2) 
+			AbilityHandler.ACTIVE_HANDLERS.get(player.getUniqueID()).setEnded(player);
 	}
 
 	@Override
 	public void end(EntityPlayer player) {
-		player.removeActivePotionEffect(MobEffects.INVISIBILITY);
-		player.removeActivePotionEffect(MobEffects.SLOWNESS);
-		player.removeActivePotionEffect(MobEffects.STRENGTH);
+		player.removePotionEffect(MobEffects.INVISIBILITY);
+		player.removePotionEffect(MobEffects.SLOWNESS);
+		player.removePotionEffect(MobEffects.STRENGTH);
 	}
 
 	@Override
@@ -58,7 +60,7 @@ public class AbilityStealth extends Ability {
 		for (int i = 0; i < 360; i += 10) {
 			player.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, player.posX, player.posY + 4, player.posZ, Math.sin(i) * 0.1F, -0.8F, Math.cos(i) * 0.1F);
 		}
-		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.PLAYERS, 1, 1, false);
+		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ILLAGER_MIRROR_MOVE, SoundCategory.PLAYERS, 1, 1, false);
 	}
 
 	@Override

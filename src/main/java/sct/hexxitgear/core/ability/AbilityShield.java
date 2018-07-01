@@ -34,7 +34,7 @@ public class AbilityShield extends Ability {
 	public static final int BLUE = Color.BLUE.getRGB();
 
 	public AbilityShield() {
-		super("Titanic Shielding", "ability.hexxitgear.shield", 120, 1600, 400, 12);
+		super("Titanic Shielding", "ability.hexxitgear.shield", 120, 2400, 400, 12);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class AbilityShield extends Ability {
 	@SideOnly(Side.CLIENT)
 	public void renderFirst(EntityPlayer player) {
 		renderAt(player, 0);
-		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.BLOCK_ANVIL_LAND, SoundCategory.PLAYERS, 1, 1, false);
+		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ILLAGER_PREPARE_MIRROR, SoundCategory.PLAYERS, 1, 1, false);
 	}
 
 	@Override

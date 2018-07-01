@@ -36,5 +36,7 @@ public class BuffMagicianSet implements IBuffHandler {
 	public void removePlayerBuffs(EntityPlayer player) {
 		player.removePotionEffect(MobEffects.ABSORPTION);
 		player.removePotionEffect(MobEffects.NIGHT_VISION);
+		player.removePotionEffect(MobEffects.FIRE_RESISTANCE);
+		player.removePotionEffect(MobEffects.WATER_BREATHING);
 	}
 }

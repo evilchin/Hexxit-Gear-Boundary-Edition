@@ -38,7 +38,7 @@ public class AbilityHandler {
 	private boolean ended = false;
 	private boolean started = false;
 
-	private static final Map<UUID, AbilityHandler> ACTIVE_HANDLERS = new HashMap<>();
+	public static final Map<UUID, AbilityHandler> ACTIVE_HANDLERS = new HashMap<>();
 
 	private AbilityHandler(EntityPlayer player) {
 		if (player.world.isRemote) throw new IllegalArgumentException("Ability handler has been constructed on a client world, please report this!");
@@ -94,9 +94,7 @@ public class AbilityHandler {
 			activeTime--;
 		} else if (cooldownTime > 0) {
 			if (ability != null && !ended) {
-				ability.end(player);
-				ended = true;
-				if (ability.getDuration() >= 100) HexNetwork.INSTANCE.sendTo(new ActionTextMessage(2, ability.getId()), (EntityPlayerMP) player);
+				setEnded(player);
 			}
 			cooldownTime--;
 		} else {
@@ -104,5 +102,12 @@ public class AbilityHandler {
 			ability = null;
 			ACTIVE_HANDLERS.remove(player.getUniqueID());
 		}
+	}
+	
+	public void setEnded(EntityPlayer player) {
+		ability.end(player);
+		ended = true;
+		activeTime = 0;
+		if (ability.getDuration() >= 100) HexNetwork.INSTANCE.sendTo(new ActionTextMessage(2, ability.getId()), (EntityPlayerMP) player);
 	}
 }

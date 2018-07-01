@@ -29,14 +29,10 @@ public class BuffThiefSet implements IBuffHandler {
 		player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 45, 1, false, false));
 		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 420, 0, false, false));
 		player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 45, 2, false, false));
-		player.stepHeight = 1.5001F;
 	}
 
 	@Override
 	public void removePlayerBuffs(EntityPlayer player) {
-		if (player.stepHeight == 1.5001F) {
-			player.stepHeight = 0.5001F;
-		}
 		player.removePotionEffect(MobEffects.NIGHT_VISION);
 	}
 }
