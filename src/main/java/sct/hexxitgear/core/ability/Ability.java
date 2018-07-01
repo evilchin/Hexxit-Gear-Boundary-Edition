@@ -50,12 +50,12 @@ public abstract class Ability {
 	 */
 	public Ability(String name, String unlocalized, int duration, int cooldown, int xpCost, int hungerCost) {
 		this.unlocName = unlocalized;
-		this.duration = HexConfig.config.getInt(name + " Duration", "ability - " + name, duration, 2, Integer.MAX_VALUE, "The duration of " + name + " in ticks.");
-		this.cooldown = HexConfig.config.getInt(name + " Cooldown", "ability - " + name, cooldown, 1, Integer.MAX_VALUE, "The cooldown of " + name + " in ticks.");
+		this.duration = HexConfig.config.getInt(name + " Duration", name, duration, 2, Integer.MAX_VALUE, "The duration of " + name + " in ticks.");
+		this.cooldown = HexConfig.config.getInt(name + " Cooldown", name, cooldown, 1, Integer.MAX_VALUE, "The cooldown of " + name + " in ticks.");
 		this.instant = false;
 		id = curId++;
-		this.xpCost = HexConfig.config.getInt(name + " XP Cost", "ability - " + name, xpCost, 0, Integer.MAX_VALUE, "The xp cost of " + name + " in numerical xp.");
-		this.hungerCost = HexConfig.config.getInt(name + " Hunger Cost", "ability - " + name, hungerCost, 0, Integer.MAX_VALUE, "The hunger cost of " + name + " in half-shanks.");
+		this.xpCost = HexConfig.config.getInt(name + " XP Cost", name, xpCost, 0, Integer.MAX_VALUE, "The xp cost of " + name + " in numerical xp.");
+		this.hungerCost = HexConfig.config.getInt(name + " Hunger Cost", name, hungerCost, 0, Integer.MAX_VALUE, "The hunger cost of " + name + " in half-shanks.");
 		ABILITIES.add(this);
 	}
 
@@ -70,11 +70,11 @@ public abstract class Ability {
 	public Ability(String name, String unlocalized, int cooldown, int xpCost, int hungerCost) {
 		this.unlocName = unlocalized;
 		this.duration = 1;
-		this.cooldown = HexConfig.config.getInt(name + " Cooldown", "ability - " + name, cooldown, 1, Integer.MAX_VALUE, "The cooldown of " + name + " in ticks.");
+		this.cooldown = HexConfig.config.getInt(name + " Cooldown", name, cooldown, 1, Integer.MAX_VALUE, "The cooldown of " + name + " in ticks.");
 		this.instant = true;
 		id = curId++;
-		this.xpCost = HexConfig.config.getInt(name + " XP Cost", "ability - " + name, xpCost, 0, Integer.MAX_VALUE, "The xp cost of " + name + " in numerical xp.");
-		this.hungerCost = HexConfig.config.getInt(name + " Hunger Cost", "ability - " + name, hungerCost, 0, Integer.MAX_VALUE, "The hunger cost of " + name + " in half-shanks.");
+		this.xpCost = HexConfig.config.getInt(name + " XP Cost", name, xpCost, 0, Integer.MAX_VALUE, "The xp cost of " + name + " in numerical xp.");
+		this.hungerCost = HexConfig.config.getInt(name + " Hunger Cost", name, hungerCost, 0, Integer.MAX_VALUE, "The hunger cost of " + name + " in half-shanks.");
 		ABILITIES.add(this);
 	}
 

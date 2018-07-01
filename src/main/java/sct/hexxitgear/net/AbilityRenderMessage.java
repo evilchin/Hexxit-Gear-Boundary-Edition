@@ -45,10 +45,12 @@ public class AbilityRenderMessage implements IMessage {
 
 		@Override
 		public IMessage onMessage(AbilityRenderMessage message, MessageContext ctx) {
-			EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().world.getEntityByID(message.player);
+			Minecraft.getMinecraft().addScheduledTask(() -> {
+				EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().world.getEntityByID(message.player);
 
-			if (message.messageId == 0) Ability.ABILITIES.get(message.abilityId).renderFirst(player);
-			else Ability.ABILITIES.get(message.abilityId).renderAt(player, message.duration);
+				if (message.messageId == 0) Ability.ABILITIES.get(message.abilityId).renderFirst(player);
+				else Ability.ABILITIES.get(message.abilityId).renderAt(player, message.duration);
+			});
 			return null;
 		}
 

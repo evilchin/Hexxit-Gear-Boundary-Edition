@@ -30,22 +30,26 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class AbilityStealth extends Ability {
 
 	public AbilityStealth() {
-		super("Stealth", "ability.hexxitgear.stealth", 200, 800, 160, 4);
+		super("Stealth", "ability.hexxitgear.stealth", 600, 800, 160, 4);
 	}
 
 	@Override
 	public void start(EntityPlayer player) {
 		player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, getDuration(), 81, false, false));
 		player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, getDuration(), 1, false, false));
-		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, getDuration(), 0, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, getDuration(), 3, false, false));
 	}
 
 	@Override
 	public void tick(EntityPlayer player, int duration) {
+		if(player.getLastAttackedEntityTime() == player.ticksExisted) end(player);
 	}
 
 	@Override
 	public void end(EntityPlayer player) {
+		player.removeActivePotionEffect(MobEffects.INVISIBILITY);
+		player.removeActivePotionEffect(MobEffects.SLOWNESS);
+		player.removeActivePotionEffect(MobEffects.STRENGTH);
 	}
 
 	@Override

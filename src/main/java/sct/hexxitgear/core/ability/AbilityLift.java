@@ -18,31 +18,66 @@
 
 package sct.hexxitgear.core.ability;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3i;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class AbilityLift extends Ability {
 
+	public static final double FRAC = Math.PI / 180;
+
 	public AbilityLift() {
-		super("Arcane Rising", "ability.hexxitgear.lift", 900, 500, 6);
+		super("Arcane Rising", "ability.hexxitgear.lift", 600, 500, 6);
 	}
 
 	@Override
 	public void start(EntityPlayer player) {
-		Vec3i lookVec = player.getHorizontalFacing().getDirectionVec();
-		BlockPos pos2 = player.getPosition().add(lookVec);
-		AxisAlignedBB box = new AxisAlignedBB(pos2.getX(), pos2.getY(), pos2.getZ(), pos2.getX() + lookVec.getX() * 5, pos2.getY() + 2, pos2.getZ() + lookVec.getZ() * 5).expand(3, 0, 3);
-		for (EntityLivingBase e : player.world.getEntitiesWithinAABB(EntityLivingBase.class, box)) {
+		for (EntityLivingBase e : getHitEntities(player)) {
 			if (e != player) e.addVelocity(0, 2, 0);
 		}
+	}
+
+	protected List<EntityLivingBase> getHitEntities(EntityPlayer player) {
+		List<EntityLivingBase> hits = new ArrayList<>();
+		for (EntityLivingBase e : player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.getPosition(), player.getPosition().up(2)).grow(3.5, 1, 3.5))) {
+			if (e != player && isEntityInFront(e, player)) hits.add(e);
+		}
+		return hits;
+	}
+
+	protected boolean isEntityInFront(EntityLivingBase entity, EntityPlayer player) {
+		float precalc = player.rotationYaw % 360;
+		float a = 360 + (90 + (precalc < 0 ? precalc + 360 : precalc)) % 360 * -1;
+
+		double x = entity.posX - player.posX;
+		double z = entity.posZ - player.posZ;
+
+		x *= getXMult(a, x, z);
+		a = 0;
+
+		double angX = Math.acos(x / 3.5) / FRAC;
+		double angZ = Math.asin(z / 3.5) / FRAC;
+
+		boolean b1 = angX + 360 > a + 270;
+		boolean b2 = angX < a + 90;
+		boolean b3 = angZ + 360 > a + 270;
+		boolean b4 = angZ < a + 90;
+
+		return b1 && b2 && b3 && b4;
+	}
+
+	static double getXMult(double a, double x, double z) {
+		if (a <= 90 || a >= 270) return 1;
+		if(z < 0 && x > 0 && a >= 90 && a <= 135) return 1;
+		return -1;
 	}
 
 	@Override
@@ -56,18 +91,14 @@ public class AbilityLift extends Ability {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderFirst(EntityPlayer player) {
-		BlockPos pos = player.getPosition();
-		renderAt(player, 0);
-		player.world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_PORTAL_TRIGGER, SoundCategory.PLAYERS, 1, 1, false);
+		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.EVOCATION_ILLAGER_CAST_SPELL, SoundCategory.PLAYERS, 1, 1, false);
+		for (EntityLivingBase e : getHitEntities(player))
+			for (int i = 0; i < 10; i++)
+				player.world.spawnParticle(EnumParticleTypes.DRAGON_BREATH, e.posX, e.posY, e.posZ, 0, (i + 1) * 0.1, 0);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderAt(EntityPlayer player, int duration) {
-		Vec3i lookVec = player.getHorizontalFacing().getDirectionVec();
-		BlockPos pos2 = player.getPosition().add(lookVec.getX() * duration, 0, lookVec.getZ() * duration);
-		for (int k = -1; k < 2; k++)
-			for (int i = 0; i < 10; i++)
-				player.world.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos2.getX() + 0.5 + k, pos2.getY(), pos2.getZ() + 0.5 + k, 0, (i + 1) * 0.1, 0);
 	}
 }

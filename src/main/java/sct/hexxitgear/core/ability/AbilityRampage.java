@@ -40,7 +40,7 @@ public class AbilityRampage extends Ability {
 	public static final int RED = Color.RED.getRGB();
 
 	public AbilityRampage() {
-		super("Rampage", "ability.hexxitgear.rampage", 200, 1600, 400, 9);
+		super("Rampage", "ability.hexxitgear.rampage", 300, 1600, 400, 9);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class AbilityRampage extends Ability {
 	public void tick(EntityPlayer player, int duration) {
 		BlockPos pos = player.getPosition();
 		for (EntityLivingBase e : player.world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos.getX() - 3, pos.getY() - 3, pos.getZ() - 3, pos.getX() + 3, pos.getY() + 3, pos.getZ() + 3)))
-			e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 40, 3));
+			e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 60, 3));
 	}
 
 	@Override
@@ -77,6 +77,5 @@ public class AbilityRampage extends Ability {
 			p.setColorFade(RED);
 			Minecraft.getMinecraft().effectRenderer.addEffect(p);
 		}
-
 	}
 }

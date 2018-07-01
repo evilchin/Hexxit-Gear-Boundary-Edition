@@ -38,7 +38,7 @@ public class AbilityHandler {
 	private boolean ended = false;
 	private boolean started = false;
 
-	private static final Map<UUID, AbilityHandler> CURRENT = new HashMap<>();
+	private static final Map<UUID, AbilityHandler> ACTIVE_HANDLERS = new HashMap<>();
 
 	private AbilityHandler(EntityPlayer player) {
 		if (player.world.isRemote) throw new IllegalArgumentException("Ability handler has been constructed on a client world, please report this!");
@@ -49,28 +49,30 @@ public class AbilityHandler {
 
 	public static AbilityHandler getActiveAbility(EntityPlayer player) {
 		if (player.world.isRemote) return null;
-		return CURRENT.get(player.getUniqueID());
+		return ACTIVE_HANDLERS.get(player.getUniqueID());
 	}
 
 	public static void activateAbility(EntityPlayer player) {
-		if (CURRENT.get(player.getUniqueID()) != null) {
-			Ability ability = CURRENT.get(player.getUniqueID()).ability;
+		if (ACTIVE_HANDLERS.get(player.getUniqueID()) != null) {
+			Ability ability = ACTIVE_HANDLERS.get(player.getUniqueID()).ability;
 			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(0, ability.getId()), (EntityPlayerMP) player);
 			return;
 		}
 		AbilityHandler handler = new AbilityHandler(player);
-		if (player.experienceTotal < handler.ability.getXpCost()) {
+		if (!player.capabilities.isCreativeMode && player.experienceTotal < handler.ability.getXpCost()) {
 			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(4, handler.ability.getId()), (EntityPlayerMP) player);
 			return;
 		}
 		int food = player.getFoodStats().getFoodLevel();
-		if (food < handler.ability.getHungerCost()) {
+		if (!player.capabilities.isCreativeMode && food < handler.ability.getHungerCost()) {
 			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(5, handler.ability.getId()), (EntityPlayerMP) player);
 			return;
 		}
-		player.experienceTotal -= handler.ability.getXpCost();
-		player.getFoodStats().setFoodLevel(food - handler.ability.getHungerCost());
-		CURRENT.put(player.getUniqueID(), handler);
+		if (!player.capabilities.isCreativeMode) {
+			player.experienceTotal -= handler.ability.getXpCost();
+			player.getFoodStats().setFoodLevel(food - handler.ability.getHungerCost());
+		}
+		ACTIVE_HANDLERS.put(player.getUniqueID(), handler);
 	}
 
 	public void onTick(EntityPlayer player) {
@@ -100,7 +102,7 @@ public class AbilityHandler {
 		} else {
 			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(3, ability.getId()), (EntityPlayerMP) player);
 			ability = null;
-			CURRENT.remove(player.getUniqueID());
+			ACTIVE_HANDLERS.remove(player.getUniqueID());
 		}
 	}
 }

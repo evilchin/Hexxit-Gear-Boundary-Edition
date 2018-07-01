@@ -1,6 +1,7 @@
 package sct.hexxitgear.net;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -24,7 +25,9 @@ public class ActivateMessage implements IMessage {
 
 		@Override
 		public IMessage onMessage(ActivateMessage message, MessageContext ctx) {
-			AbilityHandler.activateAbility(ctx.getServerHandler().player);
+			FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> {
+				AbilityHandler.activateAbility(ctx.getServerHandler().player);
+			});
 			return null;
 		}
 

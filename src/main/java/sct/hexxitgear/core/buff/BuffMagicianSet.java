@@ -29,7 +29,7 @@ public class BuffMagicianSet implements IBuffHandler {
 		if (!player.isPotionActive(MobEffects.ABSORPTION)) player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 500, 2, false, false));
 		player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 45, 0, false, false));
 		player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 45, 0, false, false));
-		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 21 * 20, 0, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 420, 0, false, false));
 	}
 
 	@Override
