@@ -40,7 +40,7 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasMod
 		super(material, renderindex, slot);
 		setCreativeTab(HexTab.INSTANCE);
 		setRegistryName(HexxitGear.MODID, regname);
-		setUnlocalizedName(HexxitGear.MODID + "." + regname);
+		setTranslationKey(HexxitGear.MODID + "." + regname);
 		HexxitGear.INFO.getItemList().add(this);
 	}
 

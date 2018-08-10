@@ -42,7 +42,7 @@ public class BlockHexbiscus extends BlockBush implements IHasModel {
 	public BlockHexbiscus() {
 		setCreativeTab(HexTab.INSTANCE);
 		setRegistryName("hexbiscus");
-		setUnlocalizedName(HexxitGear.MODID + ".hexbiscus");
+		setTranslationKey(HexxitGear.MODID + ".hexbiscus");
 		setSoundType(SoundType.PLANT);
 		HexxitGear.INFO.getItemList().add(new ItemBlock(this).setRegistryName(getRegistryName()));
 	}

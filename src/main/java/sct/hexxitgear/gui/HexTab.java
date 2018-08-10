@@ -18,11 +18,8 @@
 
 package sct.hexxitgear.gui;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.init.HexRegistry;
 
 public class HexTab extends CreativeTabs {
@@ -34,13 +31,12 @@ public class HexTab extends CreativeTabs {
 	}
 
 	@Override
-	public ItemStack getTabIconItem() {
+	public ItemStack createIcon() {
 		return new ItemStack(HexRegistry.TRIBAL_HELMET);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTranslatedTabLabel() {
-		return I18n.format("gui.hexxitgear.creativetab");
+	public String getTranslationKey() {
+		return "gui.hexxitgear.creativetab";
 	}
 }
