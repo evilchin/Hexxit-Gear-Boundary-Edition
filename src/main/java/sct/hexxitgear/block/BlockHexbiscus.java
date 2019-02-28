@@ -26,25 +26,19 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.init.HexRegistry;
-import shadows.placebo.client.IHasModel;
 
-public class BlockHexbiscus extends BlockBush implements IHasModel {
+public class BlockHexbiscus extends BlockBush {
 
 	public BlockHexbiscus() {
 		setCreativeTab(HexTab.INSTANCE);
-		setRegistryName("hexbiscus");
-		setTranslationKey(HexxitGear.MODID + ".hexbiscus");
 		setSoundType(SoundType.PLANT);
-		HexxitGear.INFO.getItemList().add(new ItemBlock(this).setRegistryName(getRegistryName()));
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import sct.hexxitgear.HexxitGear;
+import sct.hexxitgear.client.HexClient;
 import sct.hexxitgear.core.ability.Ability;
 
 public class ActionTextMessage implements IMessage {
@@ -43,22 +43,22 @@ public class ActionTextMessage implements IMessage {
 				if (ability.isInstant() && message.messageId == 2) return;
 				switch (message.messageId) {
 				case 0:
-					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.cooldown", new TextComponentTranslation(ability.getUnlocalizedName())));
+					HexClient.setActionText(new TextComponentTranslation("ability.hexxitgear.cooldown", new TextComponentTranslation(ability.getUnlocalizedName())));
 					break;
 				case 1:
-					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.activated", new TextComponentTranslation(ability.getUnlocalizedName())));
+					HexClient.setActionText(new TextComponentTranslation("ability.hexxitgear.activated", new TextComponentTranslation(ability.getUnlocalizedName())));
 					break;
 				case 2:
-					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.ended", new TextComponentTranslation(ability.getUnlocalizedName())));
+					HexClient.setActionText(new TextComponentTranslation("ability.hexxitgear.ended", new TextComponentTranslation(ability.getUnlocalizedName())));
 					break;
 				case 3:
-					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.refreshed", new TextComponentTranslation(ability.getUnlocalizedName())));
+					HexClient.setActionText(new TextComponentTranslation("ability.hexxitgear.refreshed", new TextComponentTranslation(ability.getUnlocalizedName())));
 					break;
 				case 4:
-					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.needxp", new TextComponentTranslation(ability.getUnlocalizedName())));
+					HexClient.setActionText(new TextComponentTranslation("ability.hexxitgear.needxp", new TextComponentTranslation(ability.getUnlocalizedName())));
 					break;
 				case 5:
-					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.needfood", new TextComponentTranslation(ability.getUnlocalizedName())));
+					HexClient.setActionText(new TextComponentTranslation("ability.hexxitgear.needfood", new TextComponentTranslation(ability.getUnlocalizedName())));
 					break;
 				default:
 					break;

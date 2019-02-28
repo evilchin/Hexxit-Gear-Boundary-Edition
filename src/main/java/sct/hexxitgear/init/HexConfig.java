@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import sct.hexxitgear.core.ArmorSet;
 
 public class HexConfig {
 
@@ -35,14 +33,9 @@ public class HexConfig {
 	private static final List<Integer> DIM_BLACKLIST = new ArrayList<Integer>();
 	private static int hexbiscusChance = 0;
 
-	public static void loadCommonConfig(FMLPreInitializationEvent evt) {
-		config = new Configuration(evt.getSuggestedConfigurationFile());
-		config.load();
-
+	public static void load(Configuration config) {
 		registerDimBlacklist(config.getStringList("Dimensional Blacklist", "worldgen", new String[0], "Dimensions where hexbiscuses will not generate. New line per id."));
-		ArmorSet.classloadForConfigs();
 		hexbiscusChance = config.getInt("Hexbiscus Chance", "worldgen", 50, 1, 600, "The 1/n chance for a hexbiscus to generate. Lower numbers means more.");
-
 		if (config.hasChanged()) config.save();
 	}
 
