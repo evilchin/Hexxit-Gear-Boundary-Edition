@@ -43,15 +43,13 @@ import shadows.placebo.util.PlaceboUtil;
 public class HexClient {
 
 	public static KeyBinding activateHexxitArmor = new KeyBinding("Activate Hexxit Gear Armor", Keyboard.KEY_X, "Hexxit Gear");
-	public static KeyBinding[] keybindArray = new KeyBinding[] { activateHexxitArmor };
-	public static boolean[] repeats = new boolean[keybindArray.length];
 
 	static {
 		ClientRegistry.registerKeyBinding(activateHexxitArmor);
 	}
 
 	@SubscribeEvent
-	public void keyEvent(InputEvent.KeyInputEvent event) {
+	public static void keyEvent(InputEvent.KeyInputEvent event) {
 		if (!FMLClientHandler.instance().isGUIOpen(GuiChat.class) && activateHexxitArmor.isPressed() && ArmorSet.getCurrentArmorSet(Minecraft.getMinecraft().player) != null) HexNetwork.INSTANCE.sendToServer(new ActivateMessage());
 	}
 

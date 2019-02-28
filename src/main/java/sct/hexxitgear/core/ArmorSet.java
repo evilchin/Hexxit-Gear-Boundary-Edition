@@ -49,11 +49,6 @@ public class ArmorSet {
 
 	public static final List<ArmorSet> SETS = new ArrayList<>();
 
-	public static final ArmorSet TRIBAL = new ArmorSet("Tribal", new Item[] { HexRegistry.TRIBAL_HELMET, HexRegistry.TRIBAL_CHEST, HexRegistry.TRIBAL_LEGS, HexRegistry.TRIBAL_BOOTS }, new BuffTribalSet(), new AbilityRampage());
-	public static final ArmorSet THIEF = new ArmorSet("Thief", new Item[] { HexRegistry.THIEF_HELMET, HexRegistry.THIEF_CHEST, HexRegistry.THIEF_LEGS, HexRegistry.THIEF_BOOTS }, new BuffThiefSet(), new AbilityStealth());
-	public static final ArmorSet SCALE = new ArmorSet("Scale", new Item[] { HexRegistry.SCALE_HELMET, HexRegistry.SCALE_CHEST, HexRegistry.SCALE_LEGS, HexRegistry.SCALE_BOOTS }, new BuffScaleSet(), new AbilityShield());
-	public static final ArmorSet SAGE = new ArmorSet("Sage", new Item[] { HexRegistry.SAGE_HELMET, HexRegistry.SAGE_CHEST, HexRegistry.SAGE_LEGS, HexRegistry.SAGE_BOOTS }, new BuffMagicianSet(), new AbilityLift());
-
 	private final Item[] armors;
 	private final String name;
 	private final IBuffHandler buffHandler;
@@ -64,7 +59,6 @@ public class ArmorSet {
 		this.armors = armor;
 		this.buffHandler = buffHandler;
 		this.ability = ability;
-		SETS.add(this);
 	}
 
 	public String getName() {
@@ -108,5 +102,12 @@ public class ArmorSet {
 			s.removeBuffs(e.player);
 			CACHED_SETS.put(e.player.getUniqueID(), null);
 		}
+	}
+
+	public static void init() {
+		SETS.add(new ArmorSet("Tribal", new Item[] { HexRegistry.TRIBAL_HELMET, HexRegistry.TRIBAL_CHEST, HexRegistry.TRIBAL_LEGS, HexRegistry.TRIBAL_BOOTS }, new BuffTribalSet(), new AbilityRampage()));
+		SETS.add(new ArmorSet("Thief", new Item[] { HexRegistry.THIEF_HELMET, HexRegistry.THIEF_CHEST, HexRegistry.THIEF_LEGS, HexRegistry.THIEF_BOOTS }, new BuffThiefSet(), new AbilityStealth()));
+		SETS.add(new ArmorSet("Scale", new Item[] { HexRegistry.SCALE_HELMET, HexRegistry.SCALE_CHEST, HexRegistry.SCALE_LEGS, HexRegistry.SCALE_BOOTS }, new BuffScaleSet(), new AbilityShield()));
+		SETS.add(new ArmorSet("Sage", new Item[] { HexRegistry.SAGE_HELMET, HexRegistry.SAGE_CHEST, HexRegistry.SAGE_LEGS, HexRegistry.SAGE_BOOTS }, new BuffMagicianSet(), new AbilityLift()));
 	}
 }
