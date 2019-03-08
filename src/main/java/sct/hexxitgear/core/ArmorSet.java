@@ -109,4 +109,7 @@ public class ArmorSet {
 			CACHED_SETS.put(e.player.getUniqueID(), null);
 		}
 	}
+
+	public static void classloadForConfigs() {
+	}
 }

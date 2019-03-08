@@ -33,19 +33,15 @@ import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.init.HexRegistry;
 import shadows.placebo.client.IHasModel;
-import shadows.placebo.util.PlaceboUtil;
 
 public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasModel {
 
 	public ItemHexxitArmor(String regname, ArmorMaterial material, int renderindex, EntityEquipmentSlot slot) {
 		super(material, renderindex, slot);
 		setCreativeTab(HexTab.INSTANCE);
-		PlaceboUtil.initItem(this, HexxitGear.MODID, regname);
-		addToList();
-	}
-
-	protected void addToList() {
-		HexxitGear.ARMOR_LIST.add(this);
+		setRegistryName(HexxitGear.MODID, regname);
+		setTranslationKey(HexxitGear.MODID + "." + regname);
+		HexxitGear.INFO.getItemList().add(this);
 	}
 
 	@Override
