@@ -15,7 +15,6 @@ import sct.hexxitgear.item.ItemMagicianArmor;
 import sct.hexxitgear.item.ItemScaleArmor;
 import sct.hexxitgear.item.ItemThiefArmor;
 import sct.hexxitgear.item.ItemTribalArmor;
-import shadows.placebo.item.ItemBlockBase;
 import shadows.placebo.util.PlaceboUtil;
 import shadows.placebo.util.RecipeHelper;
 
@@ -53,7 +52,7 @@ public class HexRegistry extends RecipeHelper {
 
 	@SubscribeEvent
 	public void items(Register<Item> event) {
-		event.getRegistry().registerAll(HEXICAL_ESSENCE, HEXICAL_DIAMOND, new ItemBlockBase(HEXBISCUS));
+		event.getRegistry().registerAll(HEXICAL_ESSENCE, HEXICAL_DIAMOND);
 		event.getRegistry().registerAll(HexxitGear.ARMOR_LIST.toArray(new Item[0]));
 	}
 
