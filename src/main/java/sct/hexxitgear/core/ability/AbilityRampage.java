@@ -45,9 +45,9 @@ public class AbilityRampage extends Ability {
 
 	@Override
 	public void start(EntityPlayer player) {
-		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, getDuration(), 2));
-		player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, getDuration(), 2));
-		player.addPotionEffect(new PotionEffect(MobEffects.SPEED, getDuration(), 2));
+		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, getDuration(), 3));
+		player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, getDuration(), 3));
+		player.addPotionEffect(new PotionEffect(MobEffects.HASTE, getDuration(), 3));
 	}
 
 	@Override
