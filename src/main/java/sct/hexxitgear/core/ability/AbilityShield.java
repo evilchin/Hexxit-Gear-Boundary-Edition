@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package sct.hexxitgear.core.ability;
 
 import java.awt.Color;
@@ -23,9 +22,15 @@ import java.awt.Color;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEndRod;
 import net.minecraft.client.particle.ParticleSimpleAnimated;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -46,7 +51,7 @@ public class AbilityShield extends Ability {
 	public void tick(EntityPlayer player, int duration) {
 		BlockPos pos = player.getPosition();
 		for (EntityLivingBase e : player.world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos.getX() - 3, pos.getY() - 3, pos.getZ() - 3, pos.getX() + 3, pos.getY() + 3, pos.getZ() + 3)))
-			e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 100, 4));
+			e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 100, 5));
 	}
 
 	@Override
@@ -63,8 +68,8 @@ public class AbilityShield extends Ability {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderAt(EntityPlayer player, int duration) {
-		if (duration % 10 == 0) for (int i = 0; i < 360; i += 10) {
-			ParticleSimpleAnimated p = new ParticleEndRod(Minecraft.getMinecraft().world, player.posX + Math.sin(i), player.posY, player.posZ + Math.cos(i), 0, 0.2F, 0);
+		if (duration % 20 == 0) for (int i = 0; i < 360; i += 10) {
+			ParticleSimpleAnimated p = new ParticleEndRod(Minecraft.getMinecraft().world, player.posX, player.posY, player.posZ, Math.sin(i) * 0.1, 0.1F, Math.cos(i) * 0.1);
 			p.setColor(BLUE);
 			p.setColorFade(BLUE);
 			Minecraft.getMinecraft().effectRenderer.addEffect(p);
