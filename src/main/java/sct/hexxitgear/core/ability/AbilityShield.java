@@ -39,16 +39,18 @@ public class AbilityShield extends Ability {
 
 	@Override
 	public void start(EntityPlayer player) {
-		player.setEntityInvulnerable(true);
+		player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, getDuration(), 4));
 	}
 
 	@Override
 	public void tick(EntityPlayer player, int duration) {
+		BlockPos pos = player.getPosition();
+		for (EntityLivingBase e : player.world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos.getX() - 3, pos.getY() - 3, pos.getZ() - 3, pos.getX() + 3, pos.getY() + 3, pos.getZ() + 3)))
+			e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 100, 4));
 	}
 
 	@Override
 	public void end(EntityPlayer player) {
-		player.setEntityInvulnerable(false);
 	}
 
 	@Override
