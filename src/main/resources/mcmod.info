@@ -1,16 +1,16 @@
 [
 {
     "modid": "hexxitgear",
-    "name": "Hexxit Gear",
-    "description": "Special gear designed to work in conjunction with the Hexxit modpack.",
+    "name": "Hexxit Gear Boundary Edition",
+    "description": "Specially designed and tweaked gear from the legacy modpack known as Hexxit, for use in the Boundary modpack.",
     "mcversion": "${mcversion}",
     "version": "${version}",
-    "url": "https://github.com/Shadows-of-Fire/HexxitGear",
+    "url": "https://github.com/evilchin/Hexxit-Gear-Boundary-Edition",
     "updateUrl": "",
     "authors": [
-        "Shadows_of_Fire"
+        "Mr. Chin"
     ],
-    "credits": "Originally by sct. Artwork by Cheapshot.",
+    "credits": "Originally by sct. Artwork by Cheapshot. Original update by Shadows of Fire.",
     "logoFile": "/hexxitgear.png",
     "screenshots": [
     ],
