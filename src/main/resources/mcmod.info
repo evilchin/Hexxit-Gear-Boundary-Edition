@@ -1,14 +1,14 @@
 [
 {
     "modid": "hexxitgear",
-    "name": "Hexxit Gear Boundary Edition",
+    "name": "Hexxit Gear Rebalanced",
     "description": "Specially designed and tweaked gear from the legacy modpack known as Hexxit, for use in the Boundary modpack.",
     "mcversion": "${mcversion}",
     "version": "${version}",
     "url": "https://github.com/evilchin/Hexxit-Gear-Boundary-Edition",
     "updateUrl": "",
     "authors": [
-        "Mr. Chin"
+        "EvilChin"
     ],
     "credits": "Originally by sct. Artwork by Cheapshot. Original update by Shadows of Fire.",
     "logoFile": "/hexxitgear.png",
