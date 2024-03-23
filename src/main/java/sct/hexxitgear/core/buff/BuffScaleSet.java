@@ -27,7 +27,7 @@ public class BuffScaleSet implements IBuffHandler {
 	@Override
 	public void applyPlayerBuffs(EntityPlayer player) {
 		player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 45, 0, false, false));
-		player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 45, 0, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 45, 0, false, false));
 		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 410, 0, false, false));
 	}
 
@@ -35,7 +35,7 @@ public class BuffScaleSet implements IBuffHandler {
 	public void removePlayerBuffs(EntityPlayer player) {
 		player.removePotionEffect(MobEffects.NIGHT_VISION);
 		player.removePotionEffect(MobEffects.REGENERATION);
-		player.removePotionEffect(MobEffects.RESISTANCE);
+		player.removePotionEffect(MobEffects.FIRE_RESISTANCE);
 	}
 
 }
