@@ -1,7 +1,7 @@
 Hexxit Gear
 ================
 
-Three ancient armors of legend, lost to the world. Can you restore the pieces one by one and reclaim one of these powerful sets of armor for yourself?
+Four ancient armors of legend, lost to the world. Can you restore the pieces one by one and reclaim one of these powerful sets of armor for yourself?
 
 Hexxit Gear is a simple mod that adds interesting and unique pieces of armor to the game. Each armor is crafted by collecting an especially rare resource known as "Hexical Essence." If you collect enough you will be able to enchant diamonds and sow them into the thread of your armor, restoring the legendary pieces to their former glory.
 
@@ -9,8 +9,9 @@ Each set grants unique bonuses and has a completely unique style like no set of 
 
 Credits
 --------
-- Coding by sct
-- Art by Cheapshot
+- Coding: SCT
+- Art: Cheapshot
+- Original 1.12.2 Fork: Shadows of Fire
 
 License
 ---------
@@ -20,4 +21,4 @@ HexxitGear is licensed under the GPL. You can find out more by reading the LICEN
 Distribution and Modpacks
 ---------
 
-Hexxit Gear was specifically designed for the Hexxit Modpack, but that is no reason you can't include it in your own modpack! Feel free to include this mod in your own modpacks. You do not have to ask me for permission! Just make sure to credit me and link to this page. Thats all I ask!
+Hexxit Gear was specifically designed for the Hexxit Modpack, but that is no reason you can't include it in your own modpack! Feel free to include this mod in your own modpacks. You do not have to ask me for permission! Just make sure to credit Shadows of Fire and link to this page. That's it!
