@@ -51,7 +51,7 @@ public class AbilityShield extends Ability {
 	public void tick(EntityPlayer player, int duration) {
 		BlockPos pos = player.getPosition();
 		for (EntityLivingBase e : player.world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos.getX() - 3, pos.getY() - 3, pos.getZ() - 3, pos.getX() + 3, pos.getY() + 3, pos.getZ() + 3)))
-			e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 100, 5));
+			e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 100, 4));
 	}
 
 	@Override
