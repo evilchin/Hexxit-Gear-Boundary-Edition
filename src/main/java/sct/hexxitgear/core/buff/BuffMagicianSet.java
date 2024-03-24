@@ -26,14 +26,12 @@ public class BuffMagicianSet implements IBuffHandler {
 
 	@Override
 	public void applyPlayerBuffs(EntityPlayer player) {
-		if (!player.isPotionActive(MobEffects.REGENERATION)) player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 0, false, false));
 		player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 45, 4, false, false));
 		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 410, 0, false, false));
 	}
 
 	@Override
 	public void removePlayerBuffs(EntityPlayer player) {
-		player.removePotionEffect(MobEffects.REGENERATION);
 		player.removePotionEffect(MobEffects.JUMP_BOOST);
 		player.removePotionEffect(MobEffects.NIGHT_VISION);
 	}
