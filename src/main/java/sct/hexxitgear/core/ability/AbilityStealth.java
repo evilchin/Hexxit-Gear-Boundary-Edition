@@ -37,6 +37,7 @@ public class AbilityStealth extends Ability {
 	@Override
 	public void start(EntityPlayer player) {
 		player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, getDuration(), 0, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.SPEED, getDuration(), 2, false, false));
 		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, getDuration(), 4, false, false));
 	}
 
@@ -49,6 +50,7 @@ public class AbilityStealth extends Ability {
 	@Override
 	public void end(EntityPlayer player) {
 		player.removePotionEffect(MobEffects.INVISIBILITY);
+		player.removePotionEffect(MobEffects.SPEED);
 		player.removePotionEffect(MobEffects.STRENGTH);
 	}
 
