@@ -44,8 +44,8 @@ public class AbilityShield extends Ability {
 
 	@Override
 	public void start(EntityPlayer player) {
-		player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, getDuration(), 4));
-		player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, getDuration(), 1));
+		player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, getDuration(), 2));
+		player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, getDuration(), 2));
 	}
 
 	@Override
