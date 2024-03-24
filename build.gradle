@@ -9,7 +9,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.12.2-3.x.x"
+version = "1.12.2-3.0.1"
 group= "sct.hexxitgear"
 archivesBaseName = "Hexxit Gear"
 
