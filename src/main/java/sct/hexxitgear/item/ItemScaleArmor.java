@@ -32,7 +32,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.init.HexRegistry;
-import sct.hexxitgear.model.ModelScaleHelmet;
 
 public class ItemScaleArmor extends ItemHexxitArmor {
 
@@ -42,31 +41,9 @@ public class ItemScaleArmor extends ItemHexxitArmor {
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/scale_helm.png";
-
 		if (stack.getItem() == HexRegistry.SCALE_LEGS) return "hexxitgear:textures/armor/scale2.png";
 
 		return "hexxitgear:textures/armor/scale.png";
-	}
-
-	@SideOnly(Side.CLIENT)
-	private static ModelScaleHelmet scaleHelmet;
-
-	@SideOnly(Side.CLIENT)
-	private ModelBiped getHelmet() {
-		if (scaleHelmet == null) scaleHelmet = new ModelScaleHelmet();
-		return scaleHelmet;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
-		if (armorSlot == EntityEquipmentSlot.HEAD) {
-			ModelBiped helmet = getHelmet();
-			helmet.isSneak = entityLiving.isSneaking();
-			return helmet;
-		}
-		return null;
 	}
 
 	@Override
