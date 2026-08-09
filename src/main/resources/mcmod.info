@@ -2,10 +2,10 @@
 {
     "modid": "hexxitgear",
     "name": "Hexxit Gear Rebalanced 2D",
-    "description": "Specially designed and tweaked gear from the legacy modpack known as Hexxit, for compat with Mo' Bends.",
+    "description": "Specially designed and tweaked gear from the legacy modpack known as Hexxit.",
     "mcversion": "${mcversion}",
     "version": "${version}",
-    "url": "https://github.com/evilchin/Hexxit-Gear-Boundary-Edition/tree/2D-Helmets",
+    "url": "https://github.com/evilchin/Hexxit-Gear-Boundary-Edition",
     "updateUrl": "",
     "authors": [
         "Xuvious"
