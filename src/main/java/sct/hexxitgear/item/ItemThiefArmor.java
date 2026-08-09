@@ -34,7 +34,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.init.HexRegistry;
-import sct.hexxitgear.model.ModelHoodHelmet;
 
 public class ItemThiefArmor extends ItemHexxitArmor {
 
@@ -49,33 +48,9 @@ public class ItemThiefArmor extends ItemHexxitArmor {
 			if (player.isPotionActive(MobEffects.INVISIBILITY)) return "hexxitgear:textures/armor/invisible.png";
 		}
 
-		// If the helmet slot, return helmet texture map
-		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/thief_hood.png";
-
 		if (stack.getItem() == HexRegistry.THIEF_LEGS) return "hexxitgear:textures/armor/thief2.png";
 
 		return "hexxitgear:textures/armor/thief.png";
-	}
-
-	@SideOnly(Side.CLIENT)
-	private static ModelHoodHelmet hoodHelmet;
-
-	@SideOnly(Side.CLIENT)
-	private ModelBiped getHelmet() {
-		if (hoodHelmet == null) hoodHelmet = new ModelHoodHelmet();
-
-		return hoodHelmet;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
-		if (armorSlot == EntityEquipmentSlot.HEAD) {
-			ModelBiped helmet = getHelmet();
-			helmet.isSneak = entityLiving.isSneaking();
-			return helmet;
-		}
-		return null;
 	}
 
 	@Override
