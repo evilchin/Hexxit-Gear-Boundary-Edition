@@ -32,7 +32,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.init.HexRegistry;
-import sct.hexxitgear.model.ModelSkullHelmet;
 
 public class ItemTribalArmor extends ItemHexxitArmor {
 
@@ -42,31 +41,9 @@ public class ItemTribalArmor extends ItemHexxitArmor {
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/tribal_skull.png";
-
 		if (stack.getItem() == HexRegistry.TRIBAL_LEGS) return "hexxitgear:textures/armor/tribal2.png";
 
 		return "hexxitgear:textures/armor/tribal.png";
-	}
-
-	@SideOnly(Side.CLIENT)
-	private static ModelSkullHelmet skullHelmet;
-
-	@SideOnly(Side.CLIENT)
-	private ModelSkullHelmet getHelmet() {
-		if (skullHelmet == null) skullHelmet = new ModelSkullHelmet();
-		return skullHelmet;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
-		if (armorSlot == EntityEquipmentSlot.HEAD) {
-			ModelBiped skull = getHelmet();
-			skull.isSneak = entityLiving.isSneaking();
-			return skull;
-		}
-		return null;
 	}
 
 	@Override
