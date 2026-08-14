@@ -129,6 +129,8 @@ public class ModelScaleHelmet extends ModelBiped {
 
 	@Override
 	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
+		
 		float scaledUp = scale + 0.009F;
 		float suLarge = scale + 0.002F;
 		head.render(scaledUp);
@@ -143,13 +145,6 @@ public class ModelScaleHelmet extends ModelBiped {
 		Shape9.render(suLarge);
 		Shape10.render(suLarge);
 		Shape11.render(suLarge);
-
-		entityIn;
-		limbSwing;
-		limbSwingAmount;
-		ageInTicks;
-		netHeadYaw;
-		headPitch;
 	}
 	
 }
