@@ -25,7 +25,6 @@ import net.minecraft.entity.Entity;
 
 public class ModelScaleHelmet extends ModelBiped {
 
-	ModelRenderer head;
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;
 	ModelRenderer Shape3;
@@ -40,12 +39,6 @@ public class ModelScaleHelmet extends ModelBiped {
 
 	public ModelScaleHelmet(float modelSize) {
 		super(modelSize, 0.0F, 64, 64);
-
-		head = new ModelRenderer(this, 0, 0);
-		head.addBox(-4F, -8F, -4F, 8, 8, 8);
-		head.setRotationPoint(0F, 0F, 0F);
-		head.setTextureSize(64, 64);
-		head.mirror = true;
 		
 		Shape1 = new ModelRenderer(this, 0, 16);
 		Shape1.addBox(-5F, -9F, -5F, 10, 9, 10);
@@ -113,7 +106,6 @@ public class ModelScaleHelmet extends ModelBiped {
 		Shape11.setTextureSize(64, 64);
 		Shape11.mirror = true;
 
-		bipedHead.addChild(head);
 		bipedHead.addChild(Shape1);
         bipedHead.addChild(Shape2);
         bipedHead.addChild(Shape3);
