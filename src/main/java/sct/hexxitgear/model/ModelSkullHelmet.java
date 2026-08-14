@@ -38,16 +38,19 @@ public class ModelSkullHelmet extends ModelBiped {
         Shape4.setRotationPoint(0F, 0F, 0F);
         Shape4.setTextureSize(64, 32);
         Shape4.mirror = true;
+        
         Shape1 = new ModelRenderer(this, 25, 0);
         Shape1.addBox(4F, -7F, 0F, 3, 2, 2);
         Shape1.setRotationPoint(0F, 0F, 0F);
         Shape1.setTextureSize(64, 32);
         Shape1.mirror = true;
+        
         Shape2 = new ModelRenderer(this, 25, 5);
         Shape2.addBox(6F, -8F, 0F, 1, 1, 1);
         Shape2.setRotationPoint(0F, 0F, 0F);
         Shape2.setTextureSize(64, 32);
         Shape2.mirror = true;
+        
         Shape3 = new ModelRenderer(this, 25, 5);
         Shape3.addBox(-5F, -7F, 0F, 1, 1, 1);
         Shape3.setRotationPoint(0F, 0F, 0F);
