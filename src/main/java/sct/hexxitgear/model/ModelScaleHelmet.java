@@ -25,6 +25,7 @@ import net.minecraft.entity.Entity;
 
 public class ModelScaleHelmet extends ModelBiped {
 
+	ModelRenderer head;
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;
 	ModelRenderer Shape3;
