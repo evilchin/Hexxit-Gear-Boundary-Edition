@@ -39,6 +39,12 @@ public class ModelScaleHelmet extends ModelBiped {
 
 	public ModelScaleHelmet(float modelSize) {
 		super(modelSize, 0.0F, 64, 64);
+
+		head = new ModelRenderer(this, 0, 0);
+		head.addBox(-4F, -8F, -4F, 8, 8, 8);
+		head.setRotationPoint(0F, 0F, 0F);
+		head.setTextureSize(64, 64);
+		head.mirror = true;
 		
 		Shape1 = new ModelRenderer(this, 0, 16);
 		Shape1.addBox(-5F, -9F, -5F, 10, 9, 10);
@@ -106,6 +112,7 @@ public class ModelScaleHelmet extends ModelBiped {
 		Shape11.setTextureSize(64, 64);
 		Shape11.mirror = true;
 
+		bipedHead.addChild(head);
 		bipedHead.addChild(Shape1);
         bipedHead.addChild(Shape2);
         bipedHead.addChild(Shape3);
@@ -120,20 +127,22 @@ public class ModelScaleHelmet extends ModelBiped {
 	}
 
 	@Override
-	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		Shape1.render(scale + 0.009F);
-		Shape2.render(scale + 0.002F);
-		Shape3.render(scale + 0.002F);
-		Shape4.render(scale + 0.002F);
-		Shape5.render(scale + 0.002F);
-		Shape6.render(scale + 0.002F);
-		Shape7.render(scale + 0.002F);
-		Shape8.render(scale + 0.002F);
-		Shape9.render(scale + 0.002F);
-		Shape10.render(scale + 0.002F);
-		Shape11.render(scale + 0.002F);
+	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+		float scaledUp = scale + 0.02F;
+		float suLarge = scale + 0.002F;
 		
-		super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		head.render(scaledUp);
+		Shape1.render(suLarge);
+		Shape2.render(suLarge);
+		Shape3.render(suLarge);
+		Shape4.render(suLarge);
+		Shape5.render(suLarge);
+		Shape6.render(suLarge);
+		Shape7.render(suLarge);
+		Shape8.render(suLarge);
+		Shape9.render(suLarge);
+		Shape10.render(suLarge);
+		Shape11.render(suLarge);
 	}
 	
 }
