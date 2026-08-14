@@ -132,20 +132,9 @@ public class ModelScaleHelmet extends ModelBiped {
 		float scaledUp = scale + 0.009F;
 		float suLarge = scale + 0.002F;
 		
-		head.(scaledUp);
-		Shape1.(suLarge);
-		Shape2.(suLarge);
-		Shape3.(suLarge);
-		Shape4.(suLarge);
-		Shape5.(suLarge);
-		Shape6.(suLarge);
-		Shape7.(suLarge);
-		Shape8.(suLarge);
-		Shape9.(suLarge);
-		Shape10.(suLarge);
-		Shape11.(suLarge);
+		head.scale(scaledUp);
 
-		super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale + 0.003F);
+		super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 	}
 	
 }
