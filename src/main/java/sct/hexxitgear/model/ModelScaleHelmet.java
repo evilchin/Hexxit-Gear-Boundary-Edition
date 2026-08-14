@@ -123,7 +123,7 @@ public class ModelScaleHelmet extends ModelBiped {
 	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		Shape1.render(scale + 0.009);
+		Shape1.render(scale + 0.009F);
 	}
 	
 }
