@@ -62,7 +62,7 @@ public class ItemThiefArmor extends ItemHexxitArmor {
 
 	@SideOnly(Side.CLIENT)
 	private ModelBiped getHelmet() {
-		if (hoodHelmet == null) hoodHelmet = new ModelHoodHelmet();
+		if (hoodHelmet == null) hoodHelmet = new ModelHoodHelmet(1.0F);
 
 		return hoodHelmet;
 	}
