@@ -38,7 +38,7 @@ public class ModelScaleHelmet extends ModelBiped {
 	ModelRenderer Shape11;
 
 	public ModelScaleHelmet(float modelSize) {
-		super(modelSize, 0.0F, 64, 32);
+		super(modelSize, 0.0F, 64, 64);
 
 		Shape1 = new ModelRenderer(this, 0, 16);
 		Shape1.addBox(-5F, -9F, -5F, 10, 9, 10);
