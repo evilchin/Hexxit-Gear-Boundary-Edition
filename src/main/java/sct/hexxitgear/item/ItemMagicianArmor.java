@@ -63,7 +63,7 @@ public class ItemMagicianArmor extends ItemHexxitArmor {
 
 	@SideOnly(Side.CLIENT)
 	protected ModelSageHood getHoodModel() {
-		if (hood == null) hood = new ModelSageHood();
+		if (hood == null) hood = new ModelSageHood(1.0F);
 		return hood;
 	}
 
