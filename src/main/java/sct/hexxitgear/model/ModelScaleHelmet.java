@@ -20,11 +20,11 @@ package sct.hexxitgear.model;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 
-public class ModelScaleHelmet extends ModelWtfMojang {
+public class ModelScaleHelmet extends ModelBiped {
 
-	ModelRenderer head;
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;
 	ModelRenderer Shape3;
@@ -37,17 +37,9 @@ public class ModelScaleHelmet extends ModelWtfMojang {
 	ModelRenderer Shape10;
 	ModelRenderer Shape11;
 
-	public ModelScaleHelmet() {
+	public ModelScaleHelmet(float modelSize) {
+		super(modelSize, 0.0F, 64, 32);
 
-		textureWidth = 64;
-		textureHeight = 64;
-
-		head = new ModelRenderer(this, 0, 0);
-		head.addBox(-4F, -8F, -4F, 8, 8, 8);
-		head.setRotationPoint(0F, 0F, 0F);
-		head.setTextureSize(64, 64);
-		head.mirror = true;
-		setRotation(head, 0F, 0F, 0F);
 		Shape1 = new ModelRenderer(this, 0, 16);
 		Shape1.addBox(-5F, -9F, -5F, 10, 9, 10);
 		Shape1.setRotationPoint(0F, 0F, 0F);
@@ -114,53 +106,18 @@ public class ModelScaleHelmet extends ModelWtfMojang {
 		Shape11.setTextureSize(64, 64);
 		Shape11.mirror = true;
 		setRotation(Shape11, 0F, 0F, 0F);
-	}
 
-	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		float scaledUp = f5 + 0.009F;
-		float suLarge = f5 + 0.002F;
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		GlStateManager.pushMatrix();
-		if (entity.isSneaking()) GlStateManager.translate(0, .2, 0);
-		head.render(scaledUp);
-		Shape1.render(suLarge);
-		Shape2.render(suLarge);
-		Shape3.render(suLarge);
-		Shape4.render(suLarge);
-		Shape5.render(suLarge);
-		Shape6.render(suLarge);
-		Shape7.render(suLarge);
-		Shape8.render(suLarge);
-		Shape9.render(suLarge);
-		Shape10.render(suLarge);
-		Shape11.render(suLarge);
-		GlStateManager.popMatrix();
+		bipedHead.addChild(Shape1);
+        bipedHead.addChild(Shape2);
+        bipedHead.addChild(Shape3);
+        bipedHead.addChild(Shape4);
+		bipedHead.addChild(Shape5);
+        bipedHead.addChild(Shape6);
+        bipedHead.addChild(Shape7);
+        bipedHead.addChild(Shape8);
+		bipedHead.addChild(Shape9);
+        bipedHead.addChild(Shape10);
+        bipedHead.addChild(Shape11);
 	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		float newX = this.bipedHeadwear.rotateAngleX;
-		float newY = this.bipedHeadwear.rotateAngleY;
-		setRotation(head, newX, newY, 0);
-		setRotation(Shape1, newX, newY, 0);
-		setRotation(Shape2, newX, newY, 0);
-		setRotation(Shape3, newX, newY, 0);
-		setRotation(Shape4, newX, newY, 0);
-		setRotation(Shape5, newX, newY, 0);
-		setRotation(Shape6, newX, newY, 0);
-		setRotation(Shape7, newX, newY, 0);
-		setRotation(Shape8, newX, newY, 0);
-		setRotation(Shape9, newX, newY, 0);
-		setRotation(Shape10, newX, newY, 0);
-		setRotation(Shape11, newX, newY, 0);
-
-	}
+	
 }
