@@ -20,6 +20,7 @@ package sct.hexxitgear.model;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 
 public class ModelSkullHelmet extends ModelBiped {
