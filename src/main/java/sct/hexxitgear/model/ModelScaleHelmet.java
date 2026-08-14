@@ -143,8 +143,6 @@ public class ModelScaleHelmet extends ModelBiped {
 		Shape9.render(suLarge);
 		Shape10.render(suLarge);
 		Shape11.render(suLarge);
-
-		super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 	}
 	
 }
