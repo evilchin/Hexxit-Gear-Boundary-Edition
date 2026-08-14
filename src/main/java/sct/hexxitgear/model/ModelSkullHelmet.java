@@ -63,4 +63,9 @@ public class ModelSkullHelmet extends ModelBiped {
         bipedHead.addChild(Shape3);
     }
 
+    @Override
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale + 0.05F);
+    }
+
 }
