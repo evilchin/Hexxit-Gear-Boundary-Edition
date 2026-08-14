@@ -29,7 +29,7 @@ public class ModelSkullHelmet extends ModelBiped {
     ModelRenderer Shape2;
     ModelRenderer Shape3;
 
-    public ModelSkull(float modelSize) {
+    public ModelSkull(float 1.0F) {
         super(modelSize, 0.0F, 64, 32);
 
         Shape4 = new ModelRenderer(this, 25, 0);
@@ -58,38 +58,5 @@ public class ModelSkullHelmet extends ModelBiped {
         bipedHead.addChild(Shape2);
         bipedHead.addChild(Shape3);
     }
-
-    @Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		float scaledUp = f5 + 0.01F;
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		GlStateManager.pushMatrix();
-		if (entity.isSneaking()) GlStateManager.translate(0, .2, 0);
-		head.render(scaledUp);
-		Shape4.render(scaledUp);
-		Shape1.render(scaledUp);
-		Shape2.render(scaledUp);
-		Shape3.render(scaledUp);
-		GlStateManager.popMatrix();
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-		model.rotationPointY = (this.isSneak) ? 1.0f : 0;
-	}
-
-	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		float newX = this.bipedHeadwear.rotateAngleX;
-		float newY = this.bipedHeadwear.rotateAngleY;
-		setRotation(head, newX, newY, 0);
-		setRotation(Shape1, newX, newY, 0);
-		setRotation(Shape2, newX, newY, 0);
-		setRotation(Shape3, newX, newY, 0);
-		setRotation(Shape4, newX, newY, 0);
-	}
 
 }
