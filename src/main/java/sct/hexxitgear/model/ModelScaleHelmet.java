@@ -125,5 +125,27 @@ public class ModelScaleHelmet extends ModelBiped {
         bipedHead.addChild(Shape10);
         bipedHead.addChild(Shape11);
 	}
+
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		float scaledUp = f5 + 0.009F;
+		float suLarge = f5 + 0.002F;
+		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		GlStateManager.pushMatrix();
+		if (entity.isSneaking()) GlStateManager.translate(0, .2, 0);
+		head.render(scaledUp);
+		Shape1.render(suLarge);
+		Shape2.render(suLarge);
+		Shape3.render(suLarge);
+		Shape4.render(suLarge);
+		Shape5.render(suLarge);
+		Shape6.render(suLarge);
+		Shape7.render(suLarge);
+		Shape8.render(suLarge);
+		Shape9.render(suLarge);
+		Shape10.render(suLarge);
+		Shape11.render(suLarge);
+		GlStateManager.popMatrix();
+	}
 	
 }
