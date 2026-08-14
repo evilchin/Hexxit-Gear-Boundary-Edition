@@ -54,7 +54,7 @@ public class ItemTribalArmor extends ItemHexxitArmor {
 
 	@SideOnly(Side.CLIENT)
 	private ModelSkullHelmet getHelmet() {
-		if (skullHelmet == null) skullHelmet = new ModelSkullHelmet();
+		if (skullHelmet == null) skullHelmet = new ModelSkullHelmet(1.0F);
 		return skullHelmet;
 	}
 
