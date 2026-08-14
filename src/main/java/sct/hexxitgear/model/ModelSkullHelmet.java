@@ -29,7 +29,7 @@ public class ModelSkullHelmet extends ModelBiped {
     ModelRenderer Shape2;
     ModelRenderer Shape3;
 
-    public ModelSkull(float, 1.0F) {
+    public ModelSkullHelmet(float 1.0F) {
         super(modelSize, 0.0F, 64, 32);
 
         Shape4 = new ModelRenderer(this, 25, 0);
