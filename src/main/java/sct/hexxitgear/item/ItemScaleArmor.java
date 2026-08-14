@@ -54,7 +54,7 @@ public class ItemScaleArmor extends ItemHexxitArmor {
 
 	@SideOnly(Side.CLIENT)
 	private ModelBiped getHelmet() {
-		if (scaleHelmet == null) scaleHelmet = new ModelScaleHelmet();
+		if (scaleHelmet == null) scaleHelmet = new ModelScaleHelmet(1.0F);
 		return scaleHelmet;
 	}
 
