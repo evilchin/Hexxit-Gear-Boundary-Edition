@@ -51,7 +51,7 @@ public class ModelHoodHelmet extends ModelBiped {
 		Shape2.setRotationPoint(0F, 0F, 0F);
 		Shape2.setTextureSize(64, 64);
 		Shape2.mirror = true;
-		setRotation(Shape2, 0F, 0F, 0F);
+		
 		Shape3 = new ModelRenderer(this, 48, 11);
 		Shape3.addBox(-1.333333F, -8.5F, 7F, 3, 1, 1);
 		Shape3.setRotationPoint(0F, 0F, 0F);
