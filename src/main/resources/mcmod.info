@@ -1,7 +1,7 @@
 [
 {
     "modid": "hexxitgear",
-    "name": "Hexxit Gear Rebalanced 2D",
+    "name": "Hexxit Gear Rebalanced",
     "description": "Specially designed and tweaked gear from the legacy modpack known as Hexxit.",
     "mcversion": "${mcversion}",
     "version": "${version}",
