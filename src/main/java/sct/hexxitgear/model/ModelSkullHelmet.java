@@ -26,19 +26,19 @@ public class ModelSkullHelmet extends ModelBiped {
         bipedHead.addBox(-4F, -8F, -4F, 8, 8, 8);
         bipedHead.mirror = true;
         
-        Shape1 = new ModelRenderer(this, 25, 0, -0.007F);
+        Shape1 = new ModelRendererScaled(this, 25, 0, -0.007F);
         Shape1.addBox(4F, -7F, 0F, 3, 2, 2);
         Shape1.mirror = true;
         
-        Shape2 = new ModelRenderer(this, 25, 5, -0.007F);
+        Shape2 = new ModelRendererScaled(this, 25, 5, -0.007F);
         Shape2.addBox(6F, -8F, 0F, 1, 1, 1);
         Shape2.mirror = true;
         
-        Shape3 = new ModelRenderer(this, 25, 5, -0.007F);
+        Shape3 = new ModelRendererScaled(this, 25, 5, -0.007F);
         Shape3.addBox(-5F, -7F, 0F, 1, 1, 1);
         Shape3.mirror = true;
 
-        Shape4 = new ModelRenderer(this, 25, 0, -0.007F);
+        Shape4 = new ModelRendererScaled(this, 25, 0, -0.007F);
         Shape4.addBox(4F, -7F, 0F, 3, 2, 2);
         Shape4.mirror = true;
 
