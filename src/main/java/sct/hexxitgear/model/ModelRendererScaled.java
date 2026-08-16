@@ -1,3 +1,7 @@
+/*
+ * HexxitGear
+ * Special thanks to Meldexun for helping write the majoprity of the code to fix these models with Mo' Bends!
+ */
 package sct.hexxitgear.model;
 
 import net.minecraft.client.model.ModelBase;
