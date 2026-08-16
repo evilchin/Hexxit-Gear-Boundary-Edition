@@ -1,7 +1,7 @@
 [
 {
     "modid": "hexxitgear",
-    "name": "Hexxit Gear Rebalanced",
+    "name": "Hexxit Gear Rebalanced 2D",
     "description": "Specially designed and tweaked gear from the legacy modpack known as Hexxit, for compat with Mo' Bends.",
     "mcversion": "${mcversion}",
     "version": "${version}",
