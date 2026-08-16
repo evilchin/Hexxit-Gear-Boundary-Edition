@@ -25,7 +25,6 @@ import net.minecraft.entity.Entity;
 
 public class ModelScaleHelmet extends ModelBiped {
 
-	ModelRenderer head;
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;
 	ModelRenderer Shape3;
@@ -41,79 +40,56 @@ public class ModelScaleHelmet extends ModelBiped {
 	public ModelScaleHelmet(float modelSize) {
 		super(modelSize, 0.0F, 64, 64);
 
-		head = new ModelRenderer(this, 0, 0);
-		head.addBox(-4F, -8F, -4F, 8, 8, 8);
-		head.setRotationPoint(0F, 0F, 0F);
-		head.setTextureSize(64, 64);
-		head.mirror = true;
+		bipedHeadwear.isHidden = true;
+
+		bipedHead = new ModelRendererScaled(this, 0, 0, 0.009F);
+		bipedHead.addBox(-4F, -8F, -4F, 8, 8, 8);
+		bipedHead.mirror = true;
 		
-		Shape1 = new ModelRenderer(this, 0, 16);
+		Shape1 = new ModelRendererScaled(this, 0, 16, -0.007F);
 		Shape1.addBox(-5F, -9F, -5F, 10, 9, 10);
-		Shape1.setRotationPoint(0F, 0F, 0F);
-		Shape1.setTextureSize(64, 64);
 		Shape1.mirror = true;
 		
-		Shape2 = new ModelRenderer(this, 24, 0);
+		Shape2 = new ModelRendererScaled(this, 24, 0, -0.007F);
 		Shape2.addBox(-6F, -7F, -2F, 1, 5, 3);
-		Shape2.setRotationPoint(0F, 0F, 0F);
-		Shape2.setTextureSize(64, 64);
 		Shape2.mirror = true;
 		
-		Shape3 = new ModelRenderer(this, 4, 20);
+		Shape3 = new ModelRendererScaled(this, 4, 20, -0.007F);
 		Shape3.addBox(-7F, -8F, 0F, 1, 4, 2);
-		Shape3.setRotationPoint(0F, 0F, 0F);
-		Shape3.setTextureSize(64, 64);
 		Shape3.mirror = true;
 		
-		Shape4 = new ModelRenderer(this, 2, 2);
+		Shape4 = new ModelRendererScaled(this, 2, 2, -0.007F);
 		Shape4.addBox(-9F, -9F, 2F, 2, 1, 1);
-		Shape4.setRotationPoint(0F, 0F, 0F);
-		Shape4.setTextureSize(64, 64);
 		Shape4.mirror = true;
 		
-		Shape5 = new ModelRenderer(this, 4, 4);
+		Shape5 = new ModelRendererScaled(this, 4, 4, -0.007F);
 		Shape5.addBox(-8F, -8F, 1F, 1, 3, 1);
-		Shape5.setRotationPoint(0F, 0F, 0F);
-		Shape5.setTextureSize(64, 64);
 		Shape5.mirror = true;
 		
-		Shape6 = new ModelRenderer(this, 2, 2);
+		Shape6 = new ModelRendererScaled(this, 2, 2, -0.007F);
 		Shape6.addBox(-9F, -7F, 2F, 2, 1, 1);
-		Shape6.setRotationPoint(0F, 0F, 0F);
-		Shape6.setTextureSize(64, 64);
 		Shape6.mirror = true;
 		
-		Shape7 = new ModelRenderer(this, 24, 0);
+		Shape7 = new ModelRendererScaled(this, 24, 0, -0.007F);
 		Shape7.addBox(5F, -7F, -2F, 1, 5, 3);
-		Shape7.setRotationPoint(0F, 0F, 0F);
-		Shape7.setTextureSize(64, 64);
 		Shape7.mirror = true;
 		
-		Shape8 = new ModelRenderer(this, 4, 20);
+		Shape8 = new ModelRendererScaled(this, 4, 20, -0.007F);
 		Shape8.addBox(6F, -8F, 0F, 1, 4, 2);
-		Shape8.setRotationPoint(0F, 0F, 0F);
-		Shape8.setTextureSize(64, 64);
 		Shape8.mirror = true;
 		
-		Shape9 = new ModelRenderer(this, 4, 4);
+		Shape9 = new ModelRendererScaled(this, 4, 4, -0.007F);
 		Shape9.addBox(7F, -9F, 1F, 1, 3, 1);
-		Shape9.setRotationPoint(0F, 1F, 0F);
-		Shape9.setTextureSize(64, 64);
 		Shape9.mirror = true;
 		
-		Shape10 = new ModelRenderer(this, 2, 2);
+		Shape10 = new ModelRendererScaled(this, 2, 2, -0.007F);
 		Shape10.addBox(7F, -9F, 2F, 2, 1, 1);
-		Shape10.setRotationPoint(0F, 0F, 0F);
-		Shape10.setTextureSize(64, 64);
 		Shape10.mirror = true;
 		
-		Shape11 = new ModelRenderer(this, 2, 2);
+		Shape11 = new ModelRendererScaled(this, 2, 2, -0.007F);
 		Shape11.addBox(7F, -7F, 2F, 2, 1, 1);
-		Shape11.setRotationPoint(0F, 0F, 0F);
-		Shape11.setTextureSize(64, 64);
 		Shape11.mirror = true;
 
-		bipedHead.addChild(head);
 		bipedHead.addChild(Shape1);
         bipedHead.addChild(Shape2);
         bipedHead.addChild(Shape3);
@@ -125,11 +101,6 @@ public class ModelScaleHelmet extends ModelBiped {
 		bipedHead.addChild(Shape9);
         bipedHead.addChild(Shape10);
         bipedHead.addChild(Shape11);
-	}
-
-	@Override
-	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-		super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale + 0.02F);
 	}
 	
 }
